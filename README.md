@@ -1,4 +1,4 @@
-# MBB Case Prep Trainer
+# Consulting Case Prep Trainer
 
 An interactive, spaced-repetition trainer for MBB (McKinsey / BCG / Bain) case interviews — built around the muscle that actually gets tested: hypothesis-driven diagnosis under a limited information budget, not memorized frameworks.
 
