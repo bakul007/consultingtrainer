@@ -2,6 +2,8 @@
 
 An interactive, spaced-repetition trainer for MBB (McKinsey / BCG / Bain) case interviews — built around the muscle that actually gets tested: hypothesis-driven diagnosis under a limited information budget, not memorized frameworks.
 
+![Dashboard screenshot](docs/screenshot.png)
+
 **Open it:** download `index.html` and open it in any browser — no server, no build, no install.
 
 ## What's inside
