@@ -1,0 +1,1244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MBB Case Prep Trainer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#101014; --card:#17171D; --card2:#1D1E26; --line:#2A2B36;
+  --txt:#EDEBE4; --dim:#8F94A6; --acc:#89A9CF; --gold:#CE8147;
+  --grn:#57C983; --red:#E5695E; --yel:#E8B33C;
+  --disp:'Marcellus',Georgia,'Times New Roman',serif;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font:15px/1.6 var(--sans);padding-bottom:70px;border-top:3px solid var(--gold)}
+.wrap{max-width:1020px;margin:0 auto;padding:18px}
+header{display:block;border-bottom:3px double var(--line);padding:12px 0 16px;margin-bottom:4px}
+.eyebrow{font:600 10px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
+h1{font:400 30px/1.12 var(--disp);color:var(--txt);letter-spacing:.01em;text-wrap:balance}
+.sub{display:block;color:var(--dim);font-size:12px;letter-spacing:.05em;margin-top:7px}
+nav{display:flex;flex-direction:column;gap:0;margin:10px 0 22px}
+.navrow{display:flex;gap:2px;flex-wrap:wrap;align-items:stretch;border-bottom:1px solid var(--line)}
+.navtag{font:600 9.5px/1 var(--sans);color:var(--dim);text-transform:uppercase;letter-spacing:.18em;align-self:center;margin-right:10px;padding-left:2px}
+nav button{background:none;border:0;border-bottom:2px solid transparent;color:var(--dim);padding:9px 10px 8px;border-radius:0;cursor:pointer;font:600 11.5px var(--sans);letter-spacing:.07em;text-transform:uppercase;margin-bottom:-1px}
+nav button:hover{color:var(--txt)}
+nav button.on{background:none;color:var(--gold);border-bottom-color:var(--gold)}
+nav button .b{display:inline-block;min-width:17px;padding:1px 5px;margin-left:5px;border-radius:8px;background:var(--gold);color:#101014;font-size:10px;text-align:center;letter-spacing:0}
+section{display:none}
+section.on{display:block;animation:fade .18s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:20px 20px 16px;margin-bottom:14px}
+.card h2{font:400 18px/1.25 var(--disp);letter-spacing:.02em;margin-bottom:10px;color:var(--gold)}
+.card h3{font:600 11px/1.4 var(--sans);text-transform:uppercase;letter-spacing:.13em;margin:12px 0 6px;color:var(--acc)}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:720px){.g2,.g3,.g4{grid-template-columns:1fr 1fr}}
+.stat{background:var(--card2);border:1px solid var(--line);border-radius:4px;padding:12px;text-align:center}
+.stat .v{font:700 21px/1.3 var(--mono);font-variant-numeric:tabular-nums}
+.stat .l{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.11em;margin-top:3px}
+.bar{height:8px;background:#15161C;border-radius:5px;overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,var(--acc),var(--grn))}
+.qbox{font-size:17px;font-weight:600;line-height:1.5;margin:8px 0 14px}
+.scen{background:var(--card2);border-left:3px solid var(--acc);border-radius:0 4px 4px 0;padding:12px 14px;margin:10px 0;font-size:14.5px}
+.scen b{color:var(--gold)}
+.ans{background:#14151B;border:1px solid var(--line);border-radius:4px;padding:14px;margin:12px 0;font-size:14.5px;display:none;white-space:pre-wrap}
+.ans.show{display:block;animation:fade .18s ease}
+.ans .k{color:var(--acc);font-weight:700}
+.ans .num{color:var(--gold);font-weight:700;font-family:var(--mono);font-size:.95em;font-variant-numeric:tabular-nums}
+.tip{background:rgba(206,129,71,.07);border:1px solid rgba(206,129,71,.35);border-radius:4px;padding:9px 12px;margin-top:10px;font-size:13px;white-space:normal}
+.tip b{color:var(--gold)}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;align-items:center}
+button.act{background:var(--gold);color:#101014;border:0;padding:9px 16px;border-radius:3px;font-weight:700;cursor:pointer;font-size:13px;font-family:var(--sans);letter-spacing:.02em}
+button.act:hover{background:#DC935C}
+button.ghost{background:transparent;color:var(--txt);border:1px solid var(--line);padding:9px 16px;border-radius:3px;font-weight:600;cursor:pointer;font-size:13px;font-family:var(--sans)}
+button.ghost:hover{border-color:var(--acc)}
+button.gA{background:rgba(87,201,131,.15);border:1px solid var(--grn);color:var(--grn)}
+button.gN{background:rgba(232,179,60,.15);border:1px solid var(--yel);color:var(--yel)}
+button.gD{background:rgba(229,105,94,.15);border:1px solid var(--red);color:var(--red)}
+button:disabled{opacity:.4;cursor:default}
+.grade{display:none;gap:8px;margin-top:10px}
+.grade.show{display:flex;flex-wrap:wrap}
+input[type=number],input[type=text]{background:#15161C;border:1px solid var(--line);color:var(--txt);padding:9px 12px;border-radius:3px;font-size:14.5px;width:160px;font-family:var(--mono);font-variant-numeric:tabular-nums}
+textarea{width:100%;min-height:100px;background:#15161C;border:1px solid var(--line);border-radius:4px;color:var(--txt);padding:10px;font-size:14px;font-family:var(--sans);resize:vertical}
+select{background:#15161C;color:var(--txt);border:1px solid var(--line);border-radius:3px;padding:8px;font-family:var(--sans);font-size:13px}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--acc)}
+.ok{color:var(--grn);font-weight:700}
+.bad{color:var(--red);font-weight:700}
+.wr{color:var(--yel);font-weight:700}
+.timer{font:700 24px var(--mono);font-variant-numeric:tabular-nums;color:var(--acc)}
+.timer.low{color:var(--red)}
+.pill{display:inline-block;font:700 10px/1.7 var(--sans);text-transform:uppercase;letter-spacing:.06em;padding:2px 9px;border-radius:10px;margin-right:6px;vertical-align:2px}
+.p-diag{background:rgba(206,129,71,.15);color:var(--gold)}
+.p-size{background:rgba(137,169,207,.15);color:var(--acc)}
+.p-drill{background:rgba(87,201,131,.15);color:var(--grn)}
+.kbd{color:var(--dim);font-size:11.5px;margin-top:8px}
+.kbd b{background:var(--card2);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-family:var(--mono)}
+.prog{color:var(--dim);font-size:12.5px;margin-bottom:8px}
+.mrow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px dashed #2E2F3C;font-size:13.5px;gap:10px}
+.mrow:last-child{border-bottom:0}
+.mrow .mb{flex:1;margin:0 12px}
+footer{position:fixed;bottom:0;left:0;right:0;background:rgba(16,16,20,.95);border-top:1px solid var(--line);padding:8px 18px;font:400 10.5px var(--mono);letter-spacing:.03em;color:var(--dim);text-align:center;backdrop-filter:blur(6px)}
+/* playground layout */
+.pg{display:grid;grid-template-columns:310px 1fr;gap:14px;align-items:start}
+@media(max-width:800px){.pg{grid-template-columns:1fr}}
+.panel{background:var(--card2);border:1px solid var(--line);border-radius:4px;padding:12px;margin-bottom:12px}
+.panel h3{margin-top:0}
+.sl{margin:9px 0}
+.sl-h{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--dim);margin-bottom:3px}
+.sl-h b{color:var(--txt);font-family:var(--mono);font-size:11.5px;font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;background:#15161C;border-radius:4px;outline:none;cursor:pointer;padding:0;border:0}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;border-radius:50%;background:var(--acc);border:2px solid #101014;cursor:pointer}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--acc);border:2px solid #101014;cursor:pointer}
+.seg{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.seg button{background:#15161C;border:1px solid var(--line);color:var(--dim);padding:6px 10px;border-radius:3px;cursor:pointer;font-size:12px;font-weight:600;font-family:var(--sans)}
+.seg button.on{border-color:var(--acc);color:var(--acc);background:rgba(137,169,207,.1)}
+.wfall{display:flex;gap:5px;margin:8px 0 2px}
+.wcol{flex:1;display:flex;flex-direction:column;align-items:center;min-width:0}
+.wstack{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;width:100%;height:172px}
+.wblk{width:100%;border-radius:4px;transition:height .12s ease,margin-bottom .12s ease}
+.wlab{font-size:10px;color:var(--dim);text-align:center;margin-top:4px;line-height:1.25}
+.wval{font:600 10px var(--mono);font-variant-numeric:tabular-nums;margin-bottom:2px}
+.hbar{display:flex;height:24px;border-radius:3px;overflow:hidden;background:#15161C;font:700 10.5px var(--mono)}
+.hbar div{display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden;transition:width .12s ease;color:#101014}
+.hbar+.hbar{margin-top:6px}
+.callout{border-radius:4px;padding:8px 11px;margin-top:8px;font-size:12.8px;border:1px solid}
+.co-i{background:rgba(137,169,207,.07);border-color:rgba(137,169,207,.35)}
+.co-w{background:rgba(232,179,60,.07);border-color:rgba(232,179,60,.4)}
+.co-r{background:rgba(229,105,94,.07);border-color:rgba(229,105,94,.4)}
+.co-g{background:rgba(87,201,131,.07);border-color:rgba(87,201,131,.4)}
+.chal{display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px dashed #2E2F3C;font-size:12.5px}
+.chal:last-child{border-bottom:0}
+.chal .cbx{width:17px;height:17px;border-radius:3px;border:1.5px solid var(--dim);flex:none;margin-top:1px;text-align:center;line-height:15px;font-size:11px}
+.chal.done .cbx{background:var(--grn);border-color:var(--grn);color:#101014}
+.chal.done{color:var(--dim)}
+.gauge{height:14px;background:#15161C;border-radius:4px;position:relative;overflow:hidden;margin:8px 0 2px}
+.gauge .z{position:absolute;top:0;left:50%;width:1.5px;height:100%;background:var(--dim);z-index:1}
+.gauge .f{position:absolute;top:0;height:100%;transition:all .12s ease}
+.toast{position:fixed;right:16px;bottom:60px;background:var(--grn);color:#101014;font-weight:700;padding:10px 16px;border-radius:4px;font-size:13px;opacity:0;transform:translateY(8px);transition:all .3s ease;z-index:50;pointer-events:none;max-width:320px}
+.toast.show{opacity:1;transform:none}
+/* accordions (case map / pe reference) */
+.acc-h{cursor:pointer;padding:11px 14px;background:var(--card2);border:1px solid var(--line);border-radius:4px;margin-top:8px;font-weight:600;font-size:14px;display:flex;justify-content:space-between}
+.acc-h:hover{border-color:var(--acc)}
+.acc-b{display:none;padding:12px 16px;border:1px solid var(--line);border-top:none;border-radius:0 0 4px 4px;font-size:13.5px;white-space:pre-wrap;background:#14151B}
+.acc-h.open+.acc-b{display:block}
+.opt{display:block;width:100%;text-align:left;background:var(--card2);border:1px solid var(--line);border-radius:4px;padding:10px 13px;margin-top:8px;color:var(--txt);font-size:13.5px;cursor:pointer;font-family:var(--sans)}
+.opt:hover{border-color:var(--acc)}
+.opt.correct{border-color:var(--grn);background:rgba(87,201,131,.12)}
+.opt.wrong{border-color:var(--red);background:rgba(229,105,94,.10)}
+.score5{display:flex;gap:6px;margin-top:8px}
+.score5 button{width:40px;height:36px;border-radius:3px;border:1px solid var(--line);background:var(--card2);color:var(--txt);font-weight:700;cursor:pointer;font-family:var(--mono)}
+.score5 button:hover{border-color:var(--gold)}
+/* diagnosis game */
+.pullgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:8px;margin:10px 0}
+.pull{background:var(--card2);border:1px solid var(--line);border-radius:4px;padding:10px 12px;cursor:pointer;font-size:12.5px;transition:border-color .12s ease}
+.pull:hover{border-color:var(--gold)}
+.pull.open{cursor:default;border-color:#3A5A45;background:#14181B}
+.pull .pt{font-weight:700;font-size:12px;display:flex;justify-content:space-between;gap:6px}
+.pull .pc{color:var(--dim);font-size:11px}
+.pull table{width:100%;border-collapse:collapse;margin-top:6px;font-family:var(--mono);font-size:10.5px;font-variant-numeric:tabular-nums}
+.pull td,.pull th{padding:2px 3px;text-align:right;border-bottom:1px solid #232430;color:var(--txt);font-weight:400}
+.pull th{color:var(--dim);font-weight:600;text-transform:uppercase;font-size:9px;letter-spacing:.05em}
+.pull td:first-child,.pull th:first-child{text-align:left}
+.dneg{color:var(--red)}.dpos{color:var(--grn)}
+/* sizing builder */
+.chainrow{display:flex;align-items:center;gap:8px;margin:7px 0;flex-wrap:wrap}
+.node{flex:1;min-width:190px;background:var(--card2);border:1px solid var(--line);border-radius:4px;padding:8px 10px;cursor:pointer}
+.node.pred{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.node .nl{font-size:11.5px;color:var(--dim);display:flex;justify-content:space-between;gap:6px}
+.node .nl b{color:var(--txt);font-family:var(--mono);font-size:11px}
+.runchip{font:700 11px var(--mono);color:var(--gold);background:rgba(206,129,71,.1);border:1px solid rgba(206,129,71,.35);border-radius:4px;padding:5px 8px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.opch{font:700 13px var(--mono);color:var(--dim)}
+.brow{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:11.5px}
+.brow .bl{width:170px;color:var(--dim);text-align:right;flex:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.brow .bt{flex:1;height:13px;background:#15161C;border-radius:3px;overflow:hidden}
+.brow .bt i{display:block;height:100%;background:var(--acc)}
+.brow .bv{font-family:var(--mono);font-size:10.5px;width:64px;flex:none}
+.stmt{background:#15161C;border:1px solid var(--line);border-radius:4px;padding:9px 10px;font-size:12px}
+svg text{font-family:var(--sans)}
+.narr{background:var(--card2);border-left:3px solid var(--gold);border-radius:0 4px 4px 0;padding:10px 12px;margin:10px 0;font-size:13.5px;min-height:44px}
+:is(button,input,textarea,select,.acc-h,.pull,.node):focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Private &amp; Confidential · Prepared for B. Badwal</div>
+  <h1>MBB Case Prep Trainer</h1>
+  <span class="sub">Diagnosis playgrounds · generative drills · spaced repetition · Fall 2026 gates</span>
+</header>
+<nav id="nav"></nav>
+
+<section id="home"></section>
+<section id="queue"></section>
+<section id="gym"></section>
+<section id="dojo"></section>
+<section id="syn"></section>
+<section id="hint"></section>
+<section id="chains"></section>
+<section id="map"></section>
+<section id="diag"></section>
+<section id="size"></section>
+<section id="exh"></section>
+<section id="pe"></section>
+</div>
+<div class="toast" id="toast"></div>
+<footer><b>Space</b> reveal / advance · <b>1/2/3</b> grade chains &amp; queue — progress saves automatically in this browser</footer>
+<script>
+"use strict";
+/* ============ UTIL + STORE ============ */
+const $=id=>document.getElementById(id);
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const R=(a,b)=>Math.round(a+Math.random()*(b-a));
+const f1=x=>(Math.round(x*10)/10).toFixed(1);
+const pc=n=>(n>=0?"+":"")+(Math.round(n*10)/10)+"%";
+function fmt(n){if(!isFinite(n))return"—";const a=Math.abs(n);if(a>=1e9)return(n/1e9).toFixed(2).replace(/\.?0+$/,"")+"B";if(a>=1e6)return(n/1e6).toFixed(2).replace(/\.?0+$/,"")+"M";if(a>=1e3)return(n/1e3).toFixed(1).replace(/\.?0+$/,"")+"K";return String(Math.round(n*100)/100)}
+const today=()=>new Date().toISOString().slice(0,10);
+const S={get(k,d){try{const v=localStorage.getItem("bkl_"+k);return v?JSON.parse(v):d}catch(e){return d}},
+set(k,v){try{localStorage.setItem("bkl_"+k,JSON.stringify(v))}catch(e){}}};
+/* ============ SRS (Leitner) ============ */
+const INTERVALS=[0,1,3,7,14,30];
+let SR;
+function srLoad(){SR=S.get("srs",{items:{},sk:{},log:{},pg:{}}); SR.items=SR.items||{}; SR.sk=SR.sk||{}; SR.log=SR.log||{}; SR.pg=SR.pg||{};}
+function srSave(){S.set("srs",SR)}
+function logRep(){SR.log[today()]=(SR.log[today()]||0)+1; srSave()}
+function gradeItem(id,g){const it=SR.items[id]||{b:0,n:0,m:0};
+ it.n++; if(g===1){it.b=1;it.m++} else if(g===2){it.b=Math.max(1,it.b)} else {it.b=Math.min(6,(it.b||0)+1)}
+ const d=new Date(); d.setDate(d.getDate()+INTERVALS[Math.min(it.b,6)-1]);
+ it.due=d.toISOString().slice(0,10); SR.items[id]=it; logRep(); renderNav();}
+function gradeSkill(id,ok){const a=SR.sk[id]||[]; a.push(ok?1:0); if(a.length>20)a.shift(); SR.sk[id]=a; logRep();}
+function skillAcc(id){const a=SR.sk[id]||[]; return a.length?a.reduce((x,y)=>x+y,0)/a.length:null}
+function dueIds(){const t=today(); return CHAIN_IDS.filter(id=>{const it=SR.items[id]; return it&&it.due&&it.due<=t})}
+function newIds(){return CHAIN_IDS.filter(id=>!SR.items[id])}
+function streak(){let s=0,d=new Date(); if(!SR.log[today()])d.setDate(d.getDate()-1);
+ while(SR.log[d.toISOString().slice(0,10)]){s++;d.setDate(d.getDate()-1)} return s}
+/* ============ PLAYGROUND SHARED ============ */
+function pgDone(k){if(!SR.pg[k]){SR.pg[k]=today(); srSave(); return true} return false}
+let toastT;
+function toast(m){const t=$("toast"); t.textContent=m; t.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove("show"),2800)}
+function sld(id,lab,min,max,step,val,fn){return `<div class="sl"><div class="sl-h"><span>${lab}</span><b id="${id}v"></b></div><input type="range" id="${id}" min="${min}" max="${max}" step="${step}" value="${val}" oninput="${fn}()"></div>`}
+const sv=id=>parseFloat($(id).value);
+const setv=(id,t)=>{$(id+"v").textContent=t};
+function co(cls,html){return `<div class="callout co-${cls}">${html}</div>`}
+const CHALS={
+diag:[["diag1","Clean kill","diagnose a case correctly using 4 pulls or fewer — segment first, then drill."],
+["diag2","Us vs them","solve a case where the market check was the decisive pull (company problem vs industry problem)."],
+["diag3","The mix hunter","correctly call a mix-shift case — flat revenue hiding a margin disease. Your field-guide nemesis."],
+["diag4","Five straight","get 5 consecutive correct root-cause calls at any efficiency."]],
+size:[["size1","In the band","land inside the reference band on any prompt — with your own assumptions, not the defaults."],
+["size2","Triangulated","get top-down and bottom-up within 25% of each other on the same prompt."],
+["size3","Swing spotter","predict the highest-leverage assumption before revealing the tornado — 3 times."]],
+exh:[["exh1","First read","self-grade 3/3 on any exhibit — observation, so-what, and implication all landed."],
+["exh2","Pattern proof","score a solid read on 5 different exhibit patterns."]],
+pe:[["pe1","Operator's deal","build a 3.0x+ MOIC with zero multiple expansion (exit ≤ entry multiple)."],
+["pe2","Beta detector","construct a deal where market growth drives 60%+ of EBITDA growth — then read why CDD would push back on the price."],
+["pe3","Low-leverage alpha","hit a 25%+ IRR with debt at 40% or below of entry EV."]],
+};
+function chalHTML(mod){return `<div class="panel"><h3 style="margin:0 0 4px">Challenges</h3>`+CHALS[mod].map(c=>`<div class="chal ${SR.pg[c[0]]?'done':''}" id="ch_${c[0]}"><div class="cbx">${SR.pg[c[0]]?'✓':''}</div><div><b>${c[1]}</b> — ${c[2]}</div></div>`).join("")+`</div>`}
+function chalHit(k){if(pgDone(k)){const c=CHALS[k.replace(/\d+$/,"")].find(x=>x[0]===k); const el=$("ch_"+k); if(el){el.classList.add("done"); el.querySelector(".cbx").textContent="✓"} toast("Challenge complete: "+(c?c[1]:k))}}
+/* ============ KEYBOARD ============ */
+window.KB={};
+document.addEventListener("keydown",e=>{
+ if(e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA"||e.target.tagName==="SELECT")return;
+ if(e.code==="Space"||e.code==="Enter"){e.preventDefault(); KB.space&&KB.space();}
+ if(e.key>="1"&&e.key<="3"&&KB.grade)KB.grade(+e.key);
+});
+</script>
+<script>
+"use strict";
+/* ============ CASE-TYPE MAP (v1 content) ============ */
+const caseTypes=[
+{n:"Profitability decline",w:"The workhorse — most common first-round case. 'Client profits down 20%, why, and what to do?'",
+l:"Profit = Revenue − Cost. First question: is it a revenue problem, a cost problem, or both? Then: is it US (company-specific) or THEM (market-wide)? Revenue = price × volume × mix, by segment. Cost = fixed vs variable, by line. Isolate WHERE (which segment/product/region) before WHY.",
+p:["A regional airline's margins fell 8 points in two years while competitors held steady. Diagnose and fix.","A dental-clinic chain has flat revenue but profits down 30%. Why?"],
+t:["Jumping to ideas before isolating where the decline lives","Forgetting mix (flat revenue can hide price up / volume down)","Never asking whether competitors are hit too (market vs company)"]},
+{n:"Market entry",w:"'Should client enter market X / country Y?' Common at Bain and with growth-strategy clients.",
+l:"Three questions in order: (1) Is the market attractive? (size, growth, margins, competitive intensity, regulation). (2) Can WE win? (right to play — assets, brand, capabilities, synergies vs incumbents). (3) Does the math work? (entry cost vs profit stream; build/buy/partner). Never skip #2 — attractive markets you cannot win are traps.",
+p:["A US fitness-equipment maker is considering entering India. Should they?","A regional bank wants to launch a crypto-custody product. Advise."],
+t:["Sizing the market and calling it an answer (attractiveness ≠ ability to win)","Ignoring entry MODE (build vs buy vs JV changes everything)","No walk-away number"]},
+{n:"Market sizing",w:"Standalone or embedded inside entry/growth cases. Tests structure + math + sanity.",
+l:"Pick top-down (population → filter → frequency → price) or bottom-up (units/capacity → utilization). State the equation FIRST, then fill numbers, then sanity-check the answer against a known anchor. Announce rounding out loud.",
+p:["Size the US market for dog grooming.","How many EV chargers does Virginia need by 2030?"],
+t:["Diving into numbers before stating the equation","Fake precision (say ~$2B, not $2.13B)","No sanity check against an anchor"]},
+{n:"Growth strategy",w:"'Client wants to double revenue in 5 years — how?'",
+l:"Growth = more of the same (penetration) + new WHO (segments/geographies) + new WHAT (products/services) + new HOW (channels/pricing/M&A). Rank options by size-of-prize × feasibility × speed. Anchor to the company's actual advantage — growth ideas without a right-to-win are decoration.",
+p:["A $200M B2B software firm wants to reach $500M in 5 years. Build the roadmap.","A grocery chain has saturated its home region. Where does growth come from?"],
+t:["Listing 15 ideas with no prioritization","Ignoring capacity/capital constraints","Organic-only blindness (M&A is a growth lever)"]},
+{n:"Pricing",w:"'How should client price X?' Includes launches and repricing.",
+l:"Three anchors: cost floor (unit economics), competitor cross-check (alternatives), value ceiling (customer willingness-to-pay / economic value created). Then structure: one price or segmented/tiered? One-time or recurring? Test elasticity: what does a 10% change do to volume — and to contribution margin?",
+p:["Price a new AI diagnostic tool for mid-size hospitals.","Client wants to cut prices 15% to gain share. Good idea?"],
+t:["Cost-plus by reflex (leaves value on the table)","Forgetting the volume response (elasticity)","Price cut math: at 30% margin, a 15% cut needs +100% volume to break even — DO the contribution math"]},
+{n:"M&A / due diligence",w:"'Should PE firm / strategic buy target X?' Core at Bain (PE ring-fence), EY-P, Kearney PEPI.",
+l:"Four gates: (1) standalone quality — market, moat, unit economics, management; (2) deal logic — synergies for a strategic, value-creation plan for a sponsor; (3) price vs value — what must be true to justify the multiple; (4) risks & red flags — customer concentration, churn, key-person, regulatory. End with: buy / buy-at-lower-price / walk.",
+p:["A sponsor is looking at a $40M-revenue HVAC-services roll-up platform. Diligence it.","A beverage major wants to acquire a fast-growing energy-drink brand at 6x revenue. Advise."],
+t:["Forgetting the PRICE (great company ≠ great deal)","Synergy hand-waving without sizing","Your personal trap: sliding into deal-execution jargon — stay at thesis level"]},
+{n:"PE investment screen",w:"Sponsor-flavored variant: 'Attractive investment? What would you diligence?'",
+l:"Think like the IC memo you actually write: thesis in one line → market (size/growth/cyclicality) → company (share, moat, recurring revenue %, unit economics) → value-creation levers (pricing, ops, add-ons, professionalization) → exit path (who buys it in 5 years, at what multiple) → key diligence questions ranked. You have live reps here — deploy calmly, in plain English.",
+p:["Is a lower-middle-market landscaping roll-up a good platform investment?","A B2B SaaS with 95% gross retention and 20% growth is available at 8x revenue. Screen it."],
+t:["Showing off mechanics instead of judgment","Skipping exit thinking","Underweighting management/key-person risk in small companies"]},
+{n:"Operations / turnaround",w:"'Plant costs too high / service quality falling / company in distress — fix it.' A&M-flavored; appears at MBB too.",
+l:"Map the system first: where does time/cost/defect actually occur along the chain (inputs → process → outputs)? Segment the cost or delay by step, find the 20% driving 80%, then levers: eliminate, automate, renegotiate, redesign, re-schedule. In distress: cash first (13-week lens — what conserves cash NOW), then margin, then growth.",
+p:["A hospital's ER wait times doubled in a year. Diagnose and fix.","A distribution business is 6 weeks from a covenant breach. First moves?"],
+t:["Prescribing before locating the bottleneck","Ignoring quick wins vs structural fixes (sequence matters)","In distress: talking strategy while the patient bleeds cash"]},
+{n:"Public sector / nonprofit",w:"DC-office staple (McKinsey/BCG federal). 'Agency wants to improve outcome X with fixed budget.'",
+l:"Same rigor, different objective function: define the OUTCOME metric first (what does success mean, for whom), then levers across policy/process/people/technology, then feasibility: stakeholders, procurement, political constraints, equity. Cost-effectiveness replaces profit: outcome per dollar.",
+p:["A state wants to cut veteran unemployment by a third in three years. Design the approach.","A federal agency's permitting backlog is 18 months. Halve it."],
+t:["Importing profit logic wholesale (the metric is mission per dollar)","Ignoring stakeholder/political feasibility","Vague outcome definitions — pin the metric first"]}];
+function renderMap(){
+ $("map").innerHTML=`<div class="card"><h2>Case-Type Map <span class="pill p-drill">reference</span></h2>
+ <div class="prog">Nine families. For each: when it shows up, the first-principles logic (never recite a named framework — rebuild it from "what would have to be true"), exemplar prompts, and the traps that kill candidates. Master the LOGIC; the buckets then build themselves live.</div>
+ <div id="mapAcc"></div></div>`;
+ const box=$("mapAcc");
+ caseTypes.forEach(c=>{
+  const h=document.createElement("div");h.className="acc-h";h.innerHTML=c.n+"<span>+</span>";
+  const b=document.createElement("div");b.className="acc-b";
+  b.textContent="WHEN IT APPEARS\n"+c.w+"\n\nFIRST-PRINCIPLES LOGIC\n"+c.l+"\n\nEXEMPLAR PROMPTS\n• "+c.p.join("\n• ")+"\n\nTRAPS\n✗ "+c.t.join("\n✗ ");
+  h.onclick=()=>{h.classList.toggle("open");h.querySelector("span").textContent=h.classList.contains("open")?"−":"+"};
+  box.appendChild(h);box.appendChild(b);});
+ KB={};
+}
+/* ============ STRUCTURE GYM (v1 content) ============ */
+const gymBank=[
+{t:"Profitability",q:"A national gym chain's profits fell 25% over 18 months while revenue grew 5%. The CEO wants answers in 4 weeks.",
+m:"Clarify: which costs grew, and where (which regions/formats)?\n1. COST DEEP-DIVE — split fixed (rent, leases — new locations?) vs variable (labor, utilities); by location cohort (new vs mature gyms). Hypothesis: growth added high-rent, under-ramped locations.\n2. REVENUE QUALITY — price vs member volume vs mix (premium vs base tiers); discounting to drive the 5% growth?\n3. MARKET CHECK — are competitors' margins compressing too (wage inflation, rent)? Company problem vs industry problem.\nSo-what: locate the bleed by cohort first; likely answer is expansion economics, not core operations."},
+{t:"Profitability",q:"A specialty coffee roaster selling B2B (cafés) and DTC (subscriptions) saw margins halve. Diagnose.",
+m:"1. SEGMENT SPLIT FIRST — B2B vs DTC margins separately; a blended number hides everything. Which segment fell?\n2. PER-UNIT ECONOMICS — green-bean costs (commodity spike?), shipping (DTC killer), discounting/churn in subscriptions.\n3. MIX SHIFT — if low-margin DTC grew faster than B2B, blended margin falls with no operational change at all.\nSo-what: this is a mix-vs-margin decomposition case — say that early."},
+{t:"Market entry",q:"A European discount grocer is considering entering the US Southeast. Advise go/no-go.",
+m:"1. MARKET ATTRACTIVENESS — grocery $ in target states, growth, discount-segment penetration vs Europe (headroom?), competitive set (Walmart, Aldi already there — response risk).\n2. RIGHT TO WIN — sourcing scale, private-label engine, small-box real-estate model; does their EU cost advantage translate?\n3. ENTRY ECONOMICS & MODE — organic rollout vs acquiring a regional chain; stores-to-breakeven; 10-yr NPV vs deploying same capital in Europe.\nSo-what: the decision hinges on Walmart/Aldi response — game that out explicitly."},
+{t:"Market entry",q:"A US telehealth company asks whether to launch a cash-pay weight-management offering.",
+m:"1. MARKET — patients seeking GLP-1-era weight care × willingness to pay cash × regulatory/prescribing constraints.\n2. CAN WE WIN — existing provider network, patient base to cross-sell, pharmacy partnerships vs specialized competitors.\n3. ECONOMICS & RISK — CAC vs LTV, drug-supply dependence, reimbursement shifts that could kill cash-pay.\nSo-what: this is a bet on regulatory/reimbursement trajectory as much as demand — name that."},
+{t:"Market sizing",q:"Size the annual US market for home EV chargers (hardware + install).",
+m:"EQUATION FIRST: annual installs × avg ticket.\n~16M new vehicles/yr × ~10% EV share ≈ 1.6M EVs; ~80% owners have home access ≈ 1.3M; ~60% buy a Level-2 charger ≈ 0.8M installs; ticket ≈ $600 hardware + $900 install ≈ $1,500.\n≈ 0.8M × $1.5K ≈ ~$1.2B/yr, plus replacement/upgrade tail.\nSANITY: low single-digit $B feels right for an emerging accessory market."},
+{t:"Market sizing",q:"How many pizzas are sold in the US on a given Friday?",
+m:"EQUATION: people eating pizza that day × pizzas per person-group.\n335M people; Friday is peak — say ~12% have pizza ≈ 40M people; ~2.5 people share a pie → ~16M pizzas; add frozen (~30% of occasions) if asked to include retail.\nSANITY: industry ~3B pizzas/yr ÷ 365 ≈ 8M/day average; Friday ≈ 2× average ≈ 16M. ✓ (Knowing the anchor is the flex.)"},
+{t:"Growth",q:"A $150M revenue veterinary-clinic group wants to double in 4 years. Build the growth structure.",
+m:"1. SAME CLINICS, MORE — pricing power (vet demand is inelastic), service attach (dental, imaging, wellness plans), capacity utilization (hours, vet productivity).\n2. NEW WHO/WHERE — de-novo clinics vs acquisitions (fragmented market → roll-up math: how many $2M clinics/yr needed?).\n3. NEW WHAT — telehealth triage, pharmacy/e-comm, insurance partnerships.\nPrioritize: acquisitions likely carry the load — say 60/25/15 and defend it. Constraint to flag: vet labor supply."},
+{t:"Pricing",q:"A SaaS client's flagship product is priced at $99/user/mo, unchanged in 6 years. Should they raise prices?",
+m:"1. VALUE CEILING — what economic value per user (time saved × wage, revenue enabled)? If 10× price, headroom exists.\n2. COMPETITIVE POSITION — where does $99 sit vs alternatives, and how sticky is the base (switching costs, retention)?\n3. EXECUTION DESIGN — grandfather vs migrate, tiering (good-better-best captures heterogeneous WTP), test on new cohorts first; churn math: at 80% gross margin, a 15% raise tolerates ~13% incremental churn before value-destructive.\nSo-what: the answer is almost certainly yes-with-design, not yes/no."},
+{t:"M&A / DD",q:"A strategic acquirer is evaluating a $30M-revenue managed-IT-services firm at 10× EBITDA. One week to a go/no-go read.",
+m:"1. STANDALONE QUALITY — recurring contract %, gross retention, customer concentration (top-5 %?), engineer attrition, margin trend.\n2. DEAL LOGIC — cross-sell into acquirer's base, cost synergies, capability gap it fills. Size them, roughly.\n3. PRICE TEST — 10× vs peers (6–9× typical); what growth/synergy must be TRUE to clear it? Reverse-engineer.\n4. RED FLAGS — key-person founders, contract change-of-control clauses, project-vs-recurring mix drift.\nSo-what: at 10×, price demands proven synergies — recommend price discipline or structure (earnout)."},
+{t:"PE screen",q:"A sponsor asks: is residential HVAC services a good roll-up thesis right now?",
+m:"THESIS: fragmented, non-discretionary, recurring-ish demand + multiple arbitrage (buy at 4–5×, exit platform at 8–10×).\n1. MARKET — replacement-driven (installed-base age), weather/seasonality, housing exposure at the margin.\n2. ECONOMICS — technician scarcity is THE constraint; membership plans drive recurring %; pricing power decent.\n3. VALUE CREATION — professionalize (pricing, dispatch software, procurement), add-on M&A cadence, brand consolidation.\n4. EXIT — strategic consolidators + larger sponsors actively buying platforms. Proven path.\nRISKS: integration at pace, tech labor, rate-sensitive housing turnover. Verdict: attractive IF operator bench exists — the constraint is management, not deals."},
+{t:"Ops / turnaround",q:"A parcel-delivery company's on-time rate fell from 95% to 82% in six months. Fix it.",
+m:"1. LOCATE THE FAILURE — decompose the journey: pickup → sort → linehaul → last-mile. Where do the late parcels become late? Data cut by node, region, time-of-day.\n2. ROOT CAUSE at the failing node — volume above design capacity? Driver attrition? New routing software? Weather mix?\n3. LEVERS — short-term (overtime, rebalancing volume, SLA triage by customer value) vs structural (capacity add, network redesign).\nSo-what: this is a bottleneck-location case; resist fixing everything — find the ONE node."},
+{t:"Public sector",q:"A governor wants 50,000 more skilled-trades workers in the state within 5 years. Design the approach.",
+m:"METRIC FIRST: net new certified tradespeople employed in-state.\n1. SUPPLY LEVERS — community-college/apprenticeship capacity, completion rates, adult reskilling, licensing reciprocity for out-of-state workers.\n2. DEMAND/ATTRACTION — wage signaling, employer partnerships, image campaign targeting high-schoolers and career-switchers.\n3. FEASIBILITY — funding sources, union/employer stakeholders, measurement cadence; cost-per-placed-worker as the efficiency metric.\nSo-what: completion and retention beat enrollment — fund the finish line, not the front door."},
+{t:"M&A / DD",q:"Your PE client can buy either a niche defense-electronics supplier or a dental-clinic platform, same price, same EBITDA. Frame the choice.",
+m:"Same buckets, run twice, compare:\n1. MARKET — defense: budget-cycle-driven, program concentration; dental: demographic-steady, reimbursement exposure.\n2. MOAT & CONTRACTS — defense: qualified-supplier status = deep moat, but customer concentration extreme; dental: brand/locations, low moat, labor-dependent.\n3. VALUE CREATION & EXIT — dental: classic add-on machine, many buyers; defense: fewer add-ons, strategic exit premium possible (citizenship/clearance factors).\nSo-what: choose by the FUND's model — roll-up machine → dental; program-expertise & patience → defense. Fit-to-owner beats abstract quality."},
+{t:"Growth",q:"A stadium-concessions operator wants to grow profit 40% with no new venues. Go.",
+m:"Profit per attendee × attendees served.\n1. CAPTURE RATE — % of attendees who buy at all (queue abandonment is huge): mobile ordering, express lanes, hawkers in seats.\n2. TICKET SIZE — bundles, premium items, dynamic pricing by game importance, alcohol mix.\n3. COST SIDE — labor scheduling to demand curves, waste reduction (perishables), SKU rationalization.\nSo-what: throughput at peak innings is the binding constraint — most profit hides in queue math."}];
+let GYM={idx:-1,t:null,left:60};
+const gymStats=()=>S.get("gym",{done:0,scores:[],byType:{}});
+function gymPick(){
+ const st=gymStats();
+ const weights=gymBank.map(c=>{const t=st.byType[c.t];if(!t||!t.n)return 3;const avg=t.s/t.n;return avg<3.5?4:avg<4.2?2:1});
+ let sum=weights.reduce((a,b)=>a+b,0),r=Math.random()*sum,i=0;
+ for(;i<weights.length;i++){r-=weights[i];if(r<=0)break}
+ return Math.min(i,gymBank.length-1);
+}
+function renderGym(){
+ clearInterval(GYM.t);
+ const st=gymStats(); const last5=st.scores.slice(-5);
+ const avg=last5.length?(last5.reduce((a,b)=>a+b,0)/last5.length).toFixed(1):"—";
+ $("gym").innerHTML=`<div class="card">
+ <h2>Structure Gym <span class="pill p-drill">timed</span></h2>
+ <div class="prog">Random prompt → 60 seconds → build your buckets OUT LOUD (type keywords as you speak). Then compare and self-score 1–5. Your top-level buckets must answer THIS case, not a template. Weak types resurface more often. · <b>${st.done}</b> done · last-5 avg <b>${avg}</b></div>
+ <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+  <span class="pill p-size" id="gymType">—</span><div class="timer" id="gymTimer">60</div></div>
+ <div class="qbox" id="gymPrompt">Press Start.</div>
+ <textarea id="gymInput" placeholder="Speak aloud while typing bucket keywords…"></textarea>
+ <div class="btnrow"><button class="act" onclick="gymStart()">Start / next prompt</button>
+ <button class="ghost" onclick="gymReveal()">Reveal model structure</button></div>
+ <div class="ans" id="gymModel"></div>
+ <div id="gymScoreRow" style="display:none"><h3>Self-score (MECE · case-specific · depth · so-what)</h3><div class="score5" id="gymScore"></div></div>
+ </div>`;
+ const sc=$("gymScore");
+ for(let i=1;i<=5;i++){const b=document.createElement("button");b.textContent=i;b.onclick=()=>{
+  const st2=gymStats();st2.done++;st2.scores.push(i);if(st2.scores.length>50)st2.scores.shift();
+  const t=gymBank[GYM.idx].t;st2.byType[t]=st2.byType[t]||{n:0,s:0};st2.byType[t].n++;st2.byType[t].s+=i;
+  S.set("gym",st2);logRep();renderGym();gymStart();
+ };sc.appendChild(b)}
+ KB={space:()=>{if(GYM.idx<0)gymStart();else if(!$("gymModel").classList.contains("show"))gymReveal()}};
+}
+function gymStart(){
+ GYM.idx=gymPick();const c=gymBank[GYM.idx];
+ $("gymType").textContent=c.t; $("gymPrompt").textContent=c.q;
+ $("gymInput").value=""; $("gymModel").classList.remove("show"); $("gymScoreRow").style.display="none";
+ clearInterval(GYM.t);GYM.left=60;tick("gymTimer",GYM.left);
+ GYM.t=setInterval(()=>{GYM.left--;tick("gymTimer",GYM.left);if(GYM.left<=0){clearInterval(GYM.t);gymReveal()}},1000);
+}
+function gymReveal(){
+ if(GYM.idx<0)return;clearInterval(GYM.t);
+ const el=$("gymModel");el.textContent="MODEL STRUCTURE (compare, don't copy)\n\n"+gymBank[GYM.idx].m;el.classList.add("show");
+ $("gymScoreRow").style.display="block";
+}
+function tick(id,v){const e=$(id);if(!e)return;e.textContent=v;e.classList.toggle("low",v<=10)}
+/* ============ MATH DOJO (v1 gens, upgraded shell) ============ */
+const gens={
+ size(){const pop=pick([335,260,130]);const popL=pop===335?"US population (335M)":pop===260?"US adults (~260M)":"US households (~130M)";
+  const p1=R(10,60),p2=R(20,80),freq=R(1,12),price=R(5,120);
+  const ans=pop*1e6*(p1/100)*(p2/100)*freq*price;
+  return{q:"Start with "+popL+". "+p1+"% are in the target group; of those, "+p2+"% buy the product, on average "+freq+"×/year at $"+price+". Total annual market ($)?",
+  u:"$",a:ans,s:popL+" × "+p1+"% = "+fmt(pop*1e6*p1/100)+" → × "+p2+"% = "+fmt(pop*1e6*p1/100*p2/100)+" buyers → × "+freq+"/yr × $"+price+" = $"+fmt(ans)}},
+ be(){const f=R(2,20)*1e5,pr=R(20,90),vc=R(5,pr-8);const ans=f/(pr-vc);
+  return{q:"Fixed costs $"+fmt(f)+"/yr. Price $"+pr+"/unit, variable cost $"+vc+"/unit. Breakeven volume (units/yr)?",
+  u:"units",a:ans,s:"Contribution = $"+pr+"−$"+vc+" = $"+(pr-vc)+"/unit → "+fmt(f)+" ÷ "+(pr-vc)+" = "+fmt(ans)+" units. Then ask: what % of the market is that?"}},
+ marg(){const m=R(20,45),d=R(5,Math.min(15,m-5));const ans=(d/(m-d))*100;
+  return{q:"Contribution margin is "+m+"%. Client cuts price by "+d+" points (of price). What % volume INCREASE is needed to keep total contribution flat?",
+  u:"%",a:ans,s:"New margin = "+(m-d)+"%. Required volume × = "+m+"/"+(m-d)+" → increase = "+d+"/"+(m-d)+" = "+ans.toFixed(1)+"%. Price cuts are brutal at low margins — this is THE pricing-case kill shot."}},
+ grow(){const g=pick([6,8,9,12,18,24]);const ans=72/g;
+  return{q:"A business grows "+g+"%/yr. Roughly how many years to double (Rule of 72)?",
+  u:"years",a:ans,s:"72 ÷ "+g+" ≈ "+ans.toFixed(1)+" years. Cite the rule out loud — it signals fluency."}},
+ pay(){const inv=R(5,50)*1e6,cf=R(1,9)*1e6;const ans=inv/cf;
+  return{q:"Investment $"+fmt(inv)+", generating $"+fmt(cf)+"/yr in incremental cash flow. Simple payback (years)?",
+  u:"years",a:ans,s:fmt(inv)+" ÷ "+fmt(cf)+"/yr = "+ans.toFixed(1)+" years. Then editorialize: vs typical hurdle (3–5 yrs), is that good?"}},
+ pe(){const em=R(5,8),xm=R(6,10),g=R(4,12),n=pick([4,5]),lev=R(40,60);
+  const e0=10,ev0=e0*em,eq0=ev0*(1-lev/100);const en=e0*Math.pow(1+g/100,n);const evn=en*xm;const debt0=ev0*lev/100;const debtn=debt0*0.5;const eqn=evn-debtn;const moic=eqn/eq0;
+  return{q:"Entry: $10M EBITDA at "+em+"×, "+lev+"% debt. EBITDA grows "+g+"%/yr for "+n+" yrs; exit at "+xm+"×; half the debt is paid down. MOIC (×)?",
+  u:"× MOIC",a:moic,s:"Entry EV "+fmt(ev0*1e6)+", equity "+fmt(eq0*1e6)+". Exit EBITDA $"+en.toFixed(1)+"M × "+xm+" = EV "+fmt(evn*1e6)+"; less debt "+fmt(debtn*1e6)+" → equity "+fmt(eqn*1e6)+". MOIC = "+moic.toFixed(2)+"×. IRR ≈ MOIC^(1/"+n+")−1 ≈ "+((Math.pow(moic,1/n)-1)*100).toFixed(0)+"%."}},
+ share(){const mkt=R(2,40)*1e9,g=R(3,12),sh=R(5,30),tgt=sh+R(3,10);
+  const ans=mkt*Math.pow(1+g/100,3)*(tgt/100)-mkt*(sh/100);
+  return{q:"Market is $"+fmt(mkt)+" growing "+g+"%/yr. Client has "+sh+"% share today and targets "+tgt+"% in 3 years. Incremental revenue vs today ($)?",
+  u:"$",a:ans,s:"Market in 3 yrs = "+fmt(mkt)+" × (1."+(g<10?"0"+g:g)+")³ ≈ "+fmt(mkt*Math.pow(1+g/100,3))+". Target rev = × "+tgt+"% = "+fmt(mkt*Math.pow(1+g/100,3)*tgt/100)+"; today = "+fmt(mkt*sh/100)+". Δ ≈ $"+fmt(ans)+". Decompose out loud: market growth vs share gain."}},
+};
+let DOJO={cur:null,t0:0,ti:null};
+function renderDojo(){
+ clearInterval(DOJO.ti);
+ const st=S.get("dojo",{n:0,c:0,times:[]});const acc=st.n?Math.round(100*st.c/st.n):0;
+ const avg=st.times.length?Math.round(st.times.reduce((a,b)=>a+b,0)/st.times.length):0;
+ $("dojo").innerHTML=`<div class="card">
+ <h2>Math Dojo <span class="pill p-drill">generative · timed</span></h2>
+ <div class="prog">Timed, randomized case math. ALWAYS say units. Round smart and announce the rounding. ±3% tolerance. Accuracy <b class="${acc>=90?'ok':acc>=75?'wr':'bad'}">${acc}%</b> (${st.c}/${st.n}) · gate 90% · avg ${avg}s</div>
+ <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+  <div><select id="dojoKind"><option value="mix">Mixed</option><option value="size">Sizing chain</option><option value="be">Breakeven</option><option value="marg">Margin / price-volume</option><option value="grow">Growth & CAGR</option><option value="pay">Payback</option><option value="share">Market share math</option><option value="pe">PE returns math</option></select>
+  <button class="act" onclick="dojoNew()">New drill</button></div>
+  <div class="timer" id="dojoTimer">—</div></div>
+ <div class="qbox" id="dojoQ" style="margin-top:10px">Choose a drill type and press New drill.</div>
+ <div class="btnrow"><input type="number" id="dojoA" step="any" placeholder="answer"> <span class="prog" id="dojoUnit" style="margin:0"></span>
+ <button class="ghost" onclick="dojoCheck()">Check</button></div>
+ <div class="ans" id="dojoSteps"></div>
+ <div class="kbd"><b>Enter</b> in the box checks · <b>Space</b> next drill</div>
+ </div>
+ <div class="card"><h3 style="margin-top:0">Anchor numbers (memorize cold)</h3>
+ <div class="prog" style="margin:0">US population ~335M · adults ~260M · households ~130M (avg 2.5 people) · US GDP ~$28T · consumer spend ~$18T · median HH income ~$80K · new-vehicle sales ~16M/yr · smartphone penetration ~90% of adults · workdays/yr ~250 · full-time hours/yr ~2,000 · US hospitals ~6,000 · doctors ~1.1M · SMBs ~33M (6M with employees) · 1% of US pop ≈ 3.35M · hours/yr 8,760.<br><br><b style="color:var(--gold)">Rounding rule:</b> round INPUTS to friendly numbers, announce it, keep one significant digit of honesty in the OUTPUT.</div></div>`;
+ const inp=$("dojoA"); inp.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();dojoCheck()}});
+ KB={space:()=>{if($("dojoSteps").classList.contains("show"))dojoNew()}};
+}
+function dojoNew(){
+ const k=$("dojoKind").value; const kk=k==="mix"?pick(Object.keys(gens)):k;
+ DOJO.cur=gens[kk]();DOJO.cur.kind=kk;
+ $("dojoQ").textContent=DOJO.cur.q; $("dojoUnit").textContent=DOJO.cur.u;
+ $("dojoA").value=""; $("dojoSteps").classList.remove("show");
+ DOJO.t0=Date.now();clearInterval(DOJO.ti);
+ DOJO.ti=setInterval(()=>{$("dojoTimer").textContent=Math.floor((Date.now()-DOJO.t0)/1000)+"s"},250);
+ $("dojoA").focus();
+}
+function dojoCheck(){
+ if(!DOJO.cur)return;clearInterval(DOJO.ti);
+ const v=parseFloat($("dojoA").value); if(!isFinite(v))return;
+ const secs=Math.floor((Date.now()-DOJO.t0)/1000);
+ const ok=Math.abs(v-DOJO.cur.a)/Math.abs(DOJO.cur.a)<=0.03;
+ const st=S.get("dojo",{n:0,c:0,times:[]});st.n++;if(ok)st.c++;st.times.push(secs);if(st.times.length>100)st.times.shift();S.set("dojo",st);
+ gradeSkill("g_math_"+DOJO.cur.kind,ok); logRep();
+ const el=$("dojoSteps");
+ el.innerHTML=`<span class="${ok?'ok':'bad'}">${ok?"✓ CORRECT":"✗ Off — exact: "+(DOJO.cur.a>=1000?fmt(DOJO.cur.a):DOJO.cur.a.toFixed(2))}</span>  (${secs}s)\n\n${DOJO.cur.s}`;
+ el.classList.add("show");
+}
+/* ============ SYNTHESIS (v1 content) ============ */
+const synBank=[
+{f:"Case so far: client is a US regional bank considering launching small-business lending in two new states. Market is $4B and growing 6%; client brand is strong but has no SMB sales force; a fintech competitor just raised prices 20%; regulatory approval takes ~9 months; pilot economics show breakeven at 18 months.",
+m:"RECOMMENDATION: Enter — but via a 2-state pilot starting regulatory filing now.\nSUPPORT: (1) Market attractive: $4B, 6% growth, and the price umbrella from the fintech's 20% raise improves our entry economics. (2) Breakeven at 18 months is inside typical hurdle for a strategic build.\nRISK: No SMB sales force — the build could stall; mitigate by hiring a proven regional sales lead before launch.\nNEXT STEP: File regulatory paperwork this quarter (9-month clock is the critical path) while piloting distribution."},
+{f:"Case so far: PE client evaluating a $25M-revenue landscaping roll-up platform at 5.5× EBITDA. Recurring commercial contracts = 70% of revenue; owner wants to retire fully at close; two competing sponsors circling; add-on targets available at ~4×; technician turnover 35%/yr.",
+m:"RECOMMENDATION: Pursue — bid at or slightly above 5.5×, conditional on solving the leadership gap pre-close.\nSUPPORT: (1) 70% recurring commercial revenue plus add-ons at 4× gives clean multiple-arbitrage math. (2) Competitive tension means price discipline, not price chasing — our edge must be certainty and speed.\nRISK: Owner leaving + 35% tech turnover = operational vacuum; make a signed GM/successor a closing condition.\nNEXT STEP: This week — management diligence and a retention plan for the top 5 field leaders."},
+{f:"Case so far: A hospital system's ER wait times doubled. Analysis shows 70% of the delay occurs at the admit-to-bed handoff, driven by discharge bottlenecks upstairs (discharges happen 4–7pm; ER peak is 10am–2pm). Staffing is at budget; a $2M fast-track unit proposal is on the table.",
+m:"RECOMMENDATION: Fix discharge timing first; defer the $2M fast-track unit.\nSUPPORT: (1) 70% of delay is bed handoff — a discharge-by-11am protocol attacks the actual bottleneck at near-zero capital cost. (2) The fast-track unit treats the 30%, not the 70%.\nRISK: Physician rounding behavior is hard to shift — pair the protocol with scheduling changes and a discharge-lounge stopgap.\nNEXT STEP: 6-week pilot on two wards; target 25% wait reduction before any capital spend."},
+{f:"Case so far: A $300M consumer-electronics brand's DTC channel (30% of sales) has CAC up 60% in two years; Amazon (50% of sales) margin is 10 points lower but stable; retail (20%) is flat. CEO asks where to put the next $20M of growth spend.",
+m:"RECOMMENDATION: Shift the $20M toward retention economics and Amazon share defense — not more DTC acquisition.\nSUPPORT: (1) DTC CAC +60% means the marginal dollar there is the worst dollar; (2) LTV levers (attach, subscriptions, email/CRM) monetize the existing base at far better returns; Amazon is lower margin but stable — protect the volume engine.\nRISK: Over-rotating off DTC erodes the brand's data asset — keep a floor spend.\nNEXT STEP: Rebuild the spend plan around contribution-per-marginal-dollar by channel; 90-day test."},
+{f:"Case so far: State agency wants to halve a 18-month permitting backlog. Diagnostics: 40% of applications arrive incomplete; reviewers spend 30% of time on status calls; IT system is 15 years old; hiring freeze in effect; a $30M system overhaul was proposed (3-year build).",
+m:"RECOMMENDATION: Attack intake quality and communication first; sequence the IT overhaul second.\nSUPPORT: (1) 40% incomplete applications — a smart-intake checklist/portal fix removes rework at the source; (2) a public status tracker kills the 30% of reviewer time lost to calls — that's capacity without hiring.\nRISK: Quick wins may relieve pressure and stall the structural fix — lock the $30M decision to a date now.\nNEXT STEP: 90-day sprint: digital intake validation + status page; measure backlog velocity before capital commitment."},
+{f:"Case so far: Bain-style PE ring-fence — client can win a dental platform auction at 9× (peers trade 7×) or walk. Fund has one platform slot left this vintage; the asset is the best-run in the space; financing is committed; LP pressure to deploy is real.",
+m:"RECOMMENDATION: Walk at 9× — discipline over deployment.\nSUPPORT: (1) Entry at 2 turns above peers consumes the value-creation math: at exit parity you need ~30% more EBITDA growth just to tie the base case. (2) 'Best-run' cuts both ways — fewer improvement levers left for us.\nRISK: Vintage deployment pressure is genuine — mitigate by redirecting to add-on-rich, lower-multiple platforms within 2 quarters.\nNEXT STEP: Deliver a bid-discipline memo with a walk-away price of 7.5× and a pre-approved pivot list."}];
+let SYN={idx:-1,t:null,left:60};
+function renderSyn(){
+ clearInterval(SYN.t);
+ const st=S.get("syn",{done:0,scores:[]});const l5=st.scores.slice(-5);
+ const avg=l5.length?(l5.reduce((a,b)=>a+b,0)/l5.length).toFixed(1):"—";
+ $("syn").innerHTML=`<div class="card">
+ <h2>Synthesis Trainer <span class="pill p-drill">the final-mile muscle</span></h2>
+ <div class="prog">Facts appear → 60 seconds → deliver the answer-first close OUT LOUD: recommendation → 2–3 supports → key risk → next step. This is the exact skill superdays measure. · <b>${st.done}</b> done · last-5 avg <b>${avg}</b></div>
+ <div style="display:flex;justify-content:space-between;align-items:center"><span class="pill p-size">answer first, always</span><div class="timer" id="synTimer">60</div></div>
+ <div class="scen" id="synFacts" style="display:none"></div>
+ <textarea id="synInput" placeholder="Recommendation first. Always."></textarea>
+ <div class="btnrow"><button class="act" onclick="synStart()">New scenario</button><button class="ghost" onclick="synReveal()">Reveal model close</button></div>
+ <div class="ans" id="synModel"></div>
+ <div id="synScoreRow" style="display:none"><h3>Self-score (answer-first · support quality · risk named · ≤60s)</h3><div class="score5" id="synScore"></div></div>
+ </div>`;
+ const sc=$("synScore");
+ for(let i=1;i<=5;i++){const b=document.createElement("button");b.textContent=i;b.onclick=()=>{
+  const st2=S.get("syn",{done:0,scores:[]});st2.done++;st2.scores.push(i);if(st2.scores.length>50)st2.scores.shift();S.set("syn",st2);logRep();renderSyn();synStart();
+ };sc.appendChild(b)}
+ KB={space:()=>{if(SYN.idx<0)synStart();else if(!$("synModel").classList.contains("show"))synReveal()}};
+}
+function synStart(){
+ SYN.idx=(SYN.idx+1)%synBank.length;
+ const c=synBank[SYN.idx];
+ const f=$("synFacts");f.style.display="block";f.textContent=c.f;
+ $("synInput").value="";$("synModel").classList.remove("show");$("synScoreRow").style.display="none";
+ clearInterval(SYN.t);SYN.left=60;tick("synTimer",SYN.left);
+ SYN.t=setInterval(()=>{SYN.left--;tick("synTimer",SYN.left);if(SYN.left<=0){clearInterval(SYN.t);synReveal()}},1000);
+}
+function synReveal(){
+ if(SYN.idx<0)return;clearInterval(SYN.t);
+ const el=$("synModel");el.textContent="MODEL CLOSE\n\n"+synBank[SYN.idx].m;el.classList.add("show");
+ $("synScoreRow").style.display="block";
+}
+/* ============ HINT DECODER (v1 content) ============ */
+const hintBank=[
+{q:"You present three buckets. Interviewer: 'Interesting. What ELSE might matter here?'",o:["They liked it and want bonus points","Your structure missed something important — expand now","They are testing confidence; defend your buckets"],c:1,w:"'What else' after a structure almost always means a major bucket is missing. Do NOT defend — think out loud, add the missing dimension (often: competition, capacity, or the customer)."},
+{q:"Mid-analysis, interviewer says: 'Let's set that aside for now.'",o:["Your thread is wrong or low-priority — follow their redirect instantly","They will come back to it; keep it in your summary","Push back — persistence shows ownership"],c:0,w:"A redirect is a gift: they're steering you to where the case actually lives. Drop it cleanly and move with full energy — no mourning your lost thread."},
+{q:"You give a number. Interviewer: 'Does that seem right to you?'",o:["It's wrong — recompute immediately","Sanity-check it OUT LOUD against an anchor; it may be right or wrong","They want you to defend it confidently"],c:1,w:"This tests whether you sanity-check under pressure. Sometimes the number IS right. The winning move is a calm, visible check: 'Let me test that against X…' — the process is the answer."},
+{q:"Interviewer asks: 'If you could only look at ONE piece of data, what would it be?'",o:["A prioritization test — name the single highest-leverage data point and say why","A trick — ask for two or three","They're ending the case early because you're behind"],c:0,w:"Pure prioritization. Pick the datum that discriminates between your top hypotheses, and give the because. Judgment, not completeness, is being scored."},
+{q:"You finish a strong drill-down. Interviewer, neutrally: 'Okay. So what would you tell the CEO?'",o:["Recap your analysis in order","The synthesis bell — answer-first recommendation, 60 seconds","Ask clarifying questions about the CEO's priorities"],c:1,w:"'What would you tell the CEO' = the case is OVER and the only thing left to score is your close. Recommendation first, always. This is your trained muscle — hear the bell."},
+{q:"Early in the case, interviewer volunteers: 'By the way, the client recently acquired a smaller competitor.'",o:["Color — note it and continue your plan","Volunteered facts are never decoration — weave it into your structure now","Ask why they mentioned it"],c:1,w:"Interviewers don't volunteer neutral trivia. An unprompted fact is a signpost — the acquisition is probably central (integration costs? overlap? new capability?). Use it visibly."},
+{q:"You're structuring and the interviewer interrupts you halfway through bucket two.",o:["Rudeness — finish your structure politely but firmly","Time pressure or they've seen enough — answer the interrupt directly, stay loose","You were rambling; apologize and restart"],c:1,w:"McKinsey-style interviewer-led cases interrupt BY DESIGN. Never cling to your plan, never apologize — pivot with energy. This is the interruption/recovery drill; it's a feature, not an attack."},
+{q:"Interviewer: 'Your math is right. What does it MEAN for the client?'",o:["Restate the number more slowly","Translate to decision language: is it big/small vs profit pool, does it change the answer","Show the formula to prove rigor"],c:1,w:"Numbers without so-what are the classic middle-of-the-pack marker. Every computed number gets one sentence of meaning: 'That's $40M — about a third of current profits — so this lever alone justifies the investment.'"},
+{q:"Near the end: 'What would worry you most about this recommendation?'",o:["Confidence test — say you're comfortable with the recommendation","Risk-judgment test — name the ONE risk that could flip the answer, plus the early-warning signal","List every risk you can think of"],c:1,w:"One flip-risk with a monitoring trigger beats ten generic risks. 'If technician churn passes 40%, the roll-up math breaks — I'd track that monthly' is a partner-level answer."},
+{q:"Interviewer goes quiet after your answer and just looks at you.",o:["Fill the silence with more analysis","Hold the silence calmly — you're done when you're done","Ask 'would you like more detail?'"],c:1,w:"Silence is a composure probe (and sometimes just note-taking). Filling it dilutes a good answer into a mediocre one. Two full seconds of calm reads as senior. You're allowed to stop."},
+{q:"'Suppose the client rejects your recommendation. What then?'",o:["Restate the case for it more persuasively","Flex test — show you can serve the client's chosen path: best version of plan B, with safeguards","Concede the client knows best"],c:1,w:"They're testing advisor maturity: conviction WITHOUT rigidity. One sentence re-anchoring your view, then genuinely build their path: 'I'd still favor X, but if we go Y, here's how we protect the downside.'"},
+{q:"Interviewer, casually, mid-case: 'You've done deal work — how would a sponsor look at this?'",o:["Downshift jargon, one investor insight in plain English, hand the thread back","Full LBO walkthrough — this is your moment","Deflect modestly; stay in consultant mode"],c:0,w:"Your background is being invited, with a trap inside: they want ONE judgment flash ('a sponsor would fixate on the recurring-revenue %'), not a masterclass. Deposit the insight, return to the case. Restraint IS the flex."}];
+let HINT={idx:-1};
+function renderHint(){
+ const st=S.get("hint",{n:0,c:0});const p=st.n?Math.round(100*st.c/st.n):0;
+ $("hint").innerHTML=`<div class="card">
+ <h2>Interviewer-Hint Decoder <span class="pill p-drill">read the steer</span></h2>
+ <div class="prog">Interviewers steer constantly; missing steers is a top-2 failure mode. Read the line, pick what it really means. · <b>${st.n}</b> answered · <b class="${p>=80?'ok':'wr'}">${p}%</b> (target 80%)</div>
+ <div class="qbox" id="hintQ"></div>
+ <div id="hintOpts"></div>
+ <div class="ans" id="hintWhy"></div>
+ <div class="btnrow"><button class="act" onclick="nextHint()">Next</button></div>
+ <div class="kbd"><b>Space</b> next line</div></div>`;
+ nextHint(); KB={space:nextHint};
+}
+function nextHint(){
+ HINT.idx=(HINT.idx+1)%hintBank.length;
+ const h=hintBank[HINT.idx];
+ $("hintQ").textContent=h.q; $("hintWhy").classList.remove("show");
+ const box=$("hintOpts");box.innerHTML="";
+ h.o.forEach((opt,i)=>{const b=document.createElement("button");b.className="opt";b.textContent=opt;
+  b.onclick=()=>{
+   const st=S.get("hint",{n:0,c:0});st.n++;if(i===h.c)st.c++;S.set("hint",st);
+   gradeSkill("g_hint",i===h.c); logRep();
+   box.querySelectorAll(".opt").forEach((x,j)=>{x.classList.toggle("correct",j===h.c);if(j===i&&i!==h.c)x.classList.add("wrong");x.disabled=true});
+   const w=$("hintWhy");w.textContent=h.w;w.classList.add("show");
+  };box.appendChild(b)});
+}
+</script>
+<script>
+"use strict";
+/* ============ PROFIT DIAGNOSIS GAME ============ */
+const ARCHS=[
+{biz:"MidAtlantic grocery chain — 80 stores",unit:"M units",segs:["Fresh & prepared","Packaged center-store","Household & other"],pr:[[26,34],[18,24],[10,16]],gm:[[0.33,0.40],[0.16,0.22],[0.20,0.26]],sh:[0.44,0.40,0.16],fx:["Rent & occupancy","Store labor (salaried)","Corporate overhead"],m0:[0.05,0.09]},
+{biz:"Specialty coffee roaster — B2B wholesale + DTC subscriptions",unit:"M units",segs:["B2B café wholesale","DTC subscriptions"],pr:[[9,12],[18,22]],gm:[[0.26,0.34],[0.44,0.52]],sh:[0.62,0.38],fx:["Roastery & facilities","Salaried team","Marketing base"],m0:[0.08,0.14]},
+{biz:"Regional fitness-club operator — 45 clubs",unit:"M member-months",segs:["Premium clubs","Value clubs"],pr:[[75,95],[28,40]],gm:[[0.55,0.65],[0.38,0.48]],sh:[0.55,0.45],fx:["Rent & leases","Salaried staff","Corporate overhead"],m0:[0.10,0.16]},
+{biz:"B2B software platform — enterprise + SMB",unit:"M seats",segs:["Enterprise contracts","SMB self-serve"],pr:[[1800,2400],[300,420]],gm:[[0.74,0.82],[0.62,0.72]],sh:[0.66,0.34],fx:["R&D","Sales & marketing base","G&A"],m0:[0.10,0.20]},
+{biz:"Regional parcel & courier network",unit:"M parcels",segs:["Express next-day","Standard ground"],pr:[[18,24],[7,10]],gm:[[0.34,0.42],[0.18,0.24]],sh:[0.45,0.55],fx:["Hubs & fleet leases","Salaried ops staff","Corporate overhead"],m0:[0.05,0.10]}];
+const FAULTS={
+A:{label:s=>"Price erosion in "+s,lever:0,opt:["revseg","pv"],mkt:"A competitor moved prices ~10% below yours in the affected line. Market volume roughly flat (+1-3%). Competitors' revenue steady.",
+ note:"Price faults hide inside healthy volume. The tell: revenue down while units hold. Segment revenue first, then split price vs volume — never guess from the total."},
+B:{label:s=>"Volume / share loss in "+s,lever:1,opt:["revseg","pv","market"],mkt:"Market volume GREW ~4% this year. Your main competitor reports double-digit revenue growth and has been hiring reps in your region.",
+ note:"Volume down in a growing market = share donation, and the market pull is what proves it. 'Us vs them' is the highest-leverage question in any profitability case."},
+C:{label:()=>"Market-wide demand decline",lever:5,opt:["revseg","pv","market"],mkt:"Market volume fell ~10% industry-wide. Competitors report similar or worse declines; two have announced capacity cuts.",
+ note:"Same symptom as share loss — completely different answer. Only the market check separates them. If you called a company problem without pulling market data, that's the lesson."},
+D:{label:(s,l)=>"Mix shift toward lower-margin "+l,lever:4,opt:["revseg","margin"],mkt:"Market roughly flat. A premium specialist has opened near your best locations and is pulling your highest-value customers.",
+ note:"Flat revenue is the mix shift's camouflage — your field-guide nemesis. The margin/mix pull is the killer move: revenue composition changed even though the total didn't. Never kill the revenue branch because the total looks fine."},
+E:{label:()=>"Variable-cost inflation (input costs)",lever:2,opt:["varcost","market"],mkt:"Input costs are up across the industry. Two competitors have announced price increases to pass costs through; a third is holding price to take share.",
+ note:"Industry-wide cost inflation is a THEM problem with an US decision: pass it through or absorb it. The market pull tells you competitors are raising — which means the pass-through window is open."},
+F:{label:()=>"Fixed-cost step-up",lever:3,opt:["fixed"],mkt:"Market healthy; competitors' margins stable. Nothing external moved.",
+ note:"When revenue and unit economics are clean, the fixed-cost pull is a one-stop diagnosis. Fastest case in the set — the skill is noticing the P&L symptom pattern (costs up, revenue flat) and going straight there."},
+G:{label:s=>"Discount-driven growth in "+s+" (bought volume)",lever:6,opt:["revseg","pv"],mkt:"Market flat. Your volume is up while competitors' volumes are flat — and their prices are holding.",
+ note:"Growth that costs more than it brings: price down, volume up, contribution down. The price-vs-volume split exposes it instantly. 'We grew revenue' is not the same claim as 'we grew profit.'"}};
+const DG_LEVERS=["Selective price response + value messaging (defend without a blanket cut)","Win-back program aimed at the poached accounts/customers","Pass costs through with indexed or staged pricing","Renegotiate / rationalize the stepped-up fixed line","Defend the premium mix — loyalty, exclusive range, service moat","Capacity & cost discipline; protect cash and share through the downturn","Promo ROI discipline — walk back unprofitable discounts, keep the ones that pay"];
+let DG=null;
+function dgGen(){
+ for(let t=0;t<60;t++){
+  const A=pick(ARCHS);
+  const total=R(400,1400);
+  const segs=A.segs.map((n,i)=>{const p=R(A.pr[i][0],A.pr[i][1]);const gm=A.gm[i][0]+Math.random()*(A.gm[i][1]-A.gm[i][0]);
+   const rev=total*A.sh[i];return{n,p,v:rev/p,vc:p*(1-gm),gm}});
+  const m0=A.m0[0]+Math.random()*(A.m0[1]-A.m0[0]);
+  const vp=segs.reduce((a,s)=>a+(s.p-s.vc)*s.v,0);
+  const fxTot=vp-total*m0; if(fxTot<=0)continue;
+  const fx=A.fx.map((n,i)=>({n,a:fxTot*[0.42,0.35,0.23][i]}));
+  const fk=pick(Object.keys(FAULTS));
+  /* year-1 copies with noise */
+  const s1=segs.map(s=>({...s,p:s.p*(1+(Math.random()-0.5)*0.02),v:s.v*(1+(Math.random()-0.5)*0.03)}));
+  const f1x=fx.map(f=>({...f,a:f.a*(1+(Math.random()-0.5)*0.02)}));
+  let si=R(0,segs.length-1),loI=-1;
+  if(fk==="A"){const d=R(7,13)/100;s1[si].p=segs[si].p*(1-d);s1[si].v=segs[si].v*1.02;}
+  if(fk==="B"){const d=R(13,20)/100;s1[si].v=segs[si].v*(1-d);}
+  if(fk==="C"){const d=R(8,14)/100;s1.forEach((s,i)=>s.v=segs[i].v*(1-d*(0.85+Math.random()*0.3)));}
+  if(fk==="D"){let hi=0,lo=0;segs.forEach((s,i)=>{if(s.gm>segs[hi].gm)hi=i;if(s.gm<segs[lo].gm)lo=i});if(hi===lo)continue;
+   const d=R(13,18)/100;const drev=segs[hi].p*segs[hi].v*d;
+   s1[hi].v=segs[hi].v*(1-d);s1[lo].v=segs[lo].v+drev/segs[lo].p;si=hi;loI=lo;}
+  if(fk==="E"){const d=R(9,16)/100;s1.forEach((s,i)=>s.vc=segs[i].vc*(1+d*(0.8+Math.random()*0.4)));}
+  if(fk==="F"){const li=R(0,2);f1x[li].a=fx[li].a*(1+R(28,45)/100);}
+  if(fk==="G"){const d=R(9,13)/100;s1[si].p=segs[si].p*(1-d);s1[si].v=segs[si].v*(1+R(4,8)/100);}
+  const rev=(ss)=>ss.reduce((a,s)=>a+s.p*s.v,0);
+  const cost=(ss,ff)=>ss.reduce((a,s)=>a+s.vc*s.v,0)+ff.reduce((a,f)=>a+f.a,0);
+  const p0=rev(segs)-cost(segs,fx), p1=rev(s1)-cost(s1,f1x);
+  const dp=(p1/p0-1)*100;
+  if(p0>0&&dp<=-9&&dp>=-45){
+   return{A,segs,s1,fx,f1x,fk,si,loI,p0,p1,dp,r0:rev(segs),r1:rev(s1),c0:cost(segs,fx),c1:cost(s1,f1x)};
+  }
+ }
+ return dgGen._fallback();
+}
+dgGen._fallback=function(){/* deterministic safe case: fixed-cost step-up on grocery */
+ const A=ARCHS[0];const segs=[{n:A.segs[0],p:30,v:14.7,vc:19.5,gm:0.35},{n:A.segs[1],p:21,v:19,vc:17.2,gm:0.18},{n:A.segs[2],p:13,v:12.3,vc:10.1,gm:0.22}];
+ const fx=[{n:A.fx[0],a:120},{n:A.fx[1],a:100},{n:A.fx[2],a:66}];
+ const s1=segs.map(s=>({...s}));const f1x=fx.map(f=>({...f}));f1x[0].a=168;
+ const rev=ss=>ss.reduce((a,s)=>a+s.p*s.v,0),cost=(ss,ff)=>ss.reduce((a,s)=>a+s.vc*s.v,0)+ff.reduce((a,f)=>a+f.a,0);
+ const p0=rev(segs)-cost(segs,fx),p1=rev(s1)-cost(s1,f1x);
+ return{A,segs,s1,fx,f1x,fk:"F",si:0,loI:-1,p0,p1,dp:(p1/p0-1)*100,r0:rev(segs),r1:rev(s1),c0:cost(segs,fx),c1:cost(s1,f1x)};
+};
+function dgDelta(a,b){const d=(b/a-1)*100;return `<span class="${d<-1?'dneg':d>1?'dpos':''}">${pc(d)}</span>`}
+function dgTable(rows,head){return `<table><tr>${head.map(h=>`<th>${h}</th>`).join("")}</tr>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</table>`}
+const DG_PULLS={
+ revseg:{t:"Revenue by segment",c:1,render:d=>dgTable(d.segs.map((s,i)=>[s.n,"$"+f1(s.p*s.v)+"M","$"+f1(d.s1[i].p*d.s1[i].v)+"M",dgDelta(s.p*s.v,d.s1[i].p*d.s1[i].v)]),["Segment","LY","TY","Δ"])},
+ pv:{t:"Price vs volume by segment",c:1,render:d=>dgTable(d.segs.flatMap((s,i)=>[[s.n+" · price","$"+f1(s.p),"$"+f1(d.s1[i].p),dgDelta(s.p,d.s1[i].p)],[s.n+" · volume",f1(s.v),f1(d.s1[i].v),dgDelta(s.v,d.s1[i].v)]]),["Driver","LY","TY","Δ"])},
+ margin:{t:"Margin & mix by segment",c:1,render:d=>{const r1=d.r1;return dgTable(d.segs.map((s,i)=>{const gm1=(d.s1[i].p-d.s1[i].vc)/d.s1[i].p*100;return [s.n,Math.round(s.gm*100)+"%",Math.round(gm1)+"%",Math.round(d.s1[i].p*d.s1[i].v/r1*100)+"% of rev"]}),["Segment","GM% LY","GM% TY","Mix TY"])}},
+ varcost:{t:"Variable cost per unit",c:1,render:d=>dgTable(d.segs.map((s,i)=>[s.n,"$"+f1(s.vc),"$"+f1(d.s1[i].vc),dgDelta(s.vc,d.s1[i].vc)]),["Segment","LY","TY","Δ"])},
+ fixed:{t:"Fixed costs by line",c:1,render:d=>dgTable(d.fx.map((f,i)=>[f.n,"$"+f1(f.a)+"M","$"+f1(d.f1x[i].a)+"M",dgDelta(f.a,d.f1x[i].a)]),["Line","LY","TY","Δ"])},
+ market:{t:"Market & competitor check",c:1,render:d=>`<div style="margin-top:6px;font-size:12px;line-height:1.5">${FAULTS[d.fk].mkt}</div>`},
+ signals:{t:"Customer & ops signals",c:1,render:d=>{const sig={A:"Sales team reports losing quotes on price; win rate down in the affected line. Customer counts stable.",B:"Churned accounts cite a rival's aggressive outreach. Your NPS is unchanged — they're being pulled, not pushed.",C:"Customers are cutting usage across the board, citing budgets. No competitor mentions.",D:"Your highest-spend customers visit/order less often; entry-level activity is up. Loyalty-tier revenue skewing down-market.",E:"Ops flags supplier surcharges and freight increases landing through the year. No demand complaints.",F:"Nothing from customers. Finance notes new leases/headcount hit the books this year.",G:"Promo redemption is way up; new customers skew deal-seeking with low repeat rates."};return `<div style="margin-top:6px;font-size:12px;line-height:1.5">${sig[d.fk]}</div>`}}
+};
+function dgCauses(d){
+ const list=[];
+ d.segs.forEach(s=>{list.push(["A",s.n,"Price erosion in "+s.n]);list.push(["B",s.n,"Volume / share loss in "+s.n]);});
+ list.push(["C",null,"Market-wide demand decline"]);
+ if(d.segs.length>1&&d.loI>=0)list.push(["D",null,"Mix shift toward lower-margin "+d.segs[d.loI].n]);
+ else list.push(["D",null,"Mix shift toward lower-margin business"]);
+ list.push(["E",null,"Variable-cost inflation (input costs)"]);
+ list.push(["F",null,"Fixed-cost step-up"]);
+ d.segs.forEach(s=>list.push(["G",s.n,"Discount-driven growth in "+s.n+" (bought volume)"]));
+ return list;
+}
+function dgCorrectIdx(d,list){
+ return list.findIndex(([k,seg])=>{
+  if(k!==d.fk)return false;
+  if(k==="A"||k==="B"||k==="G")return seg===d.segs[d.si].n;
+  return true;});
+}
+function renderDiag(){
+ DG=dgGen(); DG.pulled=[]; DG.done=false;
+ const d=DG;
+ $("diag").innerHTML=`<div class="card">
+ <h2>Profit Diagnosis <span class="pill p-diag">playground · generative</span></h2>
+ <div class="prog">A business just broke. You get <b>5 data pulls</b> — segment before you dive, form a hypothesis, pull only what tests it. Then call the root cause and the fix. Scored on diagnosis AND path efficiency, like the real thing.</div>
+ <div class="scen"><b>${d.A.biz}.</b> Profit fell from <b>$${f1(d.p0)}M</b> to <b>$${f1(d.p1)}M</b> (<b>${pc(d.dp)}</b>). Revenue went $${f1(d.r0)}M → $${f1(d.r1)}M (${pc((d.r1/d.r0-1)*100)}); total costs $${f1(d.c0)}M → $${f1(d.c1)}M (${pc((d.c1/d.c0-1)*100)}). Volumes shown in ${d.A.unit}. The CEO wants the root cause — say your hypothesis OUT LOUD before each pull.</div>
+ <div style="display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">Data room</h3><span class="prog" style="margin:0">pulls left: <b id="dgB" style="color:var(--gold);font-family:var(--mono)">5</b></span></div>
+ <div class="pullgrid" id="dgGrid"></div>
+ <div class="panel"><h3 style="margin-top:0">Make the call</h3>
+  <div class="btnrow"><select id="dgCause"></select><select id="dgLever"></select><button class="act" onclick="dgCall()">Call it</button></div>
+  <div class="prog" style="margin:4px 0 0">Cause first, then the single move you'd lead with. No partial credit for hedging — commit.</div></div>
+ <div id="dgVerdict"></div>
+ <div class="ans" id="dgReveal" style="white-space:normal"></div>
+ <div class="btnrow"><button class="ghost" id="dgNext" style="display:none" onclick="renderDiag()">Next case →</button></div>
+ </div>
+ <div class="pg" style="grid-template-columns:1fr 310px"><div></div>${chalHTML("diag")}</div>`;
+ const grid=$("dgGrid");
+ Object.entries(DG_PULLS).forEach(([k,p])=>{
+  const el=document.createElement("div");el.className="pull";el.id="dgp_"+k;
+  el.innerHTML=`<div class="pt"><span>${p.t}</span><span class="pc">${p.c} pull</span></div>`;
+  el.onclick=()=>dgPull(k);grid.appendChild(el);});
+ const cs=$("dgCause");DG.causeList=dgCauses(d);
+ cs.innerHTML=`<option value="-1">— root cause —</option>`+DG.causeList.map((c,i)=>`<option value="${i}">${c[2]}</option>`).join("");
+ $("dgLever").innerHTML=`<option value="-1">— lead move —</option>`+DG_LEVERS.map((l,i)=>`<option value="${i}">${l}</option>`).join("");
+ KB={space:()=>{if(DG.done)renderDiag()}};
+}
+function dgPull(k){
+ if(DG.done||DG.pulled.includes(k))return;
+ if(DG.pulled.length>=5){toast("Out of pulls — make the call.");return}
+ DG.pulled.push(k);
+ const el=$("dgp_"+k);el.classList.add("open");
+ el.innerHTML=`<div class="pt"><span>${DG_PULLS[k].t}</span><span class="pc">pulled</span></div>`+DG_PULLS[k].render(DG);
+ $("dgB").textContent=5-DG.pulled.length;
+}
+function dgCall(){
+ if(DG.done)return;
+ const ci=+$("dgCause").value, li=+$("dgLever").value;
+ if(ci<0||li<0){toast("Pick a cause AND a lead move.");return}
+ DG.done=true;
+ const d=DG,f=FAULTS[d.fk];
+ const correct=ci===dgCorrectIdx(d,DG.causeList);
+ const leverOK=li===f.lever;
+ const opt=f.opt.length, used=DG.pulled.length;
+ const stars=used<=opt?"★★★":used<=opt+1?"★★":"★";
+ gradeSkill("g_diag",correct); if(correct)gradeSkill("g_lever",leverOK);
+ SR.cnt=SR.cnt||{}; SR.cnt.dstreak=correct?(SR.cnt.dstreak||0)+1:0; srSave();
+ $("dgVerdict").innerHTML=`<div class="callout ${correct?'co-g':'co-r'}"><b>${correct?"Correct diagnosis.":"Wrong call."}</b> ${correct?"":"It was: <b>"+f.label(d.segs[d.si].n,d.loI>=0?d.segs[d.loI].n:"")+"</b>. "}Lead move: ${leverOK?'<b class="ok">right lever.</b>':'the stronger move was <b>“'+DG_LEVERS[f.lever]+'”</b>.'} Path efficiency: <b style="color:var(--gold)">${stars}</b> (${used} pulls vs ${opt} on the model path).</div>`;
+ const rv=$("dgReveal");
+ rv.innerHTML=`<b style="color:var(--gold)">What actually happened:</b> ${f.label(d.segs[d.si].n,d.loI>=0?d.segs[d.loI].n:"")} — profit walked from $${f1(d.p0)}M to $${f1(d.p1)}M.<br><br>
+ <b style="color:var(--acc)">Model investigation path (${opt} pulls):</b> ${f.opt.map(k=>DG_PULLS[k].t).join(" → ")}.<br><br>
+ <b style="color:var(--acc)">The lesson:</b> ${f.note}`;
+ rv.classList.add("show");
+ $("dgNext").style.display="";
+ if(correct&&used<=4)chalHit("diag1");
+ if(correct&&(d.fk==="B"||d.fk==="C")&&DG.pulled.includes("market"))chalHit("diag2");
+ if(correct&&d.fk==="D")chalHit("diag3");
+ if((SR.cnt.dstreak||0)>=5)chalHit("diag4");
+}
+</script>
+<script>
+"use strict";
+/* ============ MARKET-SIZING BUILDER ============ */
+const SIZES=[
+{name:"US paid streaming subscriptions",unit:"$B/yr",band:[40e9,55e9],anchor:"Anchor: US consumer entertainment ≈ $300B; at-home video ≈ a quarter of it. Your field-guide case — triangulated to $43–50B.",
+ td:{lab:"Top-down · spend cascade",nodes:[{l:"US consumer entertainment spend ($B)",min:250,max:350,v:300,m:1e9},{l:"% spent on at-home video",min:15,max:35,v:25,pct:1},{l:"% of that on streaming subs",min:40,max:75,v:60,pct:1}]},
+ bu:{lab:"Bottom-up · household build",nodes:[{l:"US households (M)",min:120,max:140,v:130,m:1e6},{l:"% with ≥1 paid sub",min:60,max:90,v:78,pct:1},{l:"Avg paid subs per subscribing HH",min:2,max:4.5,v:3,st:0.1},{l:"$ per sub per year",min:96,max:192,v:144}]}},
+{name:"US dog grooming",unit:"$B/yr",band:[5e9,12e9],anchor:"Anchor: total US pet industry ≈ $150B; services are a modest slice.",
+ td:{lab:"Top-down · owner demand",nodes:[{l:"US households (M)",min:120,max:140,v:130,m:1e6},{l:"% owning a dog",min:30,max:50,v:40,pct:1},{l:"% using paid grooming",min:20,max:50,v:30,pct:1},{l:"Visits per year",min:2,max:8,v:4},{l:"$ per visit",min:40,max:100,v:60}]},
+ bu:{lab:"Bottom-up · supply side",nodes:[{l:"US professional groomers (K)",min:80,max:160,v:110,m:1e3},{l:"Dogs groomed per day",min:4,max:10,v:6},{l:"Working days per year",min:200,max:250,v:230},{l:"$ per visit",min:40,max:100,v:60}]}},
+{name:"US home EV chargers (hardware + install)",unit:"$B/yr",band:[0.9e9,2.5e9],anchor:"Anchor: an emerging vehicle-accessory market — low single-digit billions feels right.",
+ td:{lab:"Top-down · new-EV funnel",nodes:[{l:"New vehicles sold (M/yr)",min:14,max:18,v:16,m:1e6},{l:"% electric",min:6,max:20,v:10,pct:1},{l:"% with home charging access",min:60,max:90,v:80,pct:1},{l:"% buying a Level-2 charger",min:40,max:80,v:60,pct:1},{l:"Ticket $ (hardware + install)",min:1000,max:2200,v:1500}]},
+ bu:{lab:"Bottom-up · installer capacity",nodes:[{l:"Electricians doing EV installs (K)",min:30,max:80,v:50,m:1e3},{l:"Installs per electrician per year",min:10,max:30,v:16},{l:"Ticket $ (hardware + install)",min:1000,max:2200,v:1500}]}},
+{name:"Coffee shops in a college town",unit:"shops",band:[25,60],anchor:"Anchor: college towns run dense — roughly one shop per 1,000–2,000 people.",
+ td:{lab:"Demand ÷ capacity",nodes:[{l:"Town population (K)",min:40,max:60,v:50,m:1e3},{l:"% buying coffee out daily",min:10,max:35,v:20,pct:1},{l:"Cups/day a shop needs to survive",min:150,max:500,v:300,div:1}]},
+ bu:{lab:"Per-capita density anchor",nodes:[{l:"Town population (K)",min:40,max:60,v:50,m:1e3},{l:"People per coffee shop",min:800,max:2500,v:1200,div:1}]}},
+{name:"Pizzas sold in the US on a Friday",unit:"pizzas",band:[12e6,22e6],anchor:"Anchor: ~3B US pizzas/yr ÷ 365 ≈ 8M/day; Friday ≈ 2× an average day.",
+ td:{lab:"Demand · who eats tonight",nodes:[{l:"US population (M)",min:320,max:345,v:335,m:1e6},{l:"% eating pizza on a Friday",min:8,max:16,v:12,pct:1},{l:"People per pizza",min:2,max:3.5,v:2.5,st:0.1,div:1}]},
+ bu:{lab:"Anchor · annual volume",nodes:[{l:"US pizzas per year (B)",min:2.5,max:3.5,v:3,st:0.1,m:1e9},{l:"Days per year",min:365,max:365,v:365,div:1},{l:"Friday demand multiplier",min:1.5,max:2.5,v:2,st:0.1}]}},
+{name:"US parcel volume",unit:"packages/day",band:[55e6,120e6],anchor:"Anchor: the majors (USPS, UPS, FedEx, Amazon) each move tens of millions of parcels daily.",
+ td:{lab:"Top-down · per-person demand",nodes:[{l:"US population (M)",min:320,max:345,v:335,m:1e6},{l:"Packages per person per year",min:40,max:90,v:70},{l:"Days per year",min:365,max:365,v:365,div:1}]},
+ bu:{lab:"Bottom-up · carrier networks",nodes:[{l:"Avg daily parcels per major network (M)",min:12,max:25,v:18,m:1e6},{l:"Major national networks",min:4,max:5,v:4}]}},
+{name:"UK branded coffee-shop market",unit:"£B/yr",band:[4e9,7e9],anchor:"Anchor: ~25–30K UK coffee shops; the RoastClub entry case from your field guide.",
+ td:{lab:"Top-down · drinker demand",nodes:[{l:"UK adults (M)",min:50,max:56,v:53,m:1e6},{l:"% buying shop coffee regularly",min:20,max:45,v:30,pct:1},{l:"Cups per year (regulars)",min:80,max:220,v:120},{l:"£ per cup",min:3,max:4.5,v:3.5,st:0.1}]},
+ bu:{lab:"Bottom-up · shop economics",nodes:[{l:"UK coffee shops (K)",min:20,max:35,v:27,m:1e3},{l:"Avg revenue per shop (£K/yr)",min:150,max:350,v:220,s:1e3}]}},
+{name:"US MBA consulting hires",unit:"hires/yr",band:[2500,5500],anchor:"Anchor: meta and useful — MBB alone hires a few thousand MBAs globally.",
+ td:{lab:"Demand · school pipeline",nodes:[{l:"T15 MBA grads (K/yr)",min:8,max:16,v:12,m:1e3},{l:"% entering consulting",min:20,max:40,v:30,pct:1}]},
+ bu:{lab:"Supply · firm hiring",nodes:[{l:"Avg MBA hires per major consultancy",min:200,max:700,v:400},{l:"Firms hiring at that scale (MBB + tier-2)",min:6,max:12,v:9}]}}];
+let SZ={p:0,m:"td",pred:null,touched:{}};
+function szCalc(nodes){
+ let val=null,div=null;
+ nodes.forEach(f=>{
+  let x=f.v*(f.m||f.s||1); if(f.pct)x=f.v/100;
+  if(f.div){val=val/(f.v*(f.m||1));return}
+  if(val===null)val=x; else val*=x;});
+ return val;
+}
+function szBoth(){const p=SIZES[SZ.p];return{td:szCalc(p.td.nodes),bu:szCalc(p.bu.nodes)}}
+function renderSize(){
+ const p=SIZES[SZ.p];
+ SZ.pred=null;
+ $("size").innerHTML=`<div class="card">
+ <h2>Market-Sizing Builder <span class="pill p-size">playground</span></h2>
+ <div class="prog">State the equation before touching a slider. Then build the SAME prompt both ways — triangulation is what separates “feels right” from “is right.” Before revealing sensitivity, click the assumption you think moves the answer most.</div>
+ <div class="btnrow"><select id="szPick" onchange="SZ.p=+this.value;SZ.touched={};renderSize()">${SIZES.map((s,i)=>`<option value="${i}" ${i===SZ.p?"selected":""}>${s.name}</option>`).join("")}</select>
+ <div class="seg" style="margin:0"><button id="szTD" onclick="SZ.m='td';renderSize()">${p.td.lab}</button><button id="szBU" onclick="SZ.m='bu';renderSize()">${p.bu.lab}</button></div></div>
+ <div class="pg">
+  <div><div class="panel" id="szNodes"></div>${chalHTML("size")}</div>
+  <div>
+   <div class="panel"><div class="grid g3">
+    <div class="stat"><div class="v" id="szAns">—</div><div class="l" id="szAnsL">answer</div></div>
+    <div class="stat"><div class="v" id="szBand">—</div><div class="l">vs reference band</div></div>
+    <div class="stat"><div class="v" id="szConv">—</div><div class="l">TD vs BU convergence</div></div>
+   </div>
+   <div class="gauge" style="height:18px;margin-top:10px" id="szG"><div class="z"></div><div class="f" id="szGF"></div></div>
+   <div class="prog" id="szGL" style="margin:4px 0 0"></div></div>
+   <div class="panel"><h3 style="margin-top:0">Sensitivity — which assumption owns the answer?</h3>
+    <div class="btnrow" style="margin:0 0 6px"><button class="ghost" onclick="szTornado()">Reveal tornado</button><span class="prog" style="margin:0" id="szPredL">${SZ.pred===null?"(click an assumption card first to lock your prediction)":""}</span></div>
+    <div id="szT"></div></div>
+   <div class="callout co-i" style="margin-top:0"><b>Sanity:</b> ${p.anchor}</div>
+  </div>
+ </div></div>`;
+ $("szTD").className=SZ.m==="td"?"on":"";$("szBU").className=SZ.m==="bu"?"on":"";
+ const box=$("szNodes");box.innerHTML="";
+ p[SZ.m].nodes.forEach((f,j)=>{
+  const card=document.createElement("div");card.className="node"+(SZ.pred===j?" pred":"");card.style.marginBottom="8px";
+  card.innerHTML=`<div class="nl"><span>${f.div?"÷ ":""}${f.l}</span><b id="szv${j}"></b></div>
+  <input type="range" min="${f.min}" max="${f.max}" step="${f.st||((f.max-f.min)>50?1:0.5)}" value="${f.v}" oninput="SIZES[${SZ.p}].${SZ.m}.nodes[${j}].v=+this.value;SZ.touched.${SZ.m}=1;updSize()">`;
+  card.onclick=e=>{if(e.target.tagName==="INPUT")return;SZ.pred=j;box.querySelectorAll(".node").forEach((n,i2)=>n.classList.toggle("pred",i2===j));$("szPredL").textContent="prediction locked: "+f.l};
+  box.appendChild(card);});
+ updSize(); KB={};
+}
+function updSize(){
+ const p=SIZES[SZ.p],nodes=p[SZ.m].nodes;
+ nodes.forEach((f,j)=>{const el=$("szv"+j);if(el)el.textContent=f.v+(f.pct?"%":"")});
+ const both=szBoth(),ans=both[SZ.m];
+ $("szAns").textContent=fmt(ans)+""; $("szAnsL").textContent=p.unit;
+ const inBand=ans>=p.band[0]&&ans<=p.band[1];
+ const bEl=$("szBand");bEl.textContent=inBand?"in band":(ans<p.band[0]?"low":"high");bEl.style.color=inBand?"var(--grn)":"var(--yel)";
+ const dv=Math.abs(both.td-both.bu)/((both.td+both.bu)/2)*100;
+ const cEl=$("szConv");cEl.textContent=f1(dv)+"%";cEl.style.color=dv<=25?"var(--grn)":"var(--yel)";
+ /* gauge: 0 .. 2*hi ; band region marked via label */
+ const hi=p.band[1]*1.8;const pos=Math.min(98,ans/hi*100);
+ const g=$("szGF");g.style.left="0";g.style.width=pos+"%";g.style.background=inBand?"var(--grn)":"var(--yel)";
+ $("szG").querySelector(".z").style.left=(p.band[0]/hi*100)+"%";
+ $("szGL").innerHTML=`Reference band <b style="color:var(--gold)">${fmt(p.band[0])}–${fmt(p.band[1])} ${p.unit}</b> · top-down says <b>${fmt(both.td)}</b>, bottom-up says <b>${fmt(both.bu)}</b> — ${dv<=25?'<span class="ok">triangulated ✓</span>':'<span class="wr">'+f1(dv)+'% apart — one of your assumption sets is lying</span>'}`;
+ if(inBand&&SZ.touched[SZ.m])chalHit("size1");
+ if(dv<=25&&SZ.touched.td&&SZ.touched.bu)chalHit("size2");
+}
+function szTornado(){
+ const p=SIZES[SZ.p],nodes=p[SZ.m].nodes,base=szCalc(nodes);
+ const rows=nodes.map((f,j)=>{
+  const keep=f.v;
+  f.v=f.min;const lo=szCalc(nodes);f.v=f.max;const hiV=szCalc(nodes);f.v=keep;
+  return{j,l:f.l,sw:Math.abs(hiV-lo)};}).sort((a,b)=>b.sw-a.sw);
+ const mx=rows[0].sw||1;
+ $("szT").innerHTML=rows.map(r=>`<div class="brow"><span class="bl">${r.l}</span><div class="bt"><i style="width:${Math.max(3,r.sw/mx*100)}%;background:${r.j===SZ.pred?"var(--gold)":"var(--acc)"}"></i></div><span class="bv">±${fmt(r.sw/2)}</span></div>`).join("")
+ +`<div class="prog" style="margin-top:6px">${SZ.pred===null?"No prediction locked — click a card first next time; the prediction rep is the learning.":(SZ.pred===rows[0].j?'<span class="ok">Called it — that IS the swing assumption. Spend your interview airtime defending that one.</span>':'<span class="wr">The swing assumption was “'+rows[0].l+'” — defend THAT number hardest, not the one you were most confident about.</span>')}</div>`;
+ if(SZ.pred!==null){
+  const ok=SZ.pred===rows[0].j;
+  gradeSkill("g_size",ok);
+  SR.cnt=SR.cnt||{};SR.cnt.sizePred=(SR.cnt.sizePred||0)+(ok?1:0);srSave();
+  if((SR.cnt.sizePred||0)>=3)chalHit("size3");
+ }
+}
+/* ============ EXHIBIT READER ============ */
+const sX=(i,n)=>60+i*(470/(Math.max(n-1,1)));
+const sY=(v,lo,hi)=>245-(v-lo)/((hi-lo)||1)*195;
+function exFrame(title,inner,leg){
+ return `<svg viewBox="0 0 560 290" style="width:100%;display:block;background:#14151B;border:1px solid var(--line);border-radius:4px">
+ <text x="16" y="24" fill="#EDEBE4" font-size="13" font-weight="600">${title}</text>
+ ${leg?`<text x="544" y="24" fill="#8F94A6" font-size="10" text-anchor="end">${leg}</text>`:""}
+ <line x1="55" y1="250" x2="535" y2="250" stroke="#2A2B36"/><line x1="55" y1="45" x2="55" y2="250" stroke="#2A2B36"/>
+ ${inner}</svg>`;
+}
+function exLine(pts,lo,hi,color,w){return `<polyline fill="none" stroke="${color}" stroke-width="${w||2.5}" points="${pts.map((v,i)=>sX(i,pts.length)+","+sY(v,lo,hi)).join(" ")}"/>`}
+function exLabelsX(labs){return labs.map((t,i)=>`<text x="${sX(i,labs.length)}" y="266" fill="#8F94A6" font-size="9.5" text-anchor="middle">${t}</text>`).join("")}
+const EXH=[
+{pat:"crossover",gen(){
+ const ind=pick([["your client","NimbusPay","payments volume, $B"],["your client","Meridian Air","seat share on core routes, %"],["your client","OakHill Clinics","patient visits, K/quarter"]]);
+ const n=8,cross=R(4,6);const a=[],b=[];let av=R(80,100),bv=av*(0.55+Math.random()*0.1);
+ for(let i=0;i<n;i++){a.push(av);b.push(bv);av*=1+(Math.random()*0.01-0.008);bv*=1.07+Math.random()*0.03;}
+ const lo=Math.min(...a,...b)*0.9,hi=Math.max(...a,...b)*1.08;
+ const ci=b.findIndex((v,i)=>v>=a[i]);
+ const svg=exFrame(ind[2]+" — "+ind[0]+" vs competitor",
+  exLine(a,lo,hi,"#89A9CF")+exLine(b,lo,hi,"#CE8147")+
+  (ci>0?`<circle cx="${sX(ci,n)}" cy="${sY(b[ci],lo,hi)}" r="5" fill="none" stroke="#E5695E" stroke-width="2"/>`:"")+
+  exLabelsX([...Array(n)].map((_,i)=>"Q"+(i+1))),"steel = client · copper = competitor");
+ return{svg,ctx:"Your client ("+ind[1]+") hands you this during a growth case.",
+ obs:"Client is flat; the competitor compounds ~8-10% a quarter and crosses the client around Q"+(ci+1)+".",
+ so:"Leadership has already flipped — and the gap will widen every quarter, because one line has a growth engine and the other doesn't.",
+ imp:"The case is no longer 'are we losing?' — it's 'what is their engine (pricing, channel, product) and what's the response before the gap compounds beyond reach?'",
+ trap:"Reading the levels instead of the slopes. The crossing point is interesting; the DIVERGENCE RATE is the story."}}},
+{pat:"mix shift",gen(){
+ const seg=pick([["Premium fresh","Center-store"],["Enterprise","Self-serve"],["Branded","Private label"]]);
+ const yrs=["Yr 1","Yr 2","Yr 3"];const hiS=[R(55,62)];hiS.push(hiS[0]-R(5,8));hiS.push(hiS[1]-R(5,9));
+ const tot=R(90,110);
+ const bars=yrs.map((y,i)=>{const hv=tot*hiS[i]/100,lv=tot-hv;const x=90+i*150;
+  return `<rect x="${x}" y="${sY(hv,0,tot)}" width="70" height="${250-sY(hv,0,tot)}" fill="#CE8147"/><rect x="${x}" y="${sY(tot,0,tot)}" width="70" height="${sY(hv,0,tot)-sY(tot,0,tot)}" fill="#3E4050"/>
+  <text x="${x+35}" y="266" fill="#8F94A6" font-size="10" text-anchor="middle">${y} · total ${Math.round(tot)}</text>
+  <text x="${x+35}" y="${sY(hv/2,0,tot)}" fill="#101014" font-size="10" font-weight="700" text-anchor="middle">${hiS[i]}%</text>`}).join("");
+ return{svg:exFrame("Revenue by segment, $M (copper = "+seg[0]+", high margin)",bars,""),
+ ctx:"Profitability case. Total revenue has been 'basically flat' — management is focused on costs.",
+ obs:"Totals are flat, but the high-margin "+seg[0]+" slice fell from "+hiS[0]+"% to "+hiS[2]+"% of revenue in two years.",
+ so:"Revenue QUALITY collapsed while revenue QUANTITY held — every point of mix shifted to "+seg[1]+" bleeds gross margin with no cost problem at all.",
+ imp:"Quantify it: mix shift × margin gap = the profit decline. Then the case pivots to WHY the "+seg[0]+" customer is leaving — likely a focused competitor.",
+ trap:"Killing the revenue branch because the total is flat — your field-guide lesson. Flat totals hide violent composition moves."}}},
+{pat:"market vs client",gen(){
+ const g1=R(8,12),g2=R(2,4);const yrs=["Yr 1","Yr 2","Yr 3"];
+ let m=100,c=100;const bars=yrs.map((y,i)=>{const x=85+i*155;
+  const el=`<rect x="${x}" y="${sY(m,80,160)}" width="55" height="${250-sY(m,80,160)}" fill="#3E4050"/><rect x="${x+60}" y="${sY(c,80,160)}" width="55" height="${250-sY(c,80,160)}" fill="#89A9CF"/>
+  <text x="${x+57}" y="266" fill="#8F94A6" font-size="10" text-anchor="middle">${y}</text>`;
+  m*=1+g1/100;c*=1+g2/100;return el}).join("");
+ return{svg:exFrame("Indexed revenue (grey = market, steel = client, Yr1 = 100)",bars,""),
+ ctx:"Growth case. The CEO opens with: 'We've grown every single year.'",
+ obs:"Client grows "+g2+"%/yr — but the market grows "+g1+"%/yr. Both bars rise; the gap widens.",
+ so:"Growing absolutely, shrinking relatively: the client loses roughly "+(g1-g2)+" points of relative position a year. Share is the denominator truth the CEO's framing hides.",
+ imp:"Reframe the case out loud: 'the question isn't growth, it's why we capture so little of the market's growth' — then hunt where the lost share goes.",
+ trap:"Accepting management's framing. Any growth number is meaningless until it's benchmarked against the market's."}}},
+{pat:"margin trap",gen(){
+ const n=6;const rev=[];let r=R(90,110);for(let i=0;i<n;i++){rev.push(r);r*=1-(R(4,7)/100)}
+ const mg=[];let m=R(18,22);for(let i=0;i<n;i++){mg.push(m);m+=R(0,2)*0.5}
+ const bars=rev.map((v,i)=>`<rect x="${sX(i,n)-18}" y="${sY(v,0,120)}" width="36" height="${250-sY(v,0,120)}" fill="#3E4050"/>`).join("");
+ const profit0=rev[0]*mg[0]/100,profit1=rev[n-1]*mg[n-1]/100;
+ return{svg:exFrame("Revenue $M (bars) and operating margin % (copper line)",bars+exLine(mg.map(x=>x*120/30),0,120,"#CE8147")+exLabelsX([...Array(n)].map((_,i)=>"Q"+(i+1))),""),
+ ctx:"Board meeting exhibit. The CFO is proud: 'margins have never been higher.'",
+ obs:"Margin % climbs from "+mg[0]+"% to "+f1(mg[n-1])+"% — while revenue falls ~"+Math.round((1-rev[n-1]/rev[0])*100)+"%.",
+ so:"Profit DOLLARS are roughly flat-to-down (≈"+f1(profit0)+" → "+f1(profit1)+" $M): the margin gain is a shrinking-denominator effect — they're cutting to the bone while the franchise shrinks.",
+ imp:"Ask what's being cut (marketing? capacity?) and whether it's financing the decline. Percentages flatter; dollars pay the bills.",
+ trap:"Congratulating the margin. Any ratio can improve while the business gets smaller — always translate to absolute dollars."}}},
+{pat:"cohort decay",gen(){
+ const dec=[R(6,9)/100,R(10,14)/100,R(15,20)/100];
+ const cs=dec.map(d=>{const pts=[100];for(let i=1;i<6;i++)pts.push(pts[i-1]*(1-d));return pts});
+ const cols=["#89A9CF","#E8B33C","#E5695E"];
+ return{svg:exFrame("Customer retention by annual cohort (% of cohort remaining)",cs.map((c,i)=>exLine(c,40,105,cols[i])).join("")+exLabelsX(["M0","M6","M12","M18","M24","M30"]),"steel = 2 yrs ago · amber = last yr · red = this yr"),
+ ctx:"A subscription business growing 25% a year asks you to bless a bigger acquisition budget.",
+ obs:"Each successive cohort decays faster — this year's cohort loses ~"+Math.round(dec[2]*100)+"% per period vs ~"+Math.round(dec[0]*100)+"% two years ago.",
+ so:"The growth is buying worse customers (or the product is slipping): LTV per new customer is falling exactly while CAC spend scales up.",
+ imp:"Freeze the budget request; decompose new cohorts by channel to find where the low-quality growth comes from. Growth that decays isn't growth — it's rental.",
+ trap:"Reading the topline ('users up 25%') instead of the cohort slopes. Blended retention hides this for years — cohort curves are where the truth lives."}}},
+{pat:"waterfall",gen(){
+ const neg=pick([["Promotions & discounts","promo intensity"],["Freight & logistics","freight rates"],["Labor cost inflation","wage resets"]]);
+ const p0=R(80,100),price=R(6,12),vol=R(3,8),small=R(2,5),big=R(18,28);
+ const p1=p0+price+vol-small-big;
+ const items=[["Profit LY",p0,"#89A9CF",0],["+ Pricing",price,"#57C983",1],["+ Volume",vol,"#57C983",1],["− Other costs",-small,"#E5695E",1],["− "+neg[0],-big,"#E5695E",1],["Profit TY",p1,"#CE8147",0]];
+ let run=0;const W=560;const bw=62;
+ const inner=items.map((it,i)=>{const x=68+i*80;
+  let y0,h;const scale=v=>250-(v/(p0+price+vol))*185;
+  if(it[3]===0){y0=scale(it[1]);h=250-y0;run=it[1];}
+  else{const from=run;run+=it[1];y0=scale(Math.max(from,run));h=Math.abs(scale(from)-scale(run));}
+  return `<rect x="${x}" y="${y0}" width="${bw}" height="${Math.max(h,2)}" fill="${it[2]}"/><text x="${x+bw/2}" y="266" fill="#8F94A6" font-size="8.5" text-anchor="middle">${it[0]}</text><text x="${x+bw/2}" y="${y0-4}" fill="#EDEBE4" font-size="9" font-weight="600" text-anchor="middle">${it[1]>0&&it[3]===1?"+":""}${it[1]}</text>`}).join("");
+ return{svg:exFrame("Operating profit bridge, $M",inner,""),
+ ctx:"Profitability case; management calls the year 'a perfect storm of small things.'",
+ obs:"One bucket — "+neg[0].toLowerCase()+" at −$"+big+"M — is bigger than every other move combined.",
+ so:"It isn't a perfect storm; it's ONE storm. Pricing and volume actually HELPED (+$"+(price+vol)+"M). The entire decline concentrates in a single controllable line.",
+ imp:"Drill into that bucket: is the spend defensive (matching competitors) or self-inflicted? The recommendation will live inside that one line, not across ten initiatives.",
+ trap:"Giving equal airtime to every bar. Waterfall exhibits exist to test whether you can rank — find the biggest bar and say so in your first sentence."}}},
+{pat:"2x2 portfolio",gen(){
+ const segs=[["A",R(2,4),R(28,38),R(35,50)],["B",R(9,13),R(6,12),R(12,20)],["C",R(10,14),R(24,34),R(8,14)],["D",R(4,6),R(12,18),R(18,26)],["E",R(12,16),R(4,8),R(5,9)]];
+ const inner=segs.map(s=>{const cx=60+ (s[2]/40)*470, cy=245-(s[1]/16)*195, r=Math.sqrt(s[3])*3;
+  return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="rgba(137,169,207,.35)" stroke="#89A9CF"/><text x="${cx}" y="${cy+3}" fill="#EDEBE4" font-size="10" font-weight="700" text-anchor="middle">${s[0]}</text>`}).join("")
+  +`<text x="540" y="264" fill="#8F94A6" font-size="9" text-anchor="end">→ our market share %</text><text x="66" y="50" fill="#8F94A6" font-size="9">↑ market growth %/yr</text>`;
+ return{svg:exFrame("Segment portfolio (bubble = revenue $M)",inner,""),
+ ctx:"Portfolio-strategy case: 'where should the next $50M of investment go?'",
+ obs:"Big bubble A: high share, low growth. C: strong share in a fast market. B and E: fast markets, tiny share. D: middling everything.",
+ so:"A is the cash engine, not the investment case; C is where advantage meets growth — the compounding asset; B/E need a 'can we win?' answer before a dollar moves.",
+ imp:"Recommendation shape: harvest A to fund C's expansion; pick ONE of B/E for a right-to-win test; D gets managed for cash or exited.",
+ trap:"Investing in growth markets by reflex. Growth you have no right to win is a donation to the incumbents — position and momentum both have to be there."}}},
+{pat:"flat decoy",gen(){
+ const what=pick([["Supplier input prices (indexed)","input costs"],["Warehouse error rate, %","operational quality"],["Web traffic (indexed)","demand interest"]]);
+ const n=10;const pts=[];let v=100;for(let i=0;i<n;i++){pts.push(v+R(-3,3));}
+ return{svg:exFrame(what[0]+", 10 quarters",exLine(pts,80,120,"#89A9CF")+exLabelsX([...Array(n)].map((_,i)=>"Q"+(i+1))),""),
+ ctx:"Mid-diagnosis, testing your hypothesis that "+what[1]+" is driving the problem, the interviewer hands you this.",
+ obs:"Flat. Mean stable, variance small, no trend, no step-change anywhere in ten quarters.",
+ so:"This exhibit is an ELIMINATION, not an insight: "+what[1]+" is not the driver. The correct so-what is 'nothing here — my hypothesis is dead.'",
+ imp:"Say it cleanly and pivot with energy: 'This rules out "+what[1]+" — I'd move to [next branch].' Interviewers plant flat exhibits to see if you'll invent a story where there isn't one.",
+ trap:"Narrating noise as signal. Torturing a flat line into a finding is a worse look than a wrong hypothesis — dead hypotheses are progress."}}}];
+let EX={cur:null,t:null,left:60};
+function renderExh(){
+ clearInterval(EX.t);
+ $("exh").innerHTML=`<div class="card">
+ <h2>Exhibit Reader <span class="pill p-size">playground · generative</span></h2>
+ <div class="prog">A chart lands in front of you. 60 seconds: say the <b>observation → so-what → implication</b> OUT LOUD (type keywords as you go), then reveal the model read and grade yourself honestly.</div>
+ <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><span class="pill p-size" id="exPat">—</span><div class="timer" id="exTimer">60</div></div>
+ <div class="scen" id="exCtx" style="display:none"></div>
+ <div id="exChart"></div>
+ <textarea id="exInput" placeholder="Observation… so what… implication for the client…" style="margin-top:10px"></textarea>
+ <div class="btnrow"><button class="act" onclick="exNew()">New exhibit</button><button class="ghost" onclick="exReveal()">Reveal model read</button></div>
+ <div class="ans" id="exModel" style="white-space:normal"></div>
+ <div class="grade" id="exGrade">
+  <button class="ghost gD" onclick="exGrade(1)">1 · Missed the story</button>
+  <button class="ghost gN" onclick="exGrade(2)">2 · Observation only</button>
+  <button class="ghost gA" onclick="exGrade(3)">3 · All three layers</button></div>
+ <div class="kbd"><b>Space</b> reveal · <b>1/2/3</b> grade & next</div>
+ </div>
+ <div class="pg" style="grid-template-columns:1fr 310px"><div></div>${chalHTML("exh")}</div>`;
+ exNew(); KB={space:()=>{if(!$("exModel").classList.contains("show"))exReveal()},grade:g=>{if($("exModel").classList.contains("show"))exGrade(g)}};
+}
+function exNew(){
+ clearInterval(EX.t);
+ const g=pick(EXH);EX.cur=g.gen();EX.cur.pat=g.pat;
+ $("exPat").textContent="pattern hidden until reveal";
+ $("exCtx").style.display="block";$("exCtx").textContent=EX.cur.ctx;
+ $("exChart").innerHTML=EX.cur.svg;
+ $("exInput").value="";$("exModel").classList.remove("show");$("exGrade").classList.remove("show");
+ EX.left=60;tick("exTimer",EX.left);
+ EX.t=setInterval(()=>{EX.left--;tick("exTimer",EX.left);if(EX.left<=0){clearInterval(EX.t);exReveal()}},1000);
+}
+function exReveal(){
+ if(!EX.cur)return;clearInterval(EX.t);
+ $("exPat").textContent="pattern: "+EX.cur.pat;
+ $("exModel").innerHTML=`<b style="color:var(--acc)">OBSERVATION:</b> ${EX.cur.obs}<br><br><b style="color:var(--gold)">SO-WHAT:</b> ${EX.cur.so}<br><br><b style="color:var(--acc)">IMPLICATION:</b> ${EX.cur.imp}<div class="tip"><b>The trap:</b> ${EX.cur.trap}</div>`;
+ $("exModel").classList.add("show");$("exGrade").classList.add("show");
+}
+function exGrade(g){
+ gradeSkill("g_exh",g===3); logRep();
+ SR.cnt=SR.cnt||{};SR.cnt.exh=SR.cnt.exh||{};
+ if(g===3){SR.cnt.exh[EX.cur.pat]=1;srSave();chalHit("exh1");
+  if(Object.keys(SR.cnt.exh).length>=5)chalHit("exh2");}
+ exNew();
+}
+</script>
+<script>
+"use strict";
+/* ============ PE / CDD COCKPIT ============ */
+const peRef=[
+["Deal-screen structure (say it plainly)","1. THESIS — one sentence: why does this deal make money?\n2. MARKET — size, growth, cyclicality, fragmentation.\n3. COMPANY — share & moat, recurring revenue %, unit economics, management depth.\n4. VALUE CREATION — pricing, ops, add-ons, professionalization. Rank them.\n5. EXIT — who buys in 5 years, at what multiple, and why.\n6. RISKS & DILIGENCE PRIORITIES — top 3, ranked, with what you'd test."],
+["Value-creation levers (the operator menu)","REVENUE: pricing (most underused in LMM), sales professionalization (CRM, comp plans), attach/cross-sell, geographic infill.\nCOST: procurement, labor scheduling, SG&A discipline, tech-enabled workflow (one sentence, then move on).\nCAPITAL: working-capital tightening, add-on M&A at lower multiples (arbitrage), asset-light shifts.\nSay: growth levers > cost levers for exit multiple; both matter for cash."],
+["Don't over-technicalize — translation table","Say 'adjusting for one-time items' — not 'QoE bridge'.\nSay 'the debt paydown adds to equity value' — not 'deleveraging accretes to the residual'.\nSay 'we'd check how much revenue repeats each year' — not 'gross logo retention decomposition'.\nOne technical term per answer, MAX, and only if it earns its place. You are proving judgment, not certification."],
+["Sponsor-case red flags (rattle off any 4)","Customer concentration >20% top-1 · owner IS the business (key-person) · project vs recurring mix drifting wrong · deferred capex/maintenance · one-time boosts dressed as run-rate · receivables aging out · churn hidden by gross adds · change-of-control clauses in key contracts."]];
+function renderPE(){
+ $("pe").innerHTML=`<div class="card">
+ <h2>PE / CDD Cockpit <span class="pill p-diag">playground</span></h2>
+ <div class="prog">This is what MBB does for sponsors: decompose a target's growth into <b>market beta vs share alpha vs margin plan</b> — then see what those CDD findings do to the deal math. Market fixed at <b>$1,000M</b> today; entry at year 0, exit end of year 5.</div>
+ <div class="pg">
+  <div>
+   <div class="panel"><h3 style="margin-top:0">CDD lens — the growth story</h3>
+    ${sld("peG","Market growth (%/yr)",-2,12,0.5,4,"updPE")}
+    ${sld("peS0","Client share today (%)",5,40,1,15,"updPE")}
+    ${sld("peS5","Share in year 5 — the CIM's claim (%)",5,40,1,17,"updPE")}
+    ${sld("peM0","EBITDA margin today (%)",10,35,1,20,"updPE")}
+    ${sld("peM5","Margin in year 5 — the plan (%)",10,35,1,22,"updPE")}
+   </div>
+   <div class="panel"><h3 style="margin-top:0">Deal terms</h3>
+    ${sld("peEM","Entry multiple (× EBITDA)",5,12,0.5,8,"updPE")}
+    ${sld("peXM","Exit multiple (× EBITDA)",5,12,0.5,8.5,"updPE")}
+    ${sld("peLev","Debt at entry (% of EV)",30,70,5,50,"updPE")}
+    ${sld("peFCF","FCF conversion → debt paydown (% of EBITDA)",20,60,5,35,"updPE")}
+   </div>
+   ${chalHTML("pe")}
+  </div>
+  <div>
+   <div class="panel"><div class="grid g3">
+    <div class="stat"><div class="v" id="peMOIC">—</div><div class="l">MOIC</div></div>
+    <div class="stat"><div class="v" id="peIRR">—</div><div class="l">IRR (5-yr)</div></div>
+    <div class="stat"><div class="v" id="peE">—</div><div class="l">EBITDA yr0 → yr5</div></div>
+   </div></div>
+   <div class="panel"><h3 style="margin-top:0">Where the EBITDA growth comes from — the CDD verdict</h3>
+    <div id="peAttr"></div></div>
+   <div class="panel"><h3 style="margin-top:0">Where the equity return comes from — the value bridge</h3>
+    <div class="wfall" id="peW"></div></div>
+   <div id="peCO"></div>
+  </div>
+ </div></div>
+ <div class="card"><h3 style="margin-top:0">Reference — say it like an investor, not a textbook</h3><div id="peAcc"></div></div>`;
+ const acc=$("peAcc");
+ peRef.forEach(([h,b])=>{const hh=document.createElement("div");hh.className="acc-h";hh.innerHTML=h+"<span>+</span>";
+ const bb=document.createElement("div");bb.className="acc-b";bb.textContent=b;
+ hh.onclick=()=>{hh.classList.toggle("open");hh.querySelector("span").textContent=hh.classList.contains("open")?"−":"+"};
+ acc.appendChild(hh);acc.appendChild(bb)});
+ updPE(); KB={};
+}
+function peCalc(){
+ const g=sv("peG")/100,s0=sv("peS0")/100,s5=sv("peS5")/100,m0=sv("peM0")/100,m5=sv("peM5")/100;
+ const em=sv("peEM"),xm=sv("peXM"),lev=sv("peLev")/100,fcf=sv("peFCF")/100;
+ const E=[];for(let t=0;t<=5;t++){const M=1000*Math.pow(1+g,t),S=s0+(s5-s0)*t/5,mu=m0+(m5-m0)*t/5;E.push(M*S*mu);}
+ const M5=1000*Math.pow(1+g,5);
+ const aM=(M5-1000)*s0*m0, aS=M5*(s5-s0)*m0, aMu=M5*s5*(m5-m0);
+ const EV0=E[0]*em, D0=EV0*lev, Q0=EV0-D0;
+ let P=0;for(let t=1;t<=5;t++)P+=E[t]*fcf; P=Math.min(P,D0);
+ const Qn=E[5]*xm-(D0-P);
+ const moic=Qn/Q0, irr=(Math.pow(Math.max(moic,0.01),1/5)-1)*100;
+ return{g,s0,s5,m0,m5,em,xm,lev,fcf,E,aM,aS,aMu,EV0,D0,Q0,P,Qn,moic,irr};
+}
+function updPE(){
+ const d=peCalc();
+ setv("peG",f1(d.g*100)+"%");setv("peS0",Math.round(d.s0*100)+"%");setv("peS5",Math.round(d.s5*100)+"%");
+ setv("peM0",Math.round(d.m0*100)+"%");setv("peM5",Math.round(d.m5*100)+"%");
+ setv("peEM",d.em+"x");setv("peXM",d.xm+"x");setv("peLev",Math.round(d.lev*100)+"%");setv("peFCF",Math.round(d.fcf*100)+"%");
+ const mEl=$("peMOIC");mEl.textContent=d.moic.toFixed(2)+"x";mEl.style.color=d.moic>=2.5?"var(--grn)":d.moic>=1.8?"var(--yel)":"var(--red)";
+ $("peIRR").textContent=f1(d.irr)+"%";
+ $("peE").textContent="$"+Math.round(d.E[0])+"→$"+Math.round(d.E[5])+"M";
+ /* attribution */
+ const dE=d.E[5]-d.E[0];const tot=Math.abs(d.aM)+Math.abs(d.aS)+Math.abs(d.aMu)||1;
+ const rows=[["Market growth (beta)",d.aM,"#3E4050"],["Share gain (alpha — prove it)",d.aS,"#89A9CF"],["Margin plan (execution)",d.aMu,"#CE8147"]];
+ $("peAttr").innerHTML=rows.map(([l,v,c])=>`<div class="brow"><span class="bl">${l}</span><div class="bt"><i style="width:${Math.max(2,Math.abs(v)/tot*100)}%;background:${v<0?"var(--red)":c}"></i></div><span class="bv">${v>=0?"+":"−"}$${Math.abs(v).toFixed(1)}M</span></div>`).join("")
+ +`<div class="prog" style="margin:6px 0 0">ΔEBITDA = <b style="color:var(--gold)">${dE>=0?"+":""}$${dE.toFixed(1)}M</b> over 5 yrs — decomposition is exact; this is the chart a CDD report is built around.</div>`;
+ /* value bridge waterfall */
+ const growth=(d.E[5]-d.E[0])*d.em, mult=d.E[5]*(d.xm-d.em), pay=d.P;
+ let run=d.Q0,maxV=Math.max(d.Q0,d.Qn);
+ const blocks=[{l:"Entry<br>equity",b:0,h:d.Q0,c:"#89A9CF",t:"$"+Math.round(d.Q0)}];
+ [["EBITDA<br>growth",growth],["Multiple<br>change",mult],["Debt<br>paydown",pay]].forEach(([l,v])=>{
+  const b=Math.min(run,run+v);blocks.push({l,b,h:Math.abs(v),c:v>=0?"var(--grn)":"var(--red)",t:(v>=0?"+":"−")+Math.round(Math.abs(v))});run+=v;maxV=Math.max(maxV,b+Math.abs(v));});
+ blocks.push({l:"Exit<br>equity",b:0,h:d.Qn,c:"#CE8147",t:"$"+Math.round(d.Qn)});
+ const px=v=>Math.max(0,v/maxV*160);
+ $("peW").innerHTML=blocks.map(b=>`<div class="wcol"><div class="wstack"><div class="wval">${b.t}</div><div class="wblk" style="height:${Math.max(2,px(b.h))}px;margin-bottom:${px(b.b)}px;background:${b.c}"></div></div><div class="wlab">${b.l}</div></div>`).join("");
+ /* callouts */
+ const cos=[];const betaShare=d.aM/(Math.abs(d.aM)+Math.abs(d.aS)+Math.abs(d.aMu)||1);
+ if(betaShare>0.6&&dE>0)cos.push(co("r",`<b>You're buying beta.</b> ${Math.round(betaShare*100)}% of the EBITDA growth is just the market rising — anyone who buys anything in this space gets that. CDD translation: the target deserves a MARKET price, not a premium; the premium has to be earned by the share and margin claims, and here they're small.`));
+ if(d.aS>0&&d.aS/(dE||1)>0.35)cos.push(co("w",`<b>The share-gain claim is carrying $${d.aS.toFixed(0)}M of the story.</b> That's the number to attack hardest in diligence: win-rate trends from the CRM, cohort retention, customer interviews, competitor churn. CIM share claims usually rest on a friendly market definition — rebuild the denominator.`));
+ if(d.aMu>0&&d.aMu/(dE||1)>0.35)cos.push(co("w",`<b>Margin expansion is doing heavy lifting</b> (+$${d.aMu.toFixed(0)}M). Ask: which specific costs, who has done this playbook before, and why didn't the current owner already take it? 'Professionalization' without named line items is hope in a blazer.`));
+ if(d.xm>d.em+1)cos.push(co("w",`<b>Multiple expansion is ${Math.round(d.E[5]*(d.xm-d.em))}M of the bridge.</b> That's the fragile kind of return — you're underwriting the EXIT market's mood. Deals that need the multiple to work are the ones that break in 2027.`));
+ if(d.xm<=d.em&&d.moic>=2.2)cos.push(co("g",`<b>Operator's math:</b> the return clears with zero help from the exit multiple — growth and paydown carry it. This is the deal shape ICs love and CDD exists to validate.`));
+ if(dE<0)cos.push(co("r",`<b>EBITDA shrinks over the hold.</b> Leverage on a declining asset is how MOIC goes below 1x fast — either the price must fall or the thesis is wrong.`));
+ cos.push(co("i",`<b>Say it in the room:</b> "Returns come from three places — earnings growth, multiple change, and debt paydown. Here it's ${Math.round(Math.abs(growth)/(Math.abs(growth)+Math.abs(mult)+Math.abs(pay))*100)}% / ${Math.round(Math.abs(mult)/(Math.abs(growth)+Math.abs(mult)+Math.abs(pay))*100)}% / ${Math.round(Math.abs(pay)/(Math.abs(growth)+Math.abs(mult)+Math.abs(pay))*100)}% — and the growth piece is ${Math.round(betaShare*100)}% market beta." That sentence is the whole cockpit.`));
+ $("peCO").innerHTML=cos.slice(0,4).join("");
+ /* challenges */
+ if(d.moic>=3&&d.xm<=d.em)chalHit("pe1");
+ if(betaShare>0.6&&dE>0)chalHit("pe2");
+ if(d.irr>=25&&d.lev<=0.4)chalHit("pe3");
+}
+/* ============ INTERVIEWER CHAINS ============ */
+const CASE_CHAINS=[
+{t:"prof",title:"Profitability interrogation",desc:"The drill-down they run on every diagnosis",nodes:[
+{q:"Profits are down 20%. Where do you start?",a:"Segment before diving. First split the P&L — revenue problem, cost problem, or both. Then WHERE: which segment, region, or product holds the decline. Then us-vs-them: is the market down or just us. Saying those two axes out loud — locate first, explain second — is what separates a diagnosis from a guess."},
+{q:"Revenue is flat. Does that kill the revenue branch?",a:"No — flat totals hide mix. Decompose price × volume × mix BY SEGMENT: high-margin volume can fall while low-margin volume grows and the total never moves, yet margin per customer bleeds out. Interrogate the composition before you leave the branch — flat is a description, not an exoneration."},
+{q:"You find the decline lives in one segment. Next question?",a:"Us or them, in that segment: did the segment's market shrink, or did we lose share within it? Same symptom, opposite prescriptions — a market decline calls for capacity and cash discipline; share loss calls for a competitive response. One data pull (market growth + competitor performance) separates them."},
+{q:"It's share loss. Why might that be happening?",a:"Ranked hypotheses, not a laundry list: price (being undercut), product (feature or quality gap), place (channel coverage), promotion (share of voice), service (churn triggers). Then ask which data exists to discriminate between the top two. A ranked list with a test beats ten possibilities."},
+{q:"And if EVERY competitor is losing to the same new entrant?",a:"Reframe — that's disruption, not rivalry. The basis of competition changed: a new cost model, channel, or technology. The response menu changes too: match the model, differentiate up-market, acquire the threat, or harvest the base. Matching on price alone against a structurally cheaper model destroys value — say that before someone proposes it."}]},
+{t:"entry",title:"Market entry pressure test",desc:"Attractiveness, right-to-win, and the walk-away",nodes:[
+{q:"Your market-attractiveness read is glowing. Why isn't the case over?",a:"Because attractiveness is one gate of three. Can WE win — do our assets, brand, cost position actually transfer? And does the math work — entry cost versus the profit stream, with a mode decision attached. Attractive markets you can't win are traps with good lighting."},
+{q:"What does 'can we win' actually mean?",a:"A specific, nameable advantage that survives translation into the new market: sourcing scale, a brand that means something there, distribution we can reuse, a regulatory asset. Plus the incumbent response — your advantage has to survive their counterpunch, not just day one."},
+{q:"Walk me through entry-mode logic.",a:"Build, buy, or partner — traded off on speed, control, capital, and integration risk. Organic is cheap and slow; acquisition buys speed and local capability at a premium plus integration risk; JV shares economics for local knowledge. Tie the choice to the window: fast-closing opportunity favors buy."},
+{q:"Give me the walk-away math.",a:"Entry cost plus ramp losses versus the PV of steady-state profits; the breakeven year against a stated hurdle; and the comparison nobody does — the same capital deployed in the core business. State the kill threshold BEFORE the analysis: 'if breakeven is past year 4, we don't enter.' Numbers first, then courage."},
+{q:"The incumbent cuts prices 15% the day you enter. Now what?",a:"Game it before entering: their pain tolerance versus ours — who has the structurally lower cost base and deeper war chest? Options: match (only if we win a price war), reposition premium, or target segments they under-serve. The pre-commitment discipline: if we can't fund 18 months of response, we don't enter at all."}]},
+{t:"size",title:"Sizing defense",desc:"Defending your number under fire",nodes:[
+{q:"Defend your unit of analysis.",a:"Match the unit to how the product is consumed: households for media, utilities, streaming (one sub serves a family — individuals overcount 2-3x); individuals for personal products; transactions for retail and food. Saying the rule out loud before computing is what makes the whole build credible."},
+{q:"Your top-down and bottom-up disagree by 3x. What now?",a:"Don't average — reconcile. Find the divergent assumption (it's almost always penetration or frequency), test it against an anchor, and fix the build that's lying. Triangulation only earns its name when disagreement triggers investigation rather than a blend."},
+{q:"You can buy real data for exactly ONE assumption. Which?",a:"The tornado winner: highest answer-swing × lowest confidence. Buying precision on a low-swing assumption is theater. This is also the interview answer to 'what would you validate first' — name the assumption that owns the answer."},
+{q:"Interviewer: your answer is double the actual number. React.",a:"Calmly own it and locate it: 'then one of my inputs runs hot — most likely penetration; at half that, I land on the actual.' No defensiveness, no collapse. The recovery under correction IS the test — a graceful self-repair scores higher than a lucky first answer."},
+{q:"Convert your TAM into a 'so what'.",a:"TAM → serviceable slice (geography, segment, channel we can actually reach) → target share WITH a because (capacity, competition, comparable ramps) → revenue potential against the client's goal. A TAM without a capture story is trivia; the last sentence should answer the client's actual question."}]},
+{t:"price",title:"Pricing cross-exam",desc:"Anchors, elasticity math, and tier design",nodes:[
+{q:"Three pricing anchors — go.",a:"Cost floor (unit economics — below this every sale destroys value), competitive cross-check (what alternatives cost), value ceiling (economic value created for the customer). Price lives in that band; where in the band is a segmentation and strategy question, not an accounting one."},
+{q:"Client wants to cut price 15% to gain share. Do the math.",a:"At a 30% contribution margin, a 15-point cut leaves 15% margin — you need volume × 30/15 = DOUBLE the volume to hold contribution flat. Then the elasticity reality check: is demand anywhere near that responsive, and will competitors just match (nobody gains share, everybody loses margin)? This math kills most price cuts — do it out loud."},
+{q:"How do you find willingness to pay?",a:"Triangulate: economic value to the customer (time saved × wages, revenue enabled, cost avoided), conjoint or survey data haircut for optimism, A/B tests on new cohorts, and competitor price deltas for positioning. Customers misreport WTP in surveys — behavioral evidence outranks stated evidence."},
+{q:"One price or tiers?",a:"Heterogeneous willingness to pay means tiers — good-better-best captures surplus a single price leaves on the table. Fence the tiers with real usage or feature boundaries so high-WTP customers can't buy down, and anchor the premium tier first. Most B2B pricing power hides in packaging, not the headline number."},
+{q:"When is cost-plus actually right?",a:"Commodities, regulated markets, and cost-transparent contract work — where value pricing has no room or isn't allowed. Even there, index the pass-through so input inflation doesn't eat you. Everywhere else, cost-plus is a donation of consumer surplus to your customers — generous, but not strategy."}]},
+{t:"pe",title:"PE screen deep-dive",desc:"The sponsor questions behind the sponsor questions",nodes:[
+{q:"Screen this platform in 60 seconds.",a:"Thesis in one line — why does this make money. Market: size, growth, fragmentation, cyclicality. Company: recurring revenue %, moat, unit economics, management depth. Value creation: ranked levers, not a list. Exit: who buys it in five years and why. Then the top-3 diligence questions. Six beats, one breath each."},
+{q:"What makes revenue 'high quality'?",a:"Recurring or contracted, retention above 90%, diversified customers (no 20% logo), pricing power PROVEN by realized increases rather than claimed, and low key-person dependence in the selling motion. Quality of revenue is what the multiple is actually paying for."},
+{q:"Everyone waves at 'add-on arbitrage.' Make it concrete.",a:"Platform at 8x, add-ons at 4-5x: every deal blends your entry multiple down and compounds the exit base. But the binding constraints are integration pace and management bandwidth — underwrite the CADENCE (deals per year the team can absorb), not the theoretical spread. Arbitrage without integration is just a collection of small companies."},
+{q:"What kills roll-ups?",a:"Integration debt — systems, brand, culture piling up faster than it's paid down; scarce field labor; price discipline decaying in auctions as the fund needs to deploy; leverage meeting a rate reset; and founders coasting once the earnout is banked. Notice most of these are self-inflicted — the market rarely kills a roll-up; execution does."},
+{q:"Exit story — who pays, and for what?",a:"Name the buyer type: the next-size sponsor (paying for scale and professionalization), a strategic (paying for synergies), rarely IPO in the lower middle market. Then what they pay for: durable growth, systems, a bench that survives the founder. If you can't name a credible buyer, the IRR is theoretical — the exit is part of the thesis, not an epilogue."}]},
+{t:"cdd",title:"CDD interrogation",desc:"Prove the growth story — the sponsor work MBB actually sells",nodes:[
+{q:"The CIM claims five straight years of share gains. First move?",a:"Decompose the growth: how much is market beta, how much is share, how much is price — the attribution chart. Then verify share INDEPENDENTLY: competitor revenues, customer wallet studies, win/loss data. CIM share claims usually rest on a friendly market definition — rebuild the denominator before you believe the numerator."},
+{q:"How do you actually prove a share-gain story?",a:"Win-rate trends from the CRM, cohort revenue retention, structured customer interviews (why do you buy, what would make you switch), and the mirror image — is the named competitor actually losing? If the 'gains' concentrate in one segment or two contracts, it's not a story, it's an anecdote."},
+{q:"Management says the market grows 12%. Your build says 6%. Which goes in the model?",a:"Yours — triangulated two or three ways — as the base case. Take their 12% apart rather than dismissing it: usually the trick is category-definition inflation (adjacent segments smuggled in). Their number can live as an upside case carrying its own burden of proof. Paying for their denominator is how sponsors overpay politely."},
+{q:"What does churn hide, and how do you catch it?",a:"Gross adds can mask logo churn for years — topline grows while the base rots. Split net revenue retention from logo retention, and pull cohort curves: newer cohorts decaying faster under a growing topline means the growth is bought, not earned. That's the exhibit pattern that kills more deals than any spreadsheet."},
+{q:"Deliver the CDD verdict shape.",a:"Market: size, growth, durability — what a buyer gets just for showing up. Position: share trajectory and moat evidence, believed or haircut. Plan: which levers are credible at what discount. Then the deal read: how much of the growth is beta (pay market price) versus alpha (needs proof). The kill shot, in one sentence: 'you're being asked to pay an alpha price for beta growth.'"}]},
+{t:"cap",title:"Capital allocation & the activist clock",desc:"Rationed capital, horizons, and divestiture math",nodes:[
+{q:"The CFO has six projects and capital for three. Rank by what?",a:"Under capital rationing, profitability index — NPV per dollar of capex — not raw NPV. The biggest-NPV project is often the worst per dollar. Then overlay strategic fit and risk. Saying 'NPV per constrained dollar' out loud is the whole answer; the ranking is arithmetic."},
+{q:"An activist just took 7%. What do they want?",a:"Value that lands inside their 1-2 year horizon: a divestiture, cost programs with fast payback, capital returns, board seats to force the pace. Long-dated NPV doesn't count in their clock — which reframes every 'good project' question into a 'good project WHEN' question."},
+{q:"A restructuring has great NPV but the savings land in years 4-6. Verdict?",a:"Right project, wrong clock. In an activist context, horizon mismatch beats NPV — sequence it behind actions that pay inside the window, and communicate it as phase two so it isn't read as a dodge. Time-to-value is a first-class decision criterion, not a footnote."},
+{q:"How do you pick the divestiture candidate?",a:"Lowest growth, weakest strategic fit, widest buyer pool — the widest pool gets the cleanest multiple. Value it simply: segment EBITDA × the market multiple. Then check what the headline hides: dis-synergies and stranded overhead that stay behind. Proceeds minus stranded costs is the real number."},
+{q:"The sale clears the target with $700M left over. Finish the job.",a:"Never leave cash unassigned: buyback versus debt paydown versus reinvestment, chosen by relative returns from HERE (buyback yield vs after-tax cost of debt vs project IRRs). An unallocated residual in a board answer reads as unfinished analysis — the last dollar deserves a destination too."}]},
+{t:"syn",title:"Synthesis under pushback",desc:"The close, attacked from four directions",nodes:[
+{q:"'What would you tell the CEO?' — give me the shape.",a:"Recommendation first — one sentence. Two or three supports, at least one carrying a number. The key risk WITH its mitigant and early-warning trigger. Next step with an owner and a date. Forty-five seconds, answer-first, never a recap of your journey — the CEO wasn't on the journey and doesn't want the slideshow."},
+{q:"The CEO says: 'interesting — we're doing the opposite.'",a:"Conviction without rigidity. One sentence re-anchoring why the analysis points where it points, then genuinely build the best version of THEIR path: safeguards, milestones, and a pre-agreed trigger to revisit. 'I'd still favor X; if we go Y, here's how we protect the downside and when we'd know.' That's an advisor, not an analyst."},
+{q:"Your best option clears the math but violates the client's stated values.",a:"Economics versus strategic coherence — say the conflict out loud instead of pretending it isn't there. Recommend the values-consistent option that still clears the bar, and quantify the premium being paid for coherence. A plan that betrays the brand premise pays for itself in churn later; naming that trade IS the insight."},
+{q:"Partner: 'your recommendation needs $50M we don't have.'",a:"Constraints reshape sequencing, not the answer. Find the self-funding first step, phase-gate the capital behind proof points, or shrink to a pilot whose economics unlock the next tranche. 'Same destination, funded staircase' — delivered without a flinch."},
+{q:"Give me the 10-second version.",a:"One sentence: do X, because Y, and it's worth Z. If you can't compress it to that, you don't own the answer yet — the compression isn't a summary of the thinking, it's the proof the thinking finished. Practice the ten-second close as its own rep."}]}];
+const CHAIN_IDS=[];CASE_CHAINS.forEach((tr,ti)=>tr.nodes.forEach((n,ni)=>CHAIN_IDS.push("c"+ti+"_"+ni)));
+const FAMPILL={prof:"p-diag",entry:"p-size",size:"p-size",price:"p-drill",pe:"p-diag",cdd:"p-diag",cap:"p-size",syn:"p-drill"};
+let CH={t:null,i:0};
+function chainProgress(ti){const tr=CASE_CHAINS[ti];let box=0;tr.nodes.forEach((n,ni)=>{const it=SR.items["c"+ti+"_"+ni];if(it)box+=it.b});return Math.round(box/(6*tr.nodes.length)*100)}
+function renderChains(){
+ CH.t=null;
+ $("chains").innerHTML=`<div class="card"><h2>Interviewer Chains <span class="pill p-drill">follow-up trees · SRS</span></h2>
+ <div class="prog">Each tree is one interviewer pressing deeper. Answer every node ALOUD before revealing — verbal fluency under follow-up pressure is the thing superdays actually measure. Grades schedule resurfacing.</div>
+ <div class="grid g2">${CASE_CHAINS.map((tr,ti)=>`<div class="node" style="cursor:pointer" onclick="CH.t=${ti};CH.i=0;renderChainNode()">
+  <div style="font-weight:700;font-size:14px"><span class="pill ${FAMPILL[tr.t]}">${tr.t}</span>${tr.title}</div>
+  <div style="color:var(--dim);font-size:12px;margin-top:2px">${tr.desc} · ${tr.nodes.length} follow-ups</div>
+  <div class="bar"><i style="width:${chainProgress(ti)}%"></i></div></div>`).join("")}
+ </div></div>`;
+ KB={};
+}
+function renderChainNode(){
+ const tr=CASE_CHAINS[CH.t];
+ if(CH.i>=tr.nodes.length){
+  $("chains").innerHTML=`<div class="card"><h2>${tr.title} — complete</h2>
+  <p>All ${tr.nodes.length} follow-ups graded. The SRS will resurface the shaky ones.</p>
+  <div class="btnrow"><button class="act" onclick="renderChains()">Back to trees</button>
+  <button class="ghost" onclick="CH.i=0;renderChainNode()">Run it again</button></div></div>`;
+  KB={space:renderChains};return;
+ }
+ const n=tr.nodes[CH.i];const id="c"+CH.t+"_"+CH.i;
+ $("chains").innerHTML=`<div class="card"><h2>${tr.title}</h2>
+ <div class="prog">Follow-up ${CH.i+1} of ${tr.nodes.length} · <a style="color:var(--dim);cursor:pointer;text-decoration:underline" onclick="renderChains()">exit tree</a></div>
+ <div class="qbox">“${n.q}”</div>
+ <div class="btnrow"><button class="act" onclick="chReveal()">Reveal model answer</button></div>
+ <div class="ans" id="chAns" style="white-space:normal">${n.a}</div>
+ <div class="grade" id="chGrade">
+  <button class="ghost gD" onclick="chGrade(1)">1 · Missed it</button>
+  <button class="ghost gN" onclick="chGrade(2)">2 · Shaky</button>
+  <button class="ghost gA" onclick="chGrade(3)">3 · Solid</button></div>
+ <div class="kbd"><b>Space</b> reveal · <b>1/2/3</b> grade & next follow-up</div></div>`;
+ KB={space:()=>{if(!$("chAns").classList.contains("show"))chReveal()},grade:g=>{if($("chAns").classList.contains("show"))chGrade(g)}};
+}
+function chReveal(){$("chAns").classList.add("show");$("chGrade").classList.add("show")}
+function chGrade(g){gradeItem("c"+CH.t+"_"+CH.i,g);CH.i++;renderChainNode();}
+/* ============ REVIEW QUEUE ============ */
+let Q={list:[],i:0};
+function chainNode(id){const m=id.match(/^c(\d+)_(\d+)$/);const tr=CASE_CHAINS[+m[1]];return{tr,n:tr.nodes[+m[2]]}}
+function renderQueue(){
+ const due=dueIds();
+ const fresh=newIds().sort(()=>Math.random()-0.5).slice(0,due.length?0:8);
+ Q.list=due.concat(fresh);Q.i=0;
+ if(!Q.list.length){
+  $("queue").innerHTML=`<div class="card"><h2>Review Queue</h2><p class="ok">Queue clear — nothing due today.</p>
+  <p style="color:var(--dim);margin-top:8px">Keep the reps generative: run a Diagnosis case, an Exhibit read, or a chain you haven't maxed.</p></div>`;
+  KB={};return;}
+ renderQCard();
+}
+function renderQCard(){
+ if(Q.i>=Q.list.length){
+  $("queue").innerHTML=`<div class="card"><h2>Review Queue — done</h2><p class="ok">${Q.list.length} cards cleared. Streak: ${streak()} day${streak()===1?"":"s"}.</p></div>`;
+  renderNav();KB={};return;}
+ const id=Q.list[Q.i];const{tr,n}=chainNode(id);
+ $("queue").innerHTML=`<div class="card"><h2>Review Queue <span class="pill p-drill">spaced repetition</span></h2>
+ <div class="prog">${Q.i+1} / ${Q.list.length} — ${SR.items[id]?"due for review":"new card"} · Chain · ${tr.title}</div>
+ <div><span class="pill ${FAMPILL[tr.t]}">${tr.t}</span></div>
+ <div class="qbox">${n.q}</div>
+ <div class="btnrow"><button class="act" onclick="qReveal()">Reveal</button></div>
+ <div class="ans" id="qAns" style="white-space:normal">${n.a}</div>
+ <div class="grade" id="qGrade">
+  <button class="ghost gD" onclick="qGrade(1)">1 · Missed it</button>
+  <button class="ghost gN" onclick="qGrade(2)">2 · Shaky</button>
+  <button class="ghost gA" onclick="qGrade(3)">3 · Solid</button></div>
+ <div class="kbd"><b>Space</b> reveal · <b>1/2/3</b> grade & advance</div></div>`;
+ KB={space:()=>{if(!$("qAns").classList.contains("show"))qReveal()},grade:g=>{if($("qAns").classList.contains("show"))qGrade(g)}};
+}
+function qReveal(){$("qAns").classList.add("show");$("qGrade").classList.add("show")}
+function qGrade(g){gradeItem(Q.list[Q.i],g);Q.i++;renderQCard();}
+/* ============ DASHBOARD ============ */
+const SKILLS=[["g_diag","Diagnosis — root-cause calls"],["g_lever","Diagnosis — lever picks"],["g_size","Sizing — swing-driver predictions"],["g_exh","Exhibit reads (all three layers)"],["g_hint","Hint detection"]];
+function renderHome(){
+ const g=gymStats(),d=S.get("dojo",{n:0,c:0,times:[]}),sy=S.get("syn",{done:0,scores:[]}),h=S.get("hint",{n:0,c:0});
+ const g5=g.scores.slice(-5);const gAvg=g5.length?(g5.reduce((a,b)=>a+b,0)/g5.length):0;
+ const s5=sy.scores.slice(-5);const sAvg=s5.length?(s5.reduce((a,b)=>a+b,0)/s5.length):0;
+ const dAcc=d.n?Math.round(100*d.c/d.n):0;const hAcc=h.n?Math.round(100*h.c/h.n):0;
+ const due=dueIds().length;const st=streak();const reps=SR.log[today()]||0;
+ const mrow=(l,v,cls)=>`<div class="mrow"><span>${l}</span><span class="${cls||''}" style="font-family:var(--mono);font-size:13px">${v}</span></div>`;
+ const mathKeys=Object.keys(SR.sk).filter(k=>k.startsWith("g_math_"));
+ const mathAgg=mathKeys.length?Math.round(mathKeys.reduce((a,k)=>a+(skillAcc(k)||0),0)/mathKeys.length*100):null;
+ $("home").innerHTML=`
+ <div class="card"><div class="grid g4">
+  <div class="stat"><div class="v" style="color:var(--gold)">${st}</div><div class="l">day streak</div></div>
+  <div class="stat"><div class="v">${reps}</div><div class="l">reps today</div></div>
+  <div class="stat"><div class="v" style="color:${due?'var(--red)':'var(--grn)'}">${due}</div><div class="l">chains due</div></div>
+  <div class="stat"><div class="v">${g.done}</div><div class="l">structures built</div></div>
+ </div></div>
+ <div class="card"><h2>Gates — Sept 15 checkpoint</h2>
+ ${mrow("Structure Gym last-5 avg (gate ≥ 4.0)",gAvg?gAvg.toFixed(1)+" / 5":"—",gAvg>=4?"ok":"wr")}
+ ${mrow("Math Dojo accuracy (gate 90%)",dAcc+"% ("+d.c+"/"+d.n+")",dAcc>=90?"ok":dAcc>=75?"wr":"bad")}
+ ${mrow("Synthesis last-5 avg (gate ≥ 4.0)",sAvg?sAvg.toFixed(1)+" / 5":"—",sAvg>=4?"ok":"wr")}
+ ${mrow("Hint detection (gate 80%)",hAcc+"%",hAcc>=80?"ok":"wr")}
+ <div class="tip"><b>The real gate is measured on LIVE cases</b> — last-5 live cases ≥ 4/5 with partners. This app is the warm-up and the rep engine; log live scores separately. Two consecutive low-energy Fridays = deload week, regardless of these numbers.</div></div>
+ <div class="card"><h2>Playground skills</h2>
+ ${SKILLS.map(([id,n])=>{const a=skillAcc(id);const at=(SR.sk[id]||[]).length;
+ return `<div class="mrow"><span>${n}</span><div class="mb"><div class="bar"><i style="width:${a===null?0:Math.round(a*100)}%;background:${a!==null&&a<0.6?'var(--red)':'linear-gradient(90deg,var(--acc),var(--grn))'}"></i></div></div><span style="color:var(--dim);font-size:12px">${a===null?"—":Math.round(a*100)+"% · "+at+" reps"}</span></div>`}).join("")}
+ ${mathAgg!==null?mrow("Math by drill type (rolling)",mathAgg+"%",mathAgg>=85?"ok":"wr"):""}
+ <h3>Challenges</h3>
+ ${[["diag","Profit Diagnosis"],["size","Sizing Builder"],["exh","Exhibit Reader"],["pe","PE/CDD Cockpit"]].map(([k,n])=>{const done=CHALS[k].filter(c=>SR.pg[c[0]]).length;
+ return `<div class="mrow"><span>${n}</span><div class="mb"><div class="bar"><i style="width:${done/CHALS[k].length*100}%"></i></div></div><span style="color:var(--dim);font-size:12px">${done}/${CHALS[k].length}</span><button class="ghost" style="margin-left:10px" onclick="show('${k==='diag'?'diag':k==='size'?'size':k==='exh'?'exh':'pe'}')">Open</button></div>`}).join("")}</div>
+ <div class="card"><h2>Today's session — ~25 minutes</h2>
+ <div class="mrow"><span><b>1.</b> Clear the <b>Review Queue</b> (${due} due) — the SRS knows what you're about to forget</span><button class="act" onclick="show('queue')">Start</button></div>
+ <div class="mrow"><span><b>2.</b> Two <b>Diagnosis</b> cases — hypothesis out loud before every pull</span><button class="ghost" onclick="show('diag')">Go</button></div>
+ <div class="mrow"><span><b>3.</b> Three <b>Exhibit</b> reads — observation, so-what, implication</span><button class="ghost" onclick="show('exh')">Go</button></div>
+ <div class="mrow"><span><b>4.</b> One <b>Structure Gym</b> + one <b>Synthesis</b> rep, both aloud</span><button class="ghost" onclick="show('gym')">Go</button></div>
+ <div class="mrow"><span><b>5.</b> Five <b>Math Dojo</b> drills — protect the 90% gate</span><button class="ghost" onclick="show('dojo')">Go</button></div>
+ <div class="tip"><b>The rule:</b> grade yourself brutally. A "shaky" you call "solid" comes back to bite you in a live case, not in this app.</div></div>
+ <div class="card"><h3 style="margin-top:0">Housekeeping</h3><div class="btnrow"><button class="ghost" onclick="if(confirm('Wipe ALL local progress (drills + SRS)?')){['gym','dojo','syn','hint','srs'].forEach(k=>localStorage.removeItem('bkl_'+k));srLoad();show('home')}">Reset all local data</button></div></div>`;
+ KB={};
+}
+/* ============ NAV / ROUTER ============ */
+const TABS=[["home","Dashboard"],["queue","Review"],["gym","Structure Gym"],["dojo","Math Dojo"],["syn","Synthesis"],["hint","Hint Decoder"],["chains","Chains"],["map","Case Map"]];
+const PGTABS=[["diag","Profit Diagnosis"],["size","Sizing Builder"],["exh","Exhibit Reader"],["pe","PE / CDD Cockpit"]];
+let CUR="home";
+function renderNav(){
+ const due=dueIds().length;
+ const btn=([id,l])=>`<button class="${CUR===id?'on':''}" onclick="show('${id}')">${l}${id==='queue'&&due?`<span class="b">${due}</span>`:""}</button>`;
+ $("nav").innerHTML=`<div class="navrow">${TABS.map(btn).join("")}</div><div class="navrow"><span class="navtag">playgrounds</span>${PGTABS.map(btn).join("")}</div>`;
+}
+function show(id){
+ CUR=id;clearInterval(GYM.t);clearInterval(SYN.t);clearInterval(DOJO.ti);clearInterval(EX.t);
+ document.querySelectorAll("section").forEach(s=>s.classList.remove("on"));
+ $(id).classList.add("on");renderNav();
+ ({home:renderHome,queue:renderQueue,gym:renderGym,dojo:renderDojo,syn:renderSyn,hint:renderHint,chains:renderChains,map:renderMap,diag:renderDiag,size:renderSize,exh:renderExh,pe:renderPE})[id]();
+ window.scrollTo(0,0);
+}
+/* ============ INIT ============ */
+srLoad();show("home");
+</script>
+</body>
+</html>
