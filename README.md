@@ -8,12 +8,15 @@ An interactive, spaced-repetition trainer for MBB (McKinsey / BCG / Bain) case i
 
 ## What's inside
 
+- **Full Case Run** — a 5-round timed gauntlet (structure → exhibit → math → brainstorm → synthesis) stitching every drill below into one end-to-end mock case, with a debrief scorecard that names your weakest round
 - **Profit Diagnosis Game** — a generative engine breaks a randomized business (price erosion, share loss, mix shift, cost inflation...); you get a fixed budget of data pulls to test a hypothesis before calling the root cause, scored on accuracy *and* path efficiency
 - **Market-Sizing Builder** — the same prompt built both top-down and bottom-up, with a live convergence check and a predict-first sensitivity tornado
 - **Exhibit Reader** — eight generated chart patterns (crossover, mix shift, waterfall, the classic flat-line anti-pattern) drilling observation → so-what → implication under a 60-second clock
+- **Brainstorm Gym** — the "what are some ways to..." moment, timed: name your organizing axis first, then fill MECE buckets before the clock runs out
 - **PE / CDD Cockpit** — decomposes a target's growth into market beta vs. share alpha vs. margin execution, feeding a linked LBO-lite value bridge — the exact lens MBB uses when it diligences a deal for a sponsor
 - **Structure Gym, Math Dojo, Synthesis Trainer, Hint Decoder** — the core recurring drills, weighted to resurface your weaker case types automatically
 - **Interviewer chain trees** — real follow-up sequences across profitability, market entry, sizing, pricing, M&A, and synthesis
+- **Story Bank** — the other half of the interview: build 4-6 real fit stories with a STAR editor, track theme coverage, and rehearse random fit questions against the clock
 - **Spaced repetition** — a Leitner-system review queue tracks every drill and chain node, scheduling weak spots back sooner
 
 ## Stack

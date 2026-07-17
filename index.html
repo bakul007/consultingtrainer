@@ -3,15 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MBB Case Prep Trainer</title>
+<title>Consulting Case Prep Trainer — MBB Fluency Drills</title>
+<meta name="description" content="Free interactive MBB case-interview trainer: profit-diagnosis game, market sizing with live triangulation, exhibit reads, generative case math, synthesis reps, and spaced repetition. No login, progress saves locally.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Consulting Case Prep Trainer — MBB Fluency Drills">
+<meta property="og:description" content="Drill the muscles cases actually test: diagnosis under a data budget, sizing triangulation, exhibit reads, case math, synthesis. Free, no login.">
+<meta property="og:url" content="https://bakulbadwal.github.io/consultingtrainer/">
+<meta property="og:image" content="https://bakulbadwal.github.io/consultingtrainer/docs/screenshot.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232E5FA3'/%3E%3Crect x='14' y='34' width='9' height='16' fill='%23F6F4EE'/%3E%3Crect x='27' y='24' width='9' height='26' fill='%23F6F4EE'/%3E%3Crect x='40' y='14' width='9' height='36' fill='%23B4652F'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#101014; --card:#17171D; --card2:#1D1E26; --line:#2A2B36;
-  --txt:#EDEBE4; --dim:#8F94A6; --acc:#89A9CF; --gold:#CE8147;
-  --grn:#57C983; --red:#E5695E; --yel:#E8B33C;
+  --bg:#F6F4EE; --card:#FFFFFF; --card2:#EFECE2; --line:#DBD5C6;
+  --txt:#1B1C1F; --dim:#6E7078; --acc:#2E5FA3; --gold:#B4652F;
+  --grn:#1E7A46; --red:#C0392E; --yel:#A8770E;
   --disp:'Marcellus',Georgia,'Times New Roman',serif;
   --sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
   --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -29,7 +37,7 @@ nav{display:flex;flex-direction:column;gap:0;margin:10px 0 22px}
 nav button{background:none;border:0;border-bottom:2px solid transparent;color:var(--dim);padding:9px 10px 8px;border-radius:0;cursor:pointer;font:600 11.5px var(--sans);letter-spacing:.07em;text-transform:uppercase;margin-bottom:-1px}
 nav button:hover{color:var(--txt)}
 nav button.on{background:none;color:var(--gold);border-bottom-color:var(--gold)}
-nav button .b{display:inline-block;min-width:17px;padding:1px 5px;margin-left:5px;border-radius:8px;background:var(--gold);color:#101014;font-size:10px;text-align:center;letter-spacing:0}
+nav button .b{display:inline-block;min-width:17px;padding:1px 5px;margin-left:5px;border-radius:8px;background:var(--gold);color:#FFFFFF;font-size:10px;text-align:center;letter-spacing:0}
 section{display:none}
 section.on{display:block;animation:fade .18s ease}
 @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
@@ -44,31 +52,31 @@ section.on{display:block;animation:fade .18s ease}
 .stat{background:var(--card2);border:1px solid var(--line);border-radius:4px;padding:12px;text-align:center}
 .stat .v{font:700 21px/1.3 var(--mono);font-variant-numeric:tabular-nums}
 .stat .l{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.11em;margin-top:3px}
-.bar{height:8px;background:#15161C;border-radius:5px;overflow:hidden;margin-top:6px}
+.bar{height:8px;background:#E9E5D9;border-radius:5px;overflow:hidden;margin-top:6px}
 .bar i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,var(--acc),var(--grn))}
 .qbox{font-size:17px;font-weight:600;line-height:1.5;margin:8px 0 14px}
 .scen{background:var(--card2);border-left:3px solid var(--acc);border-radius:0 4px 4px 0;padding:12px 14px;margin:10px 0;font-size:14.5px}
 .scen b{color:var(--gold)}
-.ans{background:#14151B;border:1px solid var(--line);border-radius:4px;padding:14px;margin:12px 0;font-size:14.5px;display:none;white-space:pre-wrap}
+.ans{background:#FBFAF5;border:1px solid var(--line);border-radius:4px;padding:14px;margin:12px 0;font-size:14.5px;display:none;white-space:pre-wrap}
 .ans.show{display:block;animation:fade .18s ease}
 .ans .k{color:var(--acc);font-weight:700}
 .ans .num{color:var(--gold);font-weight:700;font-family:var(--mono);font-size:.95em;font-variant-numeric:tabular-nums}
-.tip{background:rgba(206,129,71,.07);border:1px solid rgba(206,129,71,.35);border-radius:4px;padding:9px 12px;margin-top:10px;font-size:13px;white-space:normal}
+.tip{background:rgba(180,101,47,.07);border:1px solid rgba(180,101,47,.35);border-radius:4px;padding:9px 12px;margin-top:10px;font-size:13px;white-space:normal}
 .tip b{color:var(--gold)}
 .btnrow{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;align-items:center}
-button.act{background:var(--gold);color:#101014;border:0;padding:9px 16px;border-radius:3px;font-weight:700;cursor:pointer;font-size:13px;font-family:var(--sans);letter-spacing:.02em}
-button.act:hover{background:#DC935C}
+button.act{background:var(--gold);color:#FFFFFF;border:0;padding:9px 16px;border-radius:3px;font-weight:700;cursor:pointer;font-size:13px;font-family:var(--sans);letter-spacing:.02em}
+button.act:hover{background:#9A5526}
 button.ghost{background:transparent;color:var(--txt);border:1px solid var(--line);padding:9px 16px;border-radius:3px;font-weight:600;cursor:pointer;font-size:13px;font-family:var(--sans)}
 button.ghost:hover{border-color:var(--acc)}
-button.gA{background:rgba(87,201,131,.15);border:1px solid var(--grn);color:var(--grn)}
-button.gN{background:rgba(232,179,60,.15);border:1px solid var(--yel);color:var(--yel)}
-button.gD{background:rgba(229,105,94,.15);border:1px solid var(--red);color:var(--red)}
+button.gA{background:rgba(30,122,70,.15);border:1px solid var(--grn);color:var(--grn)}
+button.gN{background:rgba(168,119,14,.15);border:1px solid var(--yel);color:var(--yel)}
+button.gD{background:rgba(192,57,46,.15);border:1px solid var(--red);color:var(--red)}
 button:disabled{opacity:.4;cursor:default}
 .grade{display:none;gap:8px;margin-top:10px}
 .grade.show{display:flex;flex-wrap:wrap}
-input[type=number],input[type=text]{background:#15161C;border:1px solid var(--line);color:var(--txt);padding:9px 12px;border-radius:3px;font-size:14.5px;width:160px;font-family:var(--mono);font-variant-numeric:tabular-nums}
-textarea{width:100%;min-height:100px;background:#15161C;border:1px solid var(--line);border-radius:4px;color:var(--txt);padding:10px;font-size:14px;font-family:var(--sans);resize:vertical}
-select{background:#15161C;color:var(--txt);border:1px solid var(--line);border-radius:3px;padding:8px;font-family:var(--sans);font-size:13px}
+input[type=number],input[type=text]{background:#E9E5D9;border:1px solid var(--line);color:var(--txt);padding:9px 12px;border-radius:3px;font-size:14.5px;width:160px;font-family:var(--mono);font-variant-numeric:tabular-nums}
+textarea{width:100%;min-height:100px;background:#E9E5D9;border:1px solid var(--line);border-radius:4px;color:var(--txt);padding:10px;font-size:14px;font-family:var(--sans);resize:vertical}
+select{background:#E9E5D9;color:var(--txt);border:1px solid var(--line);border-radius:3px;padding:8px;font-family:var(--sans);font-size:13px}
 input:focus,textarea:focus,select:focus{outline:none;border-color:var(--acc)}
 .ok{color:var(--grn);font-weight:700}
 .bad{color:var(--red);font-weight:700}
@@ -76,16 +84,16 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--acc)}
 .timer{font:700 24px var(--mono);font-variant-numeric:tabular-nums;color:var(--acc)}
 .timer.low{color:var(--red)}
 .pill{display:inline-block;font:700 10px/1.7 var(--sans);text-transform:uppercase;letter-spacing:.06em;padding:2px 9px;border-radius:10px;margin-right:6px;vertical-align:2px}
-.p-diag{background:rgba(206,129,71,.15);color:var(--gold)}
-.p-size{background:rgba(137,169,207,.15);color:var(--acc)}
-.p-drill{background:rgba(87,201,131,.15);color:var(--grn)}
+.p-diag{background:rgba(180,101,47,.15);color:var(--gold)}
+.p-size{background:rgba(46,95,163,.15);color:var(--acc)}
+.p-drill{background:rgba(30,122,70,.15);color:var(--grn)}
 .kbd{color:var(--dim);font-size:11.5px;margin-top:8px}
 .kbd b{background:var(--card2);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-family:var(--mono)}
 .prog{color:var(--dim);font-size:12.5px;margin-bottom:8px}
-.mrow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px dashed #2E2F3C;font-size:13.5px;gap:10px}
+.mrow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px dashed #DDD7C8;font-size:13.5px;gap:10px}
 .mrow:last-child{border-bottom:0}
 .mrow .mb{flex:1;margin:0 12px}
-footer{position:fixed;bottom:0;left:0;right:0;background:rgba(16,16,20,.95);border-top:1px solid var(--line);padding:8px 18px;font:400 10.5px var(--mono);letter-spacing:.03em;color:var(--dim);text-align:center;backdrop-filter:blur(6px)}
+footer{position:fixed;bottom:0;left:0;right:0;background:rgba(246,244,238,.95);border-top:1px solid var(--line);padding:8px 18px;font:400 10.5px var(--mono);letter-spacing:.03em;color:var(--dim);text-align:center;backdrop-filter:blur(6px)}
 /* playground layout */
 .pg{display:grid;grid-template-columns:310px 1fr;gap:14px;align-items:start}
 @media(max-width:800px){.pg{grid-template-columns:1fr}}
@@ -94,45 +102,45 @@ footer{position:fixed;bottom:0;left:0;right:0;background:rgba(16,16,20,.95);bord
 .sl{margin:9px 0}
 .sl-h{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--dim);margin-bottom:3px}
 .sl-h b{color:var(--txt);font-family:var(--mono);font-size:11.5px;font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
-input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;background:#15161C;border-radius:4px;outline:none;cursor:pointer;padding:0;border:0}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;border-radius:50%;background:var(--acc);border:2px solid #101014;cursor:pointer}
-input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--acc);border:2px solid #101014;cursor:pointer}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;background:#E9E5D9;border-radius:4px;outline:none;cursor:pointer;padding:0;border:0}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;border-radius:50%;background:var(--acc);border:2px solid #F6F4EE;cursor:pointer}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--acc);border:2px solid #F6F4EE;cursor:pointer}
 .seg{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
-.seg button{background:#15161C;border:1px solid var(--line);color:var(--dim);padding:6px 10px;border-radius:3px;cursor:pointer;font-size:12px;font-weight:600;font-family:var(--sans)}
-.seg button.on{border-color:var(--acc);color:var(--acc);background:rgba(137,169,207,.1)}
+.seg button{background:#E9E5D9;border:1px solid var(--line);color:var(--dim);padding:6px 10px;border-radius:3px;cursor:pointer;font-size:12px;font-weight:600;font-family:var(--sans)}
+.seg button.on{border-color:var(--acc);color:var(--acc);background:rgba(46,95,163,.1)}
 .wfall{display:flex;gap:5px;margin:8px 0 2px}
 .wcol{flex:1;display:flex;flex-direction:column;align-items:center;min-width:0}
 .wstack{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;width:100%;height:172px}
 .wblk{width:100%;border-radius:4px;transition:height .12s ease,margin-bottom .12s ease}
 .wlab{font-size:10px;color:var(--dim);text-align:center;margin-top:4px;line-height:1.25}
 .wval{font:600 10px var(--mono);font-variant-numeric:tabular-nums;margin-bottom:2px}
-.hbar{display:flex;height:24px;border-radius:3px;overflow:hidden;background:#15161C;font:700 10.5px var(--mono)}
-.hbar div{display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden;transition:width .12s ease;color:#101014}
+.hbar{display:flex;height:24px;border-radius:3px;overflow:hidden;background:#E9E5D9;font:700 10.5px var(--mono)}
+.hbar div{display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden;transition:width .12s ease;color:#FFFFFF}
 .hbar+.hbar{margin-top:6px}
 .callout{border-radius:4px;padding:8px 11px;margin-top:8px;font-size:12.8px;border:1px solid}
-.co-i{background:rgba(137,169,207,.07);border-color:rgba(137,169,207,.35)}
-.co-w{background:rgba(232,179,60,.07);border-color:rgba(232,179,60,.4)}
-.co-r{background:rgba(229,105,94,.07);border-color:rgba(229,105,94,.4)}
-.co-g{background:rgba(87,201,131,.07);border-color:rgba(87,201,131,.4)}
-.chal{display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px dashed #2E2F3C;font-size:12.5px}
+.co-i{background:rgba(46,95,163,.07);border-color:rgba(46,95,163,.35)}
+.co-w{background:rgba(168,119,14,.07);border-color:rgba(168,119,14,.4)}
+.co-r{background:rgba(192,57,46,.07);border-color:rgba(192,57,46,.4)}
+.co-g{background:rgba(30,122,70,.07);border-color:rgba(30,122,70,.4)}
+.chal{display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px dashed #DDD7C8;font-size:12.5px}
 .chal:last-child{border-bottom:0}
 .chal .cbx{width:17px;height:17px;border-radius:3px;border:1.5px solid var(--dim);flex:none;margin-top:1px;text-align:center;line-height:15px;font-size:11px}
-.chal.done .cbx{background:var(--grn);border-color:var(--grn);color:#101014}
+.chal.done .cbx{background:var(--grn);border-color:var(--grn);color:#FFFFFF}
 .chal.done{color:var(--dim)}
-.gauge{height:14px;background:#15161C;border-radius:4px;position:relative;overflow:hidden;margin:8px 0 2px}
+.gauge{height:14px;background:#E9E5D9;border-radius:4px;position:relative;overflow:hidden;margin:8px 0 2px}
 .gauge .z{position:absolute;top:0;left:50%;width:1.5px;height:100%;background:var(--dim);z-index:1}
 .gauge .f{position:absolute;top:0;height:100%;transition:all .12s ease}
-.toast{position:fixed;right:16px;bottom:60px;background:var(--grn);color:#101014;font-weight:700;padding:10px 16px;border-radius:4px;font-size:13px;opacity:0;transform:translateY(8px);transition:all .3s ease;z-index:50;pointer-events:none;max-width:320px}
+.toast{position:fixed;right:16px;bottom:60px;background:var(--grn);color:#FFFFFF;font-weight:700;padding:10px 16px;border-radius:4px;font-size:13px;opacity:0;transform:translateY(8px);transition:all .3s ease;z-index:50;pointer-events:none;max-width:320px}
 .toast.show{opacity:1;transform:none}
 /* accordions (case map / pe reference) */
 .acc-h{cursor:pointer;padding:11px 14px;background:var(--card2);border:1px solid var(--line);border-radius:4px;margin-top:8px;font-weight:600;font-size:14px;display:flex;justify-content:space-between}
 .acc-h:hover{border-color:var(--acc)}
-.acc-b{display:none;padding:12px 16px;border:1px solid var(--line);border-top:none;border-radius:0 0 4px 4px;font-size:13.5px;white-space:pre-wrap;background:#14151B}
+.acc-b{display:none;padding:12px 16px;border:1px solid var(--line);border-top:none;border-radius:0 0 4px 4px;font-size:13.5px;white-space:pre-wrap;background:#FBFAF5}
 .acc-h.open+.acc-b{display:block}
 .opt{display:block;width:100%;text-align:left;background:var(--card2);border:1px solid var(--line);border-radius:4px;padding:10px 13px;margin-top:8px;color:var(--txt);font-size:13.5px;cursor:pointer;font-family:var(--sans)}
 .opt:hover{border-color:var(--acc)}
-.opt.correct{border-color:var(--grn);background:rgba(87,201,131,.12)}
-.opt.wrong{border-color:var(--red);background:rgba(229,105,94,.10)}
+.opt.correct{border-color:var(--grn);background:rgba(30,122,70,.12)}
+.opt.wrong{border-color:var(--red);background:rgba(192,57,46,.10)}
 .score5{display:flex;gap:6px;margin-top:8px}
 .score5 button{width:40px;height:36px;border-radius:3px;border:1px solid var(--line);background:var(--card2);color:var(--txt);font-weight:700;cursor:pointer;font-family:var(--mono)}
 .score5 button:hover{border-color:var(--gold)}
@@ -140,11 +148,11 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 .pullgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:8px;margin:10px 0}
 .pull{background:var(--card2);border:1px solid var(--line);border-radius:4px;padding:10px 12px;cursor:pointer;font-size:12.5px;transition:border-color .12s ease}
 .pull:hover{border-color:var(--gold)}
-.pull.open{cursor:default;border-color:#3A5A45;background:#14181B}
+.pull.open{cursor:default;border-color:#8FB89E;background:#F3F6F1}
 .pull .pt{font-weight:700;font-size:12px;display:flex;justify-content:space-between;gap:6px}
 .pull .pc{color:var(--dim);font-size:11px}
 .pull table{width:100%;border-collapse:collapse;margin-top:6px;font-family:var(--mono);font-size:10.5px;font-variant-numeric:tabular-nums}
-.pull td,.pull th{padding:2px 3px;text-align:right;border-bottom:1px solid #232430;color:var(--txt);font-weight:400}
+.pull td,.pull th{padding:2px 3px;text-align:right;border-bottom:1px solid #E2DDCF;color:var(--txt);font-weight:400}
 .pull th{color:var(--dim);font-weight:600;text-transform:uppercase;font-size:9px;letter-spacing:.05em}
 .pull td:first-child,.pull th:first-child{text-align:left}
 .dneg{color:var(--red)}.dpos{color:var(--grn)}
@@ -154,14 +162,14 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 .node.pred{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
 .node .nl{font-size:11.5px;color:var(--dim);display:flex;justify-content:space-between;gap:6px}
 .node .nl b{color:var(--txt);font-family:var(--mono);font-size:11px}
-.runchip{font:700 11px var(--mono);color:var(--gold);background:rgba(206,129,71,.1);border:1px solid rgba(206,129,71,.35);border-radius:4px;padding:5px 8px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.runchip{font:700 11px var(--mono);color:var(--gold);background:rgba(180,101,47,.1);border:1px solid rgba(180,101,47,.35);border-radius:4px;padding:5px 8px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .opch{font:700 13px var(--mono);color:var(--dim)}
 .brow{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:11.5px}
 .brow .bl{width:170px;color:var(--dim);text-align:right;flex:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.brow .bt{flex:1;height:13px;background:#15161C;border-radius:3px;overflow:hidden}
+.brow .bt{flex:1;height:13px;background:#E9E5D9;border-radius:3px;overflow:hidden}
 .brow .bt i{display:block;height:100%;background:var(--acc)}
 .brow .bv{font-family:var(--mono);font-size:10.5px;width:64px;flex:none}
-.stmt{background:#15161C;border:1px solid var(--line);border-radius:4px;padding:9px 10px;font-size:12px}
+.stmt{background:#E9E5D9;border:1px solid var(--line);border-radius:4px;padding:9px 10px;font-size:12px}
 svg text{font-family:var(--sans)}
 .narr{background:var(--card2);border-left:3px solid var(--gold);border-radius:0 4px 4px 0;padding:10px 12px;margin:10px 0;font-size:13.5px;min-height:44px}
 :is(button,input,textarea,select,.acc-h,.pull,.node):focus-visible{outline:2px solid var(--acc);outline-offset:2px}
@@ -172,8 +180,8 @@ svg text{font-family:var(--sans)}
 <div class="wrap">
 <header>
   <div class="eyebrow">Consulting Case-Prep Fluency Trainer</div>
-  <h1>MBB Case Prep Trainer</h1>
-  <span class="sub">Diagnosis playgrounds · generative drills · spaced repetition · Fall 2026 gates</span>
+  <h1>Consulting Case Prep Trainer</h1>
+  <span class="sub">Diagnosis playgrounds · generative drills · spaced repetition · progress saves in your browser</span>
 </header>
 <nav id="nav"></nav>
 
@@ -189,6 +197,9 @@ svg text{font-family:var(--sans)}
 <section id="size"></section>
 <section id="exh"></section>
 <section id="pe"></section>
+<section id="run"></section>
+<section id="brain"></section>
+<section id="story"></section>
 </div>
 <div class="toast" id="toast"></div>
 <footer><b>Space</b> reveal / advance · <b>1/2/3</b> grade chains &amp; queue — progress saves automatically in this browser</footer>
@@ -231,7 +242,7 @@ function co(cls,html){return `<div class="callout co-${cls}">${html}</div>`}
 const CHALS={
 diag:[["diag1","Clean kill","diagnose a case correctly using 4 pulls or fewer — segment first, then drill."],
 ["diag2","Us vs them","solve a case where the market check was the decisive pull (company problem vs industry problem)."],
-["diag3","The mix hunter","correctly call a mix-shift case — flat revenue hiding a margin disease. Your field-guide nemesis."],
+["diag3","The mix hunter","correctly call a mix-shift case — flat revenue hiding a margin disease. The classic miss."],
 ["diag4","Five straight","get 5 consecutive correct root-cause calls at any efficiency."]],
 size:[["size1","In the band","land inside the reference band on any prompt — with your own assumptions, not the defaults."],
 ["size2","Triangulated","get top-down and bottom-up within 25% of each other on the same prompt."],
@@ -279,9 +290,9 @@ t:["Cost-plus by reflex (leaves value on the table)","Forgetting the volume resp
 {n:"M&A / due diligence",w:"'Should PE firm / strategic buy target X?' Core at Bain (PE ring-fence), EY-P, Kearney PEPI.",
 l:"Four gates: (1) standalone quality — market, moat, unit economics, management; (2) deal logic — synergies for a strategic, value-creation plan for a sponsor; (3) price vs value — what must be true to justify the multiple; (4) risks & red flags — customer concentration, churn, key-person, regulatory. End with: buy / buy-at-lower-price / walk.",
 p:["A sponsor is looking at a $40M-revenue HVAC-services roll-up platform. Diligence it.","A beverage major wants to acquire a fast-growing energy-drink brand at 6x revenue. Advise."],
-t:["Forgetting the PRICE (great company ≠ great deal)","Synergy hand-waving without sizing","Your personal trap: sliding into deal-execution jargon — stay at thesis level"]},
+t:["Forgetting the PRICE (great company ≠ great deal)","Synergy hand-waving without sizing","A trap for candidates with deal experience: sliding into execution jargon — stay at thesis level"]},
 {n:"PE investment screen",w:"Sponsor-flavored variant: 'Attractive investment? What would you diligence?'",
-l:"Think like the IC memo you actually write: thesis in one line → market (size/growth/cyclicality) → company (share, moat, recurring revenue %, unit economics) → value-creation levers (pricing, ops, add-ons, professionalization) → exit path (who buys it in 5 years, at what multiple) → key diligence questions ranked. You have live reps here — deploy calmly, in plain English.",
+l:"Think like a real IC memo: thesis in one line → market (size/growth/cyclicality) → company (share, moat, recurring revenue %, unit economics) → value-creation levers (pricing, ops, add-ons, professionalization) → exit path (who buys it in 5 years, at what multiple) → key diligence questions ranked. If you have investing or deal experience, deploy it calmly, in plain English.",
 p:["Is a lower-middle-market landscaping roll-up a good platform investment?","A B2B SaaS with 95% gross retention and 20% growth is available at 8x revenue. Screen it."],
 t:["Showing off mechanics instead of judgment","Skipping exit thinking","Underweighting management/key-person risk in small companies"]},
 {n:"Operations / turnaround",w:"'Plant costs too high / service quality falling / company in distress — fix it.' A&M-flavored; appears at MBB too.",
@@ -513,7 +524,7 @@ const hintBank=[
 {q:"Near the end: 'What would worry you most about this recommendation?'",o:["Confidence test — say you're comfortable with the recommendation","Risk-judgment test — name the ONE risk that could flip the answer, plus the early-warning signal","List every risk you can think of"],c:1,w:"One flip-risk with a monitoring trigger beats ten generic risks. 'If technician churn passes 40%, the roll-up math breaks — I'd track that monthly' is a partner-level answer."},
 {q:"Interviewer goes quiet after your answer and just looks at you.",o:["Fill the silence with more analysis","Hold the silence calmly — you're done when you're done","Ask 'would you like more detail?'"],c:1,w:"Silence is a composure probe (and sometimes just note-taking). Filling it dilutes a good answer into a mediocre one. Two full seconds of calm reads as senior. You're allowed to stop."},
 {q:"'Suppose the client rejects your recommendation. What then?'",o:["Restate the case for it more persuasively","Flex test — show you can serve the client's chosen path: best version of plan B, with safeguards","Concede the client knows best"],c:1,w:"They're testing advisor maturity: conviction WITHOUT rigidity. One sentence re-anchoring your view, then genuinely build their path: 'I'd still favor X, but if we go Y, here's how we protect the downside.'"},
-{q:"Interviewer, casually, mid-case: 'You've done deal work — how would a sponsor look at this?'",o:["Downshift jargon, one investor insight in plain English, hand the thread back","Full LBO walkthrough — this is your moment","Deflect modestly; stay in consultant mode"],c:0,w:"Your background is being invited, with a trap inside: they want ONE judgment flash ('a sponsor would fixate on the recurring-revenue %'), not a masterclass. Deposit the insight, return to the case. Restraint IS the flex."}];
+{q:"Interviewer, casually, mid-case: 'You've done deal work — how would a sponsor look at this?'",o:["Downshift jargon, one investor insight in plain English, hand the thread back","Full LBO walkthrough — this is your moment","Deflect modestly; stay in consultant mode"],c:0,w:"Their invitation carries a trap: they want ONE judgment flash ('a sponsor would fixate on the recurring-revenue %'), not a masterclass. Deposit the insight, return to the case. Restraint IS the flex."}];
 let HINT={idx:-1};
 function renderHint(){
  const st=S.get("hint",{n:0,c:0});const p=st.n?Math.round(100*st.c/st.n):0;
@@ -558,7 +569,7 @@ B:{label:s=>"Volume / share loss in "+s,lever:1,opt:["revseg","pv","market"],mkt
 C:{label:()=>"Market-wide demand decline",lever:5,opt:["revseg","pv","market"],mkt:"Market volume fell ~10% industry-wide. Competitors report similar or worse declines; two have announced capacity cuts.",
  note:"Same symptom as share loss — completely different answer. Only the market check separates them. If you called a company problem without pulling market data, that's the lesson."},
 D:{label:(s,l)=>"Mix shift toward lower-margin "+l,lever:4,opt:["revseg","margin"],mkt:"Market roughly flat. A premium specialist has opened near your best locations and is pulling your highest-value customers.",
- note:"Flat revenue is the mix shift's camouflage — your field-guide nemesis. The margin/mix pull is the killer move: revenue composition changed even though the total didn't. Never kill the revenue branch because the total looks fine."},
+ note:"Flat revenue is the mix shift's camouflage — the classic camouflage miss. The margin/mix pull is the killer move: revenue composition changed even though the total didn't. Never kill the revenue branch because the total looks fine."},
 E:{label:()=>"Variable-cost inflation (input costs)",lever:2,opt:["varcost","market"],mkt:"Input costs are up across the industry. Two competitors have announced price increases to pass costs through; a third is holding price to take share.",
  note:"Industry-wide cost inflation is a THEM problem with an US decision: pass it through or absorb it. The market pull tells you competitors are raising — which means the pass-through window is open."},
 F:{label:()=>"Fixed-cost step-up",lever:3,opt:["fixed"],mkt:"Market healthy; competitors' margins stable. Nothing external moved.",
@@ -701,7 +712,7 @@ function dgCall(){
 "use strict";
 /* ============ MARKET-SIZING BUILDER ============ */
 const SIZES=[
-{name:"US paid streaming subscriptions",unit:"$B/yr",band:[40e9,55e9],anchor:"Anchor: US consumer entertainment ≈ $300B; at-home video ≈ a quarter of it. Your field-guide case — triangulated to $43–50B.",
+{name:"US paid streaming subscriptions",unit:"$B/yr",band:[40e9,55e9],anchor:"Anchor: US consumer entertainment ≈ $300B; at-home video ≈ a quarter of it. A classic prompt — triangulates to $43–50B.",
  td:{lab:"Top-down · spend cascade",nodes:[{l:"US consumer entertainment spend ($B)",min:250,max:350,v:300,m:1e9},{l:"% spent on at-home video",min:15,max:35,v:25,pct:1},{l:"% of that on streaming subs",min:40,max:75,v:60,pct:1}]},
  bu:{lab:"Bottom-up · household build",nodes:[{l:"US households (M)",min:120,max:140,v:130,m:1e6},{l:"% with ≥1 paid sub",min:60,max:90,v:78,pct:1},{l:"Avg paid subs per subscribing HH",min:2,max:4.5,v:3,st:0.1},{l:"$ per sub per year",min:96,max:192,v:144}]}},
 {name:"US dog grooming",unit:"$B/yr",band:[5e9,12e9],anchor:"Anchor: total US pet industry ≈ $150B; services are a modest slice.",
@@ -719,7 +730,7 @@ const SIZES=[
 {name:"US parcel volume",unit:"packages/day",band:[55e6,120e6],anchor:"Anchor: the majors (USPS, UPS, FedEx, Amazon) each move tens of millions of parcels daily.",
  td:{lab:"Top-down · per-person demand",nodes:[{l:"US population (M)",min:320,max:345,v:335,m:1e6},{l:"Packages per person per year",min:40,max:90,v:70},{l:"Days per year",min:365,max:365,v:365,div:1}]},
  bu:{lab:"Bottom-up · carrier networks",nodes:[{l:"Avg daily parcels per major network (M)",min:12,max:25,v:18,m:1e6},{l:"Major national networks",min:4,max:5,v:4}]}},
-{name:"UK branded coffee-shop market",unit:"£B/yr",band:[4e9,7e9],anchor:"Anchor: ~25–30K UK coffee shops; the RoastClub entry case from your field guide.",
+{name:"UK branded coffee-shop market",unit:"£B/yr",band:[4e9,7e9],anchor:"Anchor: ~25–30K UK coffee shops; a classic UK market-entry case.",
  td:{lab:"Top-down · drinker demand",nodes:[{l:"UK adults (M)",min:50,max:56,v:53,m:1e6},{l:"% buying shop coffee regularly",min:20,max:45,v:30,pct:1},{l:"Cups per year (regulars)",min:80,max:220,v:120},{l:"£ per cup",min:3,max:4.5,v:3.5,st:0.1}]},
  bu:{lab:"Bottom-up · shop economics",nodes:[{l:"UK coffee shops (K)",min:20,max:35,v:27,m:1e3},{l:"Avg revenue per shop (£K/yr)",min:150,max:350,v:220,s:1e3}]}},
 {name:"US MBA consulting hires",unit:"hires/yr",band:[2500,5500],anchor:"Anchor: meta and useful — MBB alone hires a few thousand MBAs globally.",
@@ -806,14 +817,14 @@ function szTornado(){
 const sX=(i,n)=>60+i*(470/(Math.max(n-1,1)));
 const sY=(v,lo,hi)=>245-(v-lo)/((hi-lo)||1)*195;
 function exFrame(title,inner,leg){
- return `<svg viewBox="0 0 560 290" style="width:100%;display:block;background:#14151B;border:1px solid var(--line);border-radius:4px">
- <text x="16" y="24" fill="#EDEBE4" font-size="13" font-weight="600">${title}</text>
- ${leg?`<text x="544" y="24" fill="#8F94A6" font-size="10" text-anchor="end">${leg}</text>`:""}
- <line x1="55" y1="250" x2="535" y2="250" stroke="#2A2B36"/><line x1="55" y1="45" x2="55" y2="250" stroke="#2A2B36"/>
+ return `<svg viewBox="0 0 560 290" style="width:100%;display:block;background:#FBFAF5;border:1px solid var(--line);border-radius:4px">
+ <text x="16" y="24" fill="#1B1C1F" font-size="13" font-weight="600">${title}</text>
+ ${leg?`<text x="544" y="24" fill="#6E7078" font-size="10" text-anchor="end">${leg}</text>`:""}
+ <line x1="55" y1="250" x2="535" y2="250" stroke="#D8D2C2"/><line x1="55" y1="45" x2="55" y2="250" stroke="#D8D2C2"/>
  ${inner}</svg>`;
 }
 function exLine(pts,lo,hi,color,w){return `<polyline fill="none" stroke="${color}" stroke-width="${w||2.5}" points="${pts.map((v,i)=>sX(i,pts.length)+","+sY(v,lo,hi)).join(" ")}"/>`}
-function exLabelsX(labs){return labs.map((t,i)=>`<text x="${sX(i,labs.length)}" y="266" fill="#8F94A6" font-size="9.5" text-anchor="middle">${t}</text>`).join("")}
+function exLabelsX(labs){return labs.map((t,i)=>`<text x="${sX(i,labs.length)}" y="266" fill="#6E7078" font-size="9.5" text-anchor="middle">${t}</text>`).join("")}
 const EXH=[
 {pat:"crossover",gen(){
  const ind=pick([["your client","NimbusPay","payments volume, $B"],["your client","Meridian Air","seat share on core routes, %"],["your client","OakHill Clinics","patient visits, K/quarter"]]);
@@ -822,8 +833,8 @@ const EXH=[
  const lo=Math.min(...a,...b)*0.9,hi=Math.max(...a,...b)*1.08;
  const ci=b.findIndex((v,i)=>v>=a[i]);
  const svg=exFrame(ind[2]+" — "+ind[0]+" vs competitor",
-  exLine(a,lo,hi,"#89A9CF")+exLine(b,lo,hi,"#CE8147")+
-  (ci>0?`<circle cx="${sX(ci,n)}" cy="${sY(b[ci],lo,hi)}" r="5" fill="none" stroke="#E5695E" stroke-width="2"/>`:"")+
+  exLine(a,lo,hi,"#2E5FA3")+exLine(b,lo,hi,"#B4652F")+
+  (ci>0?`<circle cx="${sX(ci,n)}" cy="${sY(b[ci],lo,hi)}" r="5" fill="none" stroke="#C0392E" stroke-width="2"/>`:"")+
   exLabelsX([...Array(n)].map((_,i)=>"Q"+(i+1))),"steel = client · copper = competitor");
  return{svg,ctx:"Your client ("+ind[1]+") hands you this during a growth case.",
  obs:"Client is flat; the competitor compounds ~8-10% a quarter and crosses the client around Q"+(ci+1)+".",
@@ -835,20 +846,20 @@ const EXH=[
  const yrs=["Yr 1","Yr 2","Yr 3"];const hiS=[R(55,62)];hiS.push(hiS[0]-R(5,8));hiS.push(hiS[1]-R(5,9));
  const tot=R(90,110);
  const bars=yrs.map((y,i)=>{const hv=tot*hiS[i]/100,lv=tot-hv;const x=90+i*150;
-  return `<rect x="${x}" y="${sY(hv,0,tot)}" width="70" height="${250-sY(hv,0,tot)}" fill="#CE8147"/><rect x="${x}" y="${sY(tot,0,tot)}" width="70" height="${sY(hv,0,tot)-sY(tot,0,tot)}" fill="#3E4050"/>
-  <text x="${x+35}" y="266" fill="#8F94A6" font-size="10" text-anchor="middle">${y} · total ${Math.round(tot)}</text>
+  return `<rect x="${x}" y="${sY(hv,0,tot)}" width="70" height="${250-sY(hv,0,tot)}" fill="#B4652F"/><rect x="${x}" y="${sY(tot,0,tot)}" width="70" height="${sY(hv,0,tot)-sY(tot,0,tot)}" fill="#7E828C"/>
+  <text x="${x+35}" y="266" fill="#6E7078" font-size="10" text-anchor="middle">${y} · total ${Math.round(tot)}</text>
   <text x="${x+35}" y="${sY(hv/2,0,tot)}" fill="#101014" font-size="10" font-weight="700" text-anchor="middle">${hiS[i]}%</text>`}).join("");
  return{svg:exFrame("Revenue by segment, $M (copper = "+seg[0]+", high margin)",bars,""),
  ctx:"Profitability case. Total revenue has been 'basically flat' — management is focused on costs.",
  obs:"Totals are flat, but the high-margin "+seg[0]+" slice fell from "+hiS[0]+"% to "+hiS[2]+"% of revenue in two years.",
  so:"Revenue QUALITY collapsed while revenue QUANTITY held — every point of mix shifted to "+seg[1]+" bleeds gross margin with no cost problem at all.",
  imp:"Quantify it: mix shift × margin gap = the profit decline. Then the case pivots to WHY the "+seg[0]+" customer is leaving — likely a focused competitor.",
- trap:"Killing the revenue branch because the total is flat — your field-guide lesson. Flat totals hide violent composition moves."}}},
+ trap:"Killing the revenue branch because the total is flat — the classic lesson. Flat totals hide violent composition moves."}}},
 {pat:"market vs client",gen(){
  const g1=R(8,12),g2=R(2,4);const yrs=["Yr 1","Yr 2","Yr 3"];
  let m=100,c=100;const bars=yrs.map((y,i)=>{const x=85+i*155;
-  const el=`<rect x="${x}" y="${sY(m,80,160)}" width="55" height="${250-sY(m,80,160)}" fill="#3E4050"/><rect x="${x+60}" y="${sY(c,80,160)}" width="55" height="${250-sY(c,80,160)}" fill="#89A9CF"/>
-  <text x="${x+57}" y="266" fill="#8F94A6" font-size="10" text-anchor="middle">${y}</text>`;
+  const el=`<rect x="${x}" y="${sY(m,80,160)}" width="55" height="${250-sY(m,80,160)}" fill="#7E828C"/><rect x="${x+60}" y="${sY(c,80,160)}" width="55" height="${250-sY(c,80,160)}" fill="#2E5FA3"/>
+  <text x="${x+57}" y="266" fill="#6E7078" font-size="10" text-anchor="middle">${y}</text>`;
   m*=1+g1/100;c*=1+g2/100;return el}).join("");
  return{svg:exFrame("Indexed revenue (grey = market, steel = client, Yr1 = 100)",bars,""),
  ctx:"Growth case. The CEO opens with: 'We've grown every single year.'",
@@ -859,9 +870,9 @@ const EXH=[
 {pat:"margin trap",gen(){
  const n=6;const rev=[];let r=R(90,110);for(let i=0;i<n;i++){rev.push(r);r*=1-(R(4,7)/100)}
  const mg=[];let m=R(18,22);for(let i=0;i<n;i++){mg.push(m);m+=R(0,2)*0.5}
- const bars=rev.map((v,i)=>`<rect x="${sX(i,n)-18}" y="${sY(v,0,120)}" width="36" height="${250-sY(v,0,120)}" fill="#3E4050"/>`).join("");
+ const bars=rev.map((v,i)=>`<rect x="${sX(i,n)-18}" y="${sY(v,0,120)}" width="36" height="${250-sY(v,0,120)}" fill="#7E828C"/>`).join("");
  const profit0=rev[0]*mg[0]/100,profit1=rev[n-1]*mg[n-1]/100;
- return{svg:exFrame("Revenue $M (bars) and operating margin % (copper line)",bars+exLine(mg.map(x=>x*120/30),0,120,"#CE8147")+exLabelsX([...Array(n)].map((_,i)=>"Q"+(i+1))),""),
+ return{svg:exFrame("Revenue $M (bars) and operating margin % (copper line)",bars+exLine(mg.map(x=>x*120/30),0,120,"#B4652F")+exLabelsX([...Array(n)].map((_,i)=>"Q"+(i+1))),""),
  ctx:"Board meeting exhibit. The CFO is proud: 'margins have never been higher.'",
  obs:"Margin % climbs from "+mg[0]+"% to "+f1(mg[n-1])+"% — while revenue falls ~"+Math.round((1-rev[n-1]/rev[0])*100)+"%.",
  so:"Profit DOLLARS are roughly flat-to-down (≈"+f1(profit0)+" → "+f1(profit1)+" $M): the margin gain is a shrinking-denominator effect — they're cutting to the bone while the franchise shrinks.",
@@ -870,7 +881,7 @@ const EXH=[
 {pat:"cohort decay",gen(){
  const dec=[R(6,9)/100,R(10,14)/100,R(15,20)/100];
  const cs=dec.map(d=>{const pts=[100];for(let i=1;i<6;i++)pts.push(pts[i-1]*(1-d));return pts});
- const cols=["#89A9CF","#E8B33C","#E5695E"];
+ const cols=["#2E5FA3","#A8770E","#C0392E"];
  return{svg:exFrame("Customer retention by annual cohort (% of cohort remaining)",cs.map((c,i)=>exLine(c,40,105,cols[i])).join("")+exLabelsX(["M0","M6","M12","M18","M24","M30"]),"steel = 2 yrs ago · amber = last yr · red = this yr"),
  ctx:"A subscription business growing 25% a year asks you to bless a bigger acquisition budget.",
  obs:"Each successive cohort decays faster — this year's cohort loses ~"+Math.round(dec[2]*100)+"% per period vs ~"+Math.round(dec[0]*100)+"% two years ago.",
@@ -881,13 +892,13 @@ const EXH=[
  const neg=pick([["Promotions & discounts","promo intensity"],["Freight & logistics","freight rates"],["Labor cost inflation","wage resets"]]);
  const p0=R(80,100),price=R(6,12),vol=R(3,8),small=R(2,5),big=R(18,28);
  const p1=p0+price+vol-small-big;
- const items=[["Profit LY",p0,"#89A9CF",0],["+ Pricing",price,"#57C983",1],["+ Volume",vol,"#57C983",1],["− Other costs",-small,"#E5695E",1],["− "+neg[0],-big,"#E5695E",1],["Profit TY",p1,"#CE8147",0]];
+ const items=[["Profit LY",p0,"#2E5FA3",0],["+ Pricing",price,"#1E7A46",1],["+ Volume",vol,"#1E7A46",1],["− Other costs",-small,"#C0392E",1],["− "+neg[0],-big,"#C0392E",1],["Profit TY",p1,"#B4652F",0]];
  let run=0;const W=560;const bw=62;
  const inner=items.map((it,i)=>{const x=68+i*80;
   let y0,h;const scale=v=>250-(v/(p0+price+vol))*185;
   if(it[3]===0){y0=scale(it[1]);h=250-y0;run=it[1];}
   else{const from=run;run+=it[1];y0=scale(Math.max(from,run));h=Math.abs(scale(from)-scale(run));}
-  return `<rect x="${x}" y="${y0}" width="${bw}" height="${Math.max(h,2)}" fill="${it[2]}"/><text x="${x+bw/2}" y="266" fill="#8F94A6" font-size="8.5" text-anchor="middle">${it[0]}</text><text x="${x+bw/2}" y="${y0-4}" fill="#EDEBE4" font-size="9" font-weight="600" text-anchor="middle">${it[1]>0&&it[3]===1?"+":""}${it[1]}</text>`}).join("");
+  return `<rect x="${x}" y="${y0}" width="${bw}" height="${Math.max(h,2)}" fill="${it[2]}"/><text x="${x+bw/2}" y="266" fill="#6E7078" font-size="8.5" text-anchor="middle">${it[0]}</text><text x="${x+bw/2}" y="${y0-4}" fill="#1B1C1F" font-size="9" font-weight="600" text-anchor="middle">${it[1]>0&&it[3]===1?"+":""}${it[1]}</text>`}).join("");
  return{svg:exFrame("Operating profit bridge, $M",inner,""),
  ctx:"Profitability case; management calls the year 'a perfect storm of small things.'",
  obs:"One bucket — "+neg[0].toLowerCase()+" at −$"+big+"M — is bigger than every other move combined.",
@@ -897,8 +908,8 @@ const EXH=[
 {pat:"2x2 portfolio",gen(){
  const segs=[["A",R(2,4),R(28,38),R(35,50)],["B",R(9,13),R(6,12),R(12,20)],["C",R(10,14),R(24,34),R(8,14)],["D",R(4,6),R(12,18),R(18,26)],["E",R(12,16),R(4,8),R(5,9)]];
  const inner=segs.map(s=>{const cx=60+ (s[2]/40)*470, cy=245-(s[1]/16)*195, r=Math.sqrt(s[3])*3;
-  return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="rgba(137,169,207,.35)" stroke="#89A9CF"/><text x="${cx}" y="${cy+3}" fill="#EDEBE4" font-size="10" font-weight="700" text-anchor="middle">${s[0]}</text>`}).join("")
-  +`<text x="540" y="264" fill="#8F94A6" font-size="9" text-anchor="end">→ our market share %</text><text x="66" y="50" fill="#8F94A6" font-size="9">↑ market growth %/yr</text>`;
+  return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="rgba(46,95,163,.35)" stroke="#2E5FA3"/><text x="${cx}" y="${cy+3}" fill="#1B1C1F" font-size="10" font-weight="700" text-anchor="middle">${s[0]}</text>`}).join("")
+  +`<text x="540" y="264" fill="#6E7078" font-size="9" text-anchor="end">→ our market share %</text><text x="66" y="50" fill="#6E7078" font-size="9">↑ market growth %/yr</text>`;
  return{svg:exFrame("Segment portfolio (bubble = revenue $M)",inner,""),
  ctx:"Portfolio-strategy case: 'where should the next $50M of investment go?'",
  obs:"Big bubble A: high share, low growth. C: strong share in a fast market. B and E: fast markets, tiny share. D: middling everything.",
@@ -908,7 +919,7 @@ const EXH=[
 {pat:"flat decoy",gen(){
  const what=pick([["Supplier input prices (indexed)","input costs"],["Warehouse error rate, %","operational quality"],["Web traffic (indexed)","demand interest"]]);
  const n=10;const pts=[];let v=100;for(let i=0;i<n;i++){pts.push(v+R(-3,3));}
- return{svg:exFrame(what[0]+", 10 quarters",exLine(pts,80,120,"#89A9CF")+exLabelsX([...Array(n)].map((_,i)=>"Q"+(i+1))),""),
+ return{svg:exFrame(what[0]+", 10 quarters",exLine(pts,80,120,"#2E5FA3")+exLabelsX([...Array(n)].map((_,i)=>"Q"+(i+1))),""),
  ctx:"Mid-diagnosis, testing your hypothesis that "+what[1]+" is driving the problem, the interviewer hands you this.",
  obs:"Flat. Mean stable, variance small, no trend, no step-change anywhere in ten quarters.",
  so:"This exhibit is an ELIMINATION, not an insight: "+what[1]+" is not the driver. The correct so-what is 'nothing here — my hypothesis is dead.'",
@@ -1031,16 +1042,16 @@ function updPE(){
  $("peE").textContent="$"+Math.round(d.E[0])+"→$"+Math.round(d.E[5])+"M";
  /* attribution */
  const dE=d.E[5]-d.E[0];const tot=Math.abs(d.aM)+Math.abs(d.aS)+Math.abs(d.aMu)||1;
- const rows=[["Market growth (beta)",d.aM,"#3E4050"],["Share gain (alpha — prove it)",d.aS,"#89A9CF"],["Margin plan (execution)",d.aMu,"#CE8147"]];
+ const rows=[["Market growth (beta)",d.aM,"#7E828C"],["Share gain (alpha — prove it)",d.aS,"#2E5FA3"],["Margin plan (execution)",d.aMu,"#B4652F"]];
  $("peAttr").innerHTML=rows.map(([l,v,c])=>`<div class="brow"><span class="bl">${l}</span><div class="bt"><i style="width:${Math.max(2,Math.abs(v)/tot*100)}%;background:${v<0?"var(--red)":c}"></i></div><span class="bv">${v>=0?"+":"−"}$${Math.abs(v).toFixed(1)}M</span></div>`).join("")
  +`<div class="prog" style="margin:6px 0 0">ΔEBITDA = <b style="color:var(--gold)">${dE>=0?"+":""}$${dE.toFixed(1)}M</b> over 5 yrs — decomposition is exact; this is the chart a CDD report is built around.</div>`;
  /* value bridge waterfall */
  const growth=(d.E[5]-d.E[0])*d.em, mult=d.E[5]*(d.xm-d.em), pay=d.P;
  let run=d.Q0,maxV=Math.max(d.Q0,d.Qn);
- const blocks=[{l:"Entry<br>equity",b:0,h:d.Q0,c:"#89A9CF",t:"$"+Math.round(d.Q0)}];
+ const blocks=[{l:"Entry<br>equity",b:0,h:d.Q0,c:"#2E5FA3",t:"$"+Math.round(d.Q0)}];
  [["EBITDA<br>growth",growth],["Multiple<br>change",mult],["Debt<br>paydown",pay]].forEach(([l,v])=>{
   const b=Math.min(run,run+v);blocks.push({l,b,h:Math.abs(v),c:v>=0?"var(--grn)":"var(--red)",t:(v>=0?"+":"−")+Math.round(Math.abs(v))});run+=v;maxV=Math.max(maxV,b+Math.abs(v));});
- blocks.push({l:"Exit<br>equity",b:0,h:d.Qn,c:"#CE8147",t:"$"+Math.round(d.Qn)});
+ blocks.push({l:"Exit<br>equity",b:0,h:d.Qn,c:"#B4652F",t:"$"+Math.round(d.Qn)});
  const px=v=>Math.max(0,v/maxV*160);
  $("peW").innerHTML=blocks.map(b=>`<div class="wcol"><div class="wstack"><div class="wval">${b.t}</div><div class="wblk" style="height:${Math.max(2,px(b.h))}px;margin-bottom:${px(b.b)}px;background:${b.c}"></div></div><div class="wlab">${b.l}</div></div>`).join("");
  /* callouts */
@@ -1181,7 +1192,7 @@ function renderQCard(){
 function qReveal(){$("qAns").classList.add("show");$("qGrade").classList.add("show")}
 function qGrade(g){gradeItem(Q.list[Q.i],g);Q.i++;renderQCard();}
 /* ============ DASHBOARD ============ */
-const SKILLS=[["g_diag","Diagnosis — root-cause calls"],["g_lever","Diagnosis — lever picks"],["g_size","Sizing — swing-driver predictions"],["g_exh","Exhibit reads (all three layers)"],["g_hint","Hint detection"]];
+const SKILLS=[["g_diag","Diagnosis — root-cause calls"],["g_lever","Diagnosis — lever picks"],["g_size","Sizing — swing-driver predictions"],["g_exh","Exhibit reads (all three layers)"],["g_hint","Hint detection"],["g_brain","Brainstorm breadth (MECE under the clock)"]];
 function renderHome(){
  const g=gymStats(),d=S.get("dojo",{n:0,c:0,times:[]}),sy=S.get("syn",{done:0,scores:[]}),h=S.get("hint",{n:0,c:0});
  const g5=g.scores.slice(-5);const gAvg=g5.length?(g5.reduce((a,b)=>a+b,0)/g5.length):0;
@@ -1198,11 +1209,12 @@ function renderHome(){
   <div class="stat"><div class="v" style="color:${due?'var(--red)':'var(--grn)'}">${due}</div><div class="l">chains due</div></div>
   <div class="stat"><div class="v">${g.done}</div><div class="l">structures built</div></div>
  </div></div>
- <div class="card"><h2>Gates — Sept 15 checkpoint</h2>
+ <div class="card"><h2>Gates — interview-ready checkpoints</h2>
  ${mrow("Structure Gym last-5 avg (gate ≥ 4.0)",gAvg?gAvg.toFixed(1)+" / 5":"—",gAvg>=4?"ok":"wr")}
  ${mrow("Math Dojo accuracy (gate 90%)",dAcc+"% ("+d.c+"/"+d.n+")",dAcc>=90?"ok":dAcc>=75?"wr":"bad")}
  ${mrow("Synthesis last-5 avg (gate ≥ 4.0)",sAvg?sAvg.toFixed(1)+" / 5":"—",sAvg>=4?"ok":"wr")}
  ${mrow("Hint detection (gate 80%)",hAcc+"%",hAcc>=80?"ok":"wr")}
+ ${(()=>{const r=S.get("runs",[]);const l5=r.slice(-5);const a=l5.length?(l5.reduce((x,y)=>x+y.avg,0)/l5.length):0;return mrow("Full cases run / last-5 avg (gate ≥ 4.0)",r.length+(a?" · "+a.toFixed(1)+" / 5":""),a>=4?"ok":r.length?"wr":"")})()}
  <div class="tip"><b>The real gate is measured on LIVE cases</b> — last-5 live cases ≥ 4/5 with partners. This app is the warm-up and the rep engine; log live scores separately. Two consecutive low-energy Fridays = deload week, regardless of these numbers.</div></div>
  <div class="card"><h2>Playground skills</h2>
  ${SKILLS.map(([id,n])=>{const a=skillAcc(id);const at=(SR.sk[id]||[]).length;
@@ -1217,12 +1229,13 @@ function renderHome(){
  <div class="mrow"><span><b>3.</b> Three <b>Exhibit</b> reads — observation, so-what, implication</span><button class="ghost" onclick="show('exh')">Go</button></div>
  <div class="mrow"><span><b>4.</b> One <b>Structure Gym</b> + one <b>Synthesis</b> rep, both aloud</span><button class="ghost" onclick="show('gym')">Go</button></div>
  <div class="mrow"><span><b>5.</b> Five <b>Math Dojo</b> drills — protect the 90% gate</span><button class="ghost" onclick="show('dojo')">Go</button></div>
+ <div class="mrow"><span><b>Twice a week:</b> one <b>Full Case</b> run end-to-end, and one <b>Story Bank</b> rehearsal — the fit answer is half the interview</span><button class="ghost" onclick="show('run')">Run a case</button></div>
  <div class="tip"><b>The rule:</b> grade yourself brutally. A "shaky" you call "solid" comes back to bite you in a live case, not in this app.</div></div>
  <div class="card"><h3 style="margin-top:0">Housekeeping</h3><div class="btnrow"><button class="ghost" onclick="if(confirm('Wipe ALL local progress (drills + SRS)?')){['gym','dojo','syn','hint','srs'].forEach(k=>localStorage.removeItem('bkl_'+k));srLoad();show('home')}">Reset all local data</button></div></div>`;
  KB={};
 }
 /* ============ NAV / ROUTER ============ */
-const TABS=[["home","Dashboard"],["queue","Review"],["gym","Structure Gym"],["dojo","Math Dojo"],["syn","Synthesis"],["hint","Hint Decoder"],["chains","Chains"],["map","Case Map"]];
+const TABS=[["home","Dashboard"],["queue","Review"],["run","Full Case"],["gym","Structure Gym"],["dojo","Math Dojo"],["syn","Synthesis"],["brain","Brainstorm"],["hint","Hint Decoder"],["chains","Chains"],["story","Story Bank"],["map","Case Map"]];
 const PGTABS=[["diag","Profit Diagnosis"],["size","Sizing Builder"],["exh","Exhibit Reader"],["pe","PE / CDD Cockpit"]];
 let CUR="home";
 function renderNav(){
@@ -1231,13 +1244,287 @@ function renderNav(){
  $("nav").innerHTML=`<div class="navrow">${TABS.map(btn).join("")}</div><div class="navrow"><span class="navtag">playgrounds</span>${PGTABS.map(btn).join("")}</div>`;
 }
 function show(id){
- CUR=id;clearInterval(GYM.t);clearInterval(SYN.t);clearInterval(DOJO.ti);clearInterval(EX.t);
+ CUR=id;clearInterval(GYM.t);clearInterval(SYN.t);clearInterval(DOJO.ti);clearInterval(EX.t);if(window.BR)clearInterval(BR.t);if(window.RUN)clearInterval(RUN.t);if(window.STO)clearInterval(STO.t);
  document.querySelectorAll("section").forEach(s=>s.classList.remove("on"));
  $(id).classList.add("on");renderNav();
- ({home:renderHome,queue:renderQueue,gym:renderGym,dojo:renderDojo,syn:renderSyn,hint:renderHint,chains:renderChains,map:renderMap,diag:renderDiag,size:renderSize,exh:renderExh,pe:renderPE})[id]();
+ ({home:renderHome,queue:renderQueue,gym:renderGym,dojo:renderDojo,syn:renderSyn,hint:renderHint,chains:renderChains,map:renderMap,diag:renderDiag,size:renderSize,exh:renderExh,pe:renderPE,run:renderRun,brain:renderBrain,story:renderStory})[id]();
  window.scrollTo(0,0);
 }
-/* ============ INIT ============ */
+/* INIT moved to end of file — see final script block, after all modules are defined */
+</script>
+
+<script>
+"use strict";
+/* ============ BRAINSTORM GYM ============ */
+const BRAIN_BANK=[
+{q:"An airline wants more ancillary (non-ticket) revenue. Brainstorm levers.",axis:"Journey stage × who pays",
+m:["BEFORE FLIGHT — seat selection, bags, premium boarding, bundles/branded fares, change-fee tiers, insurance attach","IN FLIGHT — food & beverage, wifi, entertainment upgrades, duty-free, seat-back advertising","AFTER / AROUND — co-brand credit card & miles sales (the giant), lounges, partner hotel/car commissions, cargo belly space","B2B SIDE — selling loyalty points to banks, charter, ad inventory, data partnerships"]},
+{q:"A hospital wants to cut ER wait times without new buildings. Go.",axis:"Demand side × supply side × flow",
+m:["REDUCE DEMAND — divert low-acuity via telehealth triage, urgent-care partnerships, frequent-user care plans","EXPAND EFFECTIVE SUPPLY — provider-in-triage, scribes, fast-track lane for minor cases, flexible staffing to demand curves","FIX THE FLOW — early discharge upstairs (bed availability), bedside registration, results-pending lounge, parallel processing of labs/imaging","SMOOTH THE PEAKS — predictive staffing, transfer agreements, community paramedicine"]},
+{q:"A premium DTC coffee brand's CAC doubled. Brainstorm ways to grow without paid ads.",axis:"Own × earn × borrow audiences",
+m:["OWN — email/SMS flows, subscription tiers, referral program with two-sided rewards, packaging QR moments","EARN — organic content (brew education), PR moments, community/events, UGC & reviews engine","BORROW — wholesale into specialty grocers, office/hospitality accounts, brand collabs, marketplace presence","RETENTION AS GROWTH — churn-save flows, win-backs, attach/gifting — cheaper than any acquisition"]},
+{q:"Ways a B2B software company can raise net revenue retention.",axis:"More seats × more usage × more products × less churn",
+m:["EXPAND SEATS — land-and-expand playbooks, role-based packaging, champions program","EXPAND USAGE — usage-based tiers, feature adoption campaigns, integrations that deepen workflow lock-in","CROSS-SELL — adjacent modules, premium support/SLAs, services attach","DEFEND — health-score early warning, exec sponsorship, multi-year renewals with price escalators, switching-cost builders"]},
+{q:"A city wants to halve traffic congestion downtown. Brainstorm.",axis:"Reduce trips × shift trips × expand capacity",
+m:["REDUCE — remote-work incentives, consolidated deliveries, congestion pricing, parking pricing","SHIFT MODE — bus rapid transit, protected bike lanes, park-and-ride, employer transit subsidies","SHIFT TIME — staggered hours, off-peak delivery windows, dynamic tolls","CAPACITY — signal optimization, incident clearing, curb management — cheapest capacity is operational"]},
+{q:"A stadium operator wants more profit per event night. Levers?",axis:"Per-head spend × heads served × cost per head",
+m:["SPEND/HEAD — dynamic pricing by opponent, bundles, premium experiences, alcohol/food mix, merch drops","HEADS SERVED — queue-killing mobile order, hawkers, express lanes (capture rate is the hidden lever)","NEW REVENUE — non-event days (concerts, tours, corporate), sponsorship inventory, parking optimization","COST — labor scheduled to demand, waste reduction on perishables, energy management"]},
+{q:"How could a regional bank reduce small-business loan default losses?",axis:"Before × during × after the loan",
+m:["UNDERWRITE BETTER — cash-flow-based scoring, industry concentration limits, fraud screens","STRUCTURE BETTER — covenants sized to volatility, collateral/personal guarantees, right-sized tenors","MONITOR — early-warning triggers (deposit trends, payment slippage), proactive workout outreach","RECOVER — specialized workout team, restructure-vs-liquidate playbooks, guarantee programs (SBA)"]},
+{q:"An amusement park's guest-satisfaction scores are falling. Brainstorm causes to investigate.",axis:"Pre-visit × in-park × people × price",
+m:["PRE-VISIT — expectation-setting (marketing over-promise), ticketing friction, arrival/parking chaos","IN-PARK FLOW — wait times, ride downtime, capacity vs attendance, cleanliness","PEOPLE — staffing levels, training, turnover showing up as service quality","VALUE — price hikes vs experience, nickel-and-diming perception, food quality/price"]}];
+window.BR={idx:-1,t:null,left:90};
+function brainStats(){return S.get("brain",{done:0,scores:[]})}
+function renderBrain(){
+ clearInterval(BR.t);
+ const st=brainStats();const l5=st.scores.slice(-5);
+ const avg=l5.length?(l5.reduce((a,b)=>a+b,0)/l5.length).toFixed(1):"—";
+ $("brain").innerHTML=`<div class="card">
+ <h2>Brainstorm Gym <span class="pill p-drill">timed · breadth</span></h2>
+ <div class="prog">"What are some ways…" is a scored moment: interviewers count your buckets, not your bullets. 90 seconds — name your ORGANIZING AXIS first, then fill buckets OUT LOUD (type keywords as you go). Model answers show one good axis; yours can differ and still win, if it's MECE. · <b>${st.done}</b> done · last-5 avg <b>${avg}</b></div>
+ <div style="display:flex;justify-content:space-between;align-items:center"><span class="pill p-drill">axis first, then buckets</span><div class="timer" id="brTimer">90</div></div>
+ <div class="qbox" id="brQ">Press Start.</div>
+ <textarea id="brInput" placeholder="Axis: …  then buckets and ideas as you speak…"></textarea>
+ <div class="btnrow"><button class="act" onclick="brStart()">Start / next prompt</button>
+ <button class="ghost" onclick="brReveal()">Reveal model buckets</button></div>
+ <div class="ans" id="brModel" style="white-space:normal"></div>
+ <div id="brScoreRow" style="display:none"><h3>Self-score (axis named · MECE · ≥3 buckets · idea depth)</h3><div class="score5" id="brScore"></div></div>
+ </div>`;
+ const sc=$("brScore");
+ for(let i=1;i<=5;i++){const b=document.createElement("button");b.textContent=i;b.onclick=()=>{
+  const st2=brainStats();st2.done++;st2.scores.push(i);if(st2.scores.length>50)st2.scores.shift();
+  S.set("brain",st2);gradeSkill("g_brain",i>=4);logRep();renderBrain();brStart();
+ };sc.appendChild(b)}
+ KB={space:()=>{if(BR.idx<0)brStart();else if(!$("brModel").classList.contains("show"))brReveal()}};
+}
+function brStart(){
+ BR.idx=(BR.idx+R(1,BRAIN_BANK.length-1))%BRAIN_BANK.length;
+ $("brQ").textContent=BRAIN_BANK[BR.idx].q;
+ $("brInput").value="";$("brModel").classList.remove("show");$("brScoreRow").style.display="none";
+ clearInterval(BR.t);BR.left=90;tick("brTimer",BR.left);
+ BR.t=setInterval(()=>{BR.left--;tick("brTimer",BR.left);if(BR.left<=0){clearInterval(BR.t);brReveal()}},1000);
+}
+function brReveal(){
+ if(BR.idx<0)return;clearInterval(BR.t);
+ const c=BRAIN_BANK[BR.idx];
+ $("brModel").innerHTML=`<b style="color:var(--acc)">ONE GOOD AXIS:</b> ${c.axis}<br><br>`+c.m.map(x=>{const i=x.indexOf(" — ");return `<b style="color:var(--gold)">${x.slice(0,i)}</b> — ${x.slice(i+3)}`}).join("<br><br>")+`<div class="tip"><b>Scoring yourself:</b> a named axis + 3-4 MECE buckets + 2-3 ideas each beats a 15-item flat list every time. Breadth first, then one bucket deep if invited.</div>`;
+ $("brModel").classList.add("show");$("brScoreRow").style.display="block";
+}
+/* ============ STORY BANK (fit reps) ============ */
+const ST_THEMES=[["lead","Leadership"],["conf","Conflict / difficult person"],["fail","Failure / setback"],["imp","Impact / achievement"],["anal","Analytical problem-solving"],["team","Teamwork"],["drive","Drive / initiative"],["why","Why consulting / why this firm"]];
+const STORY_QS=[
+{q:"Walk me through your resume in two minutes.",th:["why"]},
+{q:"Why consulting — and why now?",th:["why"]},
+{q:"Why THIS firm specifically?",th:["why"]},
+{q:"Tell me about a time you led a team through something hard.",th:["lead"]},
+{q:"Tell me about a time you disagreed with a supervisor or teammate. What did you do?",th:["conf"]},
+{q:"Describe a time you failed. What happened and what changed after?",th:["fail"]},
+{q:"What accomplishment are you proudest of, and why?",th:["imp","drive"]},
+{q:"Tell me about the most complex problem you've solved.",th:["anal"]},
+{q:"Describe a time you had to influence someone without authority.",th:["lead","conf"]},
+{q:"Tell me about a time you had to deliver with a difficult or underperforming team.",th:["team","lead"]},
+{q:"When did you take initiative beyond what was asked?",th:["drive"]},
+{q:"Tell me about receiving hard feedback. What did you do with it?",th:["fail","drive"]}];
+window.STO={t:null,left:90,qi:-1};
+function stories(){return S.get("stories",[])}
+function renderStory(){
+ clearInterval(STO.t);
+ const sts=stories();const fr=S.get("fitreps",{n:0,scores:[]});
+ const l5=fr.scores.slice(-5);const avg=l5.length?(l5.reduce((a,b)=>a+b,0)/l5.length).toFixed(1):"—";
+ const cover=ST_THEMES.map(([k,l])=>{const n=sts.filter(s=>(s.th||[]).includes(k)).length;
+  return `<span class="pill ${n?'p-drill':'p-diag'}" title="${l}">${l.split(" ")[0]} ${n||"·"}</span>`}).join(" ");
+ $("story").innerHTML=`<div class="card">
+ <h2>Story Bank <span class="pill p-drill">fit · the other half of the interview</span></h2>
+ <div class="prog">Cases get you to the bar; <b>stories get you over it</b>. Build 4-6 real stories once, map them to themes, then rehearse random fit questions against the clock. STAR shape, 90 seconds, out loud. · <b>${fr.n}</b> rehearsals · last-5 avg <b>${avg}</b></div>
+ <div class="prog">Theme coverage: ${cover} <span style="margin-left:6px">(a copper chip = no story covers it yet)</span></div>
+ <div class="pg">
+  <div>
+   <div class="panel"><h3 style="margin-top:0">My stories <span style="color:var(--dim);text-transform:none;letter-spacing:0">(saved in this browser only)</span></h3>
+    <div id="stList"></div>
+    <div class="btnrow"><button class="ghost" onclick="stNew()">+ New story</button></div>
+   </div>
+  </div>
+  <div>
+   <div class="panel"><h3 style="margin-top:0">Rehearsal</h3>
+    <div style="display:flex;justify-content:space-between;align-items:center"><span class="pill p-size">answer out loud · STAR</span><div class="timer" id="stTimer">90</div></div>
+    <div class="qbox" id="stQ" style="min-height:52px">Press Draw.</div>
+    <div class="btnrow"><button class="act" onclick="stDraw()">Draw a question</button><button class="ghost" onclick="stDone()">I finished — show matches</button></div>
+    <div class="ans" id="stMatch" style="white-space:normal"></div>
+    <div id="stScoreRow" style="display:none"><h3>Self-score (answer shape · specificity · ≤90s · energy)</h3><div class="score5" id="stScore"></div></div>
+   </div>
+   <div class="callout co-i"><b>The bar:</b> every answer = one concrete story, told in 60-90s, with a number in it and a "what I learned" that isn't generic. If two themes share one story, that's fine — senior interviewers care that it's TRUE and SPECIFIC, not that it's new.</div>
+  </div>
+ </div></div>
+ <div id="stEditor"></div>`;
+ stRenderList();
+ const sc=$("stScore");
+ for(let i=1;i<=5;i++){const b=document.createElement("button");b.textContent=i;b.onclick=()=>{
+  const fr2=S.get("fitreps",{n:0,scores:[]});fr2.n++;fr2.scores.push(i);if(fr2.scores.length>50)fr2.scores.shift();
+  S.set("fitreps",fr2);logRep();renderStory();
+ };sc.appendChild(b)}
+ KB={};
+}
+function stRenderList(){
+ const sts=stories();
+ $("stList").innerHTML=sts.length?sts.map((s,i)=>`<div class="mrow"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><b>${s.t||"(untitled)"}</b> <span style="color:var(--dim);font-size:11px">${(s.th||[]).map(k=>ST_THEMES.find(x=>x[0]===k)[1].split(" ")[0]).join(" · ")}</span></span><span style="white-space:nowrap"><button class="ghost" style="padding:4px 9px;font-size:11px" onclick="stEdit(${i})">Edit</button> <button class="ghost" style="padding:4px 9px;font-size:11px" onclick="if(confirm('Delete this story?')){const a=stories();a.splice(${i},1);S.set('stories',a);renderStory()}">✕</button></span></div>`).join(""):`<div class="prog">No stories yet. Aim for 4-6: a leadership win, a conflict, a failure, a big impact, an analytical save, and your arc into consulting.</div>`;
+}
+function stNew(){const a=stories();a.push({t:"",s:"",k:"",r:"",th:[]});S.set("stories",a);stEdit(a.length-1)}
+function stEdit(i){
+ const s=stories()[i];
+ $("stEditor").innerHTML=`<div class="card"><h2>Edit story</h2>
+ <div class="prog">Keep each field to 1-2 sentences — this is a skeleton you rehearse from, not an essay.</div>
+ <h3>Title (how you'd label it)</h3><input type="text" id="se_t" style="width:100%" value="${(s.t||"").replace(/"/g,"&quot;")}">
+ <h3>Situation + Task</h3><textarea id="se_s" style="min-height:64px">${s.s||""}</textarea>
+ <h3>Action (what YOU specifically did)</h3><textarea id="se_k" style="min-height:64px">${s.k||""}</textarea>
+ <h3>Result + what it taught you (put a NUMBER in the result)</h3><textarea id="se_r" style="min-height:64px">${s.r||""}</textarea>
+ <h3>Covers themes</h3><div class="seg" id="se_th">${ST_THEMES.map(([k,l])=>`<button class="${(s.th||[]).includes(k)?'on':''}" data-k="${k}">${l}</button>`).join("")}</div>
+ <div class="btnrow"><button class="act" onclick="stSave(${i})">Save story</button><button class="ghost" onclick="$('stEditor').innerHTML=''">Close</button></div></div>`;
+ $("se_th").querySelectorAll("button").forEach(b=>b.onclick=()=>b.classList.toggle("on"));
+ window.scrollTo(0,document.body.scrollHeight);
+}
+function stSave(i){
+ const a=stories();
+ a[i]={t:$("se_t").value,s:$("se_s").value,k:$("se_k").value,r:$("se_r").value,
+ th:[...$("se_th").querySelectorAll("button.on")].map(b=>b.dataset.k)};
+ S.set("stories",a);$("stEditor").innerHTML="";renderStory();toast("Story saved.");
+}
+function stDraw(){
+ STO.qi=R(0,STORY_QS.length-1);
+ $("stQ").textContent=STORY_QS[STO.qi].q;
+ $("stMatch").classList.remove("show");$("stScoreRow").style.display="none";
+ clearInterval(STO.t);STO.left=90;tick("stTimer",STO.left);
+ STO.t=setInterval(()=>{STO.left--;tick("stTimer",STO.left);if(STO.left<=0){clearInterval(STO.t);stDone()}},1000);
+}
+function stDone(){
+ if(STO.qi<0)return;clearInterval(STO.t);
+ const q=STORY_QS[STO.qi];const sts=stories();
+ const matches=sts.filter(s=>(s.th||[]).some(k=>q.th.includes(k)));
+ $("stMatch").innerHTML=(matches.length?`<b style="color:var(--acc)">Stories in your bank for this:</b> ${matches.map(m=>"<b>"+(m.t||"(untitled)")+"</b>").join(" · ")}.<br><br>Did you actually use one — with the STAR shape and a number in the result?`:`<b style="color:var(--red)">No story in your bank covers this theme yet.</b> That's the gap to fix before interview week — add one now while the improvisation is fresh.`)+`<div class="tip"><b>Shape check:</b> Situation in one breath → what YOU did (not "we") → result with a number → one honest sentence of learning. 60-90 seconds, energy up at the end.</div>`;
+ $("stMatch").classList.add("show");$("stScoreRow").style.display="block";
+}
+/* ============ FULL CASE RUN (gauntlet) ============ */
+window.RUN={ph:0,t:null,left:0,scores:{},cur:{}};
+const RUN_PHASES=["Opening & structure","Exhibit read","Case math","Brainstorm","Synthesis & close"];
+function renderRun(){
+ clearInterval(RUN.t);RUN.ph=0;RUN.scores={};RUN.cur={};
+ const runs=S.get("runs",[]);const l5=runs.slice(-5);
+ const avg=l5.length?(l5.reduce((a,b)=>a+b.avg,0)/l5.length).toFixed(1):"—";
+ $("run").innerHTML=`<div class="card">
+ <h2>Full Case Run <span class="pill p-diag">the gauntlet · ~12 min</span></h2>
+ <div class="prog">Five muscles in one sitting, against the clock, scored — the closest thing to a live case without a partner across the table. The interviewer "switches gears" between rounds, exactly like a McKinsey-style interviewer-led case. Do every round OUT LOUD. · <b>${runs.length}</b> runs · last-5 avg <b>${avg}</b> / 5</div>
+ <div class="scen"><b>The five rounds:</b> ${RUN_PHASES.map((p,i)=>(i+1)+". "+p).join(" · ")}</div>
+ <div class="btnrow"><button class="act" onclick="runStart()">Start a full case</button></div>
+ <div id="runHist">${runs.length?`<h3>Recent runs</h3>`+runs.slice(-5).reverse().map(r=>`<div class="mrow"><span>${r.d}</span><span style="font-family:var(--mono);font-size:12px">${["str","exh","math","brain","syn"].map(k=>r.sc[k]).join(" · ")} → <b class="${r.avg>=4?'ok':r.avg>=3?'wr':'bad'}">${r.avg.toFixed(1)}</b></span></div>`).join(""):""}</div>
+ </div>`;
+ KB={space:runStart};
+}
+function runStart(){RUN.ph=1;RUN.scores={};runPhase()}
+function runHead(sub,timer){
+ return `<div class="prog">Round ${RUN.ph} of 5 — <b>${RUN_PHASES[RUN.ph-1]}</b> · ${RUN_PHASES.map((p,i)=>`<span style="color:${i+1<RUN.ph?'var(--grn)':i+1===RUN.ph?'var(--gold)':'var(--dim)'}">${i+1<RUN.ph?"✓":"●"}</span>`).join(" ")}</div>
+ <div style="display:flex;justify-content:space-between;align-items:center"><span class="pill p-diag">${sub}</span>${timer?`<div class="timer" id="runTimer">${timer}</div>`:""}</div>`;
+}
+function runTimer(secs,onEnd){
+ clearInterval(RUN.t);RUN.left=secs;tick("runTimer",RUN.left);
+ RUN.t=setInterval(()=>{RUN.left--;tick("runTimer",RUN.left);if(RUN.left<=0){clearInterval(RUN.t);onEnd()}},1000);
+}
+function runScoreRow(key,label){
+ return `<div id="runScoreRow"><h3>${label}</h3><div class="score5" id="runScore"></div></div>`;
+}
+function runBindScore(key){
+ $("runScore").querySelectorAll("button").forEach?0:0;
+ const sc=$("runScore");sc.innerHTML="";
+ for(let i=1;i<=5;i++){const b=document.createElement("button");b.textContent=i;
+  b.onclick=()=>{RUN.scores[key]=i;logRep();RUN.ph++;runPhase()};sc.appendChild(b)}
+}
+function runPhase(){
+ clearInterval(RUN.t);
+ if(RUN.ph===1){
+  const c=gymBank[gymPick()];RUN.cur.gym=c;
+  $("run").innerHTML=`<div class="card">${runHead("structure the case aloud",90)}
+  <div class="qbox">${c.q}</div>
+  <textarea id="runIn1" placeholder="Clarify silently, then buckets out loud — type keywords as you speak…"></textarea>
+  <div class="btnrow"><button class="ghost" onclick="runReveal1()">Reveal model structure</button></div>
+  <div class="ans" id="runAns1"></div><div style="display:none" id="runSR1">${runScoreRow("str","Self-score the structure (MECE · case-specific · so-what)")}</div></div>`;
+  runTimer(90,runReveal1);
+  KB={space:()=>{if(!$("runAns1").classList.contains("show"))runReveal1()}};
+ }
+ if(RUN.ph===2){
+  const g=pick(EXH);RUN.cur.ex=g.gen();
+  $("run").innerHTML=`<div class="card">${runHead("observation → so-what → implication",60)}
+  <div class="scen">${RUN.cur.ex.ctx}</div>${RUN.cur.ex.svg}
+  <div class="btnrow" style="margin-top:10px"><button class="ghost" onclick="runReveal2()">Reveal model read</button></div>
+  <div class="ans" id="runAns2" style="white-space:normal"></div><div style="display:none" id="runSR2">${runScoreRow("exh","Self-score the read (all three layers?)")}</div></div>`;
+  runTimer(60,runReveal2);
+  KB={space:()=>{if(!$("runAns2").classList.contains("show"))runReveal2()}};
+ }
+ if(RUN.ph===3){
+  const kk=pick(Object.keys(gens));RUN.cur.math=gens[kk]();RUN.cur.mathT0=Date.now();
+  $("run").innerHTML=`<div class="card">${runHead("case math — say units, round smart",0)}
+  <div class="qbox">${RUN.cur.math.q}</div>
+  <div class="btnrow"><input type="number" id="runMathA" step="any" placeholder="answer"> <span class="prog" style="margin:0">${RUN.cur.math.u}</span>
+  <button class="act" onclick="runMathCheck()">Check</button></div>
+  <div class="ans" id="runAns3"></div></div>`;
+  const inp=$("runMathA");inp.focus();
+  inp.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();runMathCheck()}});
+  KB={};
+ }
+ if(RUN.ph===4){
+  const c=BRAIN_BANK[R(0,BRAIN_BANK.length-1)];RUN.cur.brain=c;
+  $("run").innerHTML=`<div class="card">${runHead("axis first, then buckets",90)}
+  <div class="qbox">${c.q}</div>
+  <textarea id="runIn4" placeholder="Axis: … buckets out loud…"></textarea>
+  <div class="btnrow"><button class="ghost" onclick="runReveal4()">Reveal model buckets</button></div>
+  <div class="ans" id="runAns4" style="white-space:normal"></div><div style="display:none" id="runSR4">${runScoreRow("brain","Self-score the brainstorm (axis · MECE · breadth)")}</div></div>`;
+  runTimer(90,runReveal4);
+  KB={space:()=>{if(!$("runAns4").classList.contains("show"))runReveal4()}};
+ }
+ if(RUN.ph===5){
+  const c=synBank[R(0,synBank.length-1)];RUN.cur.syn=c;
+  $("run").innerHTML=`<div class="card">${runHead("answer-first close — 60 seconds",60)}
+  <div class="scen">${c.f}</div>
+  <textarea id="runIn5" placeholder="Recommendation first. Always."></textarea>
+  <div class="btnrow"><button class="ghost" onclick="runReveal5()">Reveal model close</button></div>
+  <div class="ans" id="runAns5"></div><div style="display:none" id="runSR5">${runScoreRow("syn","Self-score the close (answer-first · number in support · risk+next step)")}</div></div>`;
+  runTimer(60,runReveal5);
+  KB={space:()=>{if(!$("runAns5").classList.contains("show"))runReveal5()}};
+ }
+ if(RUN.ph===6)runDebrief();
+}
+function runReveal1(){clearInterval(RUN.t);const el=$("runAns1");el.textContent="MODEL STRUCTURE\n\n"+RUN.cur.gym.m;el.classList.add("show");$("runSR1").style.display="block";runBindScore("str")}
+function runReveal2(){clearInterval(RUN.t);const x=RUN.cur.ex;const el=$("runAns2");el.innerHTML=`<b style="color:var(--acc)">OBSERVATION:</b> ${x.obs}<br><br><b style="color:var(--gold)">SO-WHAT:</b> ${x.so}<br><br><b style="color:var(--acc)">IMPLICATION:</b> ${x.imp}`;el.classList.add("show");$("runSR2").style.display="block";runBindScore("exh")}
+function runMathCheck(){
+ const v=parseFloat($("runMathA").value);if(!isFinite(v))return;
+ const secs=Math.floor((Date.now()-RUN.cur.mathT0)/1000);
+ const ok=Math.abs(v-RUN.cur.math.a)/Math.abs(RUN.cur.math.a)<=0.03;
+ RUN.scores.math=ok?(secs<=75?5:4):(secs<=75?2:1);
+ gradeSkill("g_math_"+(RUN.cur.math.kind||"run"),ok);logRep();
+ const el=$("runAns3");
+ el.innerHTML=`<span class="${ok?'ok':'bad'}">${ok?"✓ CORRECT":"✗ Off — exact: "+(RUN.cur.math.a>=1000?fmt(RUN.cur.math.a):RUN.cur.math.a.toFixed(2))}</span>  (${secs}s → scored ${RUN.scores.math}/5)\n\n${RUN.cur.math.s}`;
+ el.classList.add("show");
+ el.insertAdjacentHTML("afterend",`<div class="btnrow"><button class="act" onclick="RUN.ph++;runPhase()">Next round →</button></div>`);
+ KB={space:()=>{RUN.ph++;runPhase()}};
+}
+function runReveal4(){clearInterval(RUN.t);const c=RUN.cur.brain;const el=$("runAns4");el.innerHTML=`<b style="color:var(--acc)">ONE GOOD AXIS:</b> ${c.axis}<br><br>`+c.m.map(x=>{const i=x.indexOf(" — ");return `<b style="color:var(--gold)">${x.slice(0,i)}</b> — ${x.slice(i+3)}`}).join("<br><br>");el.classList.add("show");$("runSR4").style.display="block";runBindScore("brain")}
+function runReveal5(){clearInterval(RUN.t);const el=$("runAns5");el.textContent="MODEL CLOSE\n\n"+RUN.cur.syn.m;el.classList.add("show");$("runSR5").style.display="block";runBindScore("syn")}
+function runDebrief(){
+ const sc=RUN.scores;const keys=["str","exh","math","brain","syn"];
+ const avg=keys.reduce((a,k)=>a+(sc[k]||0),0)/5;
+ const runs=S.get("runs",[]);runs.push({d:today(),sc,avg});if(runs.length>30)runs.shift();S.set("runs",runs);
+ const worst=keys.reduce((a,k)=>(sc[k]||0)<(sc[a]||9)?k:a,keys[0]);
+ const modOf={str:"gym",exh:"exh",math:"dojo",brain:"brain",syn:"syn"};
+ const nameOf={str:"Structure",exh:"Exhibit read",math:"Case math",brain:"Brainstorm",syn:"Synthesis"};
+ $("run").innerHTML=`<div class="card"><h2>Debrief — full case complete</h2>
+ <div class="grid g3" style="margin:12px 0">
+  <div class="stat"><div class="v" style="color:${avg>=4?'var(--grn)':avg>=3?'var(--yel)':'var(--red)'}">${avg.toFixed(1)}</div><div class="l">run average / 5</div></div>
+  <div class="stat"><div class="v">${S.get("runs",[]).length}</div><div class="l">total runs</div></div>
+  <div class="stat"><div class="v">${nameOf[worst]}</div><div class="l">weakest round</div></div>
+ </div>
+ ${keys.map(k=>`<div class="mrow"><span>${nameOf[k]}</span><div class="mb"><div class="bar"><i style="width:${(sc[k]||0)*20}%;background:${(sc[k]||0)>=4?'linear-gradient(90deg,var(--acc),var(--grn))':'var(--red)'}"></i></div></div><span style="font-family:var(--mono);font-size:12px">${sc[k]||0}/5</span></div>`).join("")}
+ <div class="tip"><b>The rule of the gauntlet:</b> your interview score is your WEAKEST round, not your average — a brilliant structure doesn't survive a fumbled close. Next session, lead with <b>${nameOf[worst]}</b> reps.</div>
+ <div class="btnrow"><button class="act" onclick="show('${modOf[worst]}')">Drill ${nameOf[worst]} now</button><button class="ghost" onclick="renderRun()">Another full case</button><button class="ghost" onclick="show('home')">Dashboard</button></div></div>`;
+ KB={space:()=>renderRun()};
+}
+/* ============ INIT (moved here so every module above is defined first) ============ */
 srLoad();show("home");
 </script>
 </body>
