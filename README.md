@@ -2,6 +2,8 @@
 
 An interactive, spaced-repetition trainer for MBB (McKinsey / BCG / Bain) case interviews — built around the muscle that actually gets tested: hypothesis-driven diagnosis under a limited information budget, not memorized frameworks.
 
+> 📄 **Product write-up:** one of a three-part [Recruiting Trainer Suite](https://github.com/bakulbadwal/ibtrainer) — see the [product case study](https://github.com/bakulbadwal/ibtrainer/blob/main/CASE_STUDY.md) (problem, product decisions, metrics, roadmap).
+
 ![Dashboard screenshot](docs/screenshot.png)
 
 **Open it:** download `index.html` and open it in any browser — no server, no build, no install.
